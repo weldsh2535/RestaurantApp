@@ -1,0 +1,25 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="profile"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Settings</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="regform">
+    <ion-item>
+      <ion-label>Allow Push Notifications</ion-label>
+      <ion-toggle slot="end" formControlName="notification" checked></ion-toggle>
+      </ion-item>
+    <ion-item>
+      <ion-label>Order Updates</ion-label>
+      <ion-toggle slot="end" formControlName="orderUpdate" checked></ion-toggle>
+      </ion-item>
+      <div style="text-align: center; margin: auto;">
+        <ion-button id="add items" (click)="Save()">Save</ion-button>
+      </div>
+  </form>
+
+</ion-content>

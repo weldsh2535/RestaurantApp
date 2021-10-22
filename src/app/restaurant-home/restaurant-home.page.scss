@@ -1,0 +1,26 @@
+ion-row .message{
+    padding-top: 19px;
+    padding-left: 107px;
+}
+ion-button {
+    padding-left: 0px;
+}
+ion-grid .message {
+    border-radius: 9px;
+    background-color: whitesmoke;
+    height: 79px;
+}
+ion-label .message{
+    padding-left: 60px;
+    padding-top: 24px;
+    text-align: center;
+    font-size: 28px;
+    font-style: initial;
+    font-family: cursive;
+}
+.active-category {
+    --background: var(--ion-color-primary);
+    --color: #fff;
+    --border-radius: 3px;
+    font-weight: 600;
+}

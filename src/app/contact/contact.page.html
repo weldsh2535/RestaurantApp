@@ -1,0 +1,19 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="profile"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Contact Us</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label>Our Address</ion-label>
+    {{address}}
+  </ion-item>
+  <ion-item button (click)="buttonClick()" detail>
+    <ion-label>Email Us</ion-label>
+    {{email}}
+  </ion-item>
+</ion-content>

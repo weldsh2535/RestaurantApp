@@ -1,0 +1,54 @@
+<ion-header [translucent]="true">
+	<ion-toolbar color="primary">
+		<ion-title style="text-align: center;">Login </ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+	<div class="container pt-3">
+		<div class="row justify-content-sm-center">
+			<div class="col-sm-10 col-md-6">
+				<div class="card border-info">
+					<div class="card-header">Login</div>
+					<div class="card-body">
+						<div class="row">
+							<!-- <div class="col-md-4 text-center">
+					 <ion-icon name="lock-closed"></ion-icon> 
+				  </div> -->
+							<div class="col-md-12">
+								<form [formGroup]="regform">
+									<ion-item>
+										<ion-icon name="mail"></ion-icon>&nbsp;&nbsp;
+										<ion-input type="text" formControlName="email" [required] placeholder="Enter your email">
+										</ion-input>
+									</ion-item>
+									<ion-item>
+										<ion-icon name="lock-closed"></ion-icon>&nbsp;&nbsp;
+										<ion-input placeholder="Enter your password" [type]="fieldTextType ? 'text' : 'password'"
+											formControlName="password" [required]></ion-input>
+										<i class="fa" [ngClass]="{
+						  'fa-eye-slash': !fieldTextType,
+						  'fa-eye': fieldTextType
+						}" (click)="toggleFieldTextType()"></i>
+									</ion-item>
+								    <button style="margin-top: 12px" (click)="signIn()"
+										class="btn btn-lg btn-primary btn-block mb-1" type="submit">
+										Login
+									</button>
+									<ion-item>
+										<ion-label>Don't have an account ?</ion-label>
+										<button style="margin-left: -37px; color: #234ada; background-color: #f8f9fa;" 
+											(click)="register()">
+											Register
+										  </button>
+									</ion-item>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</ion-content>
+<router-outlet></router-outlet>

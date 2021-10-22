@@ -1,0 +1,33 @@
+
+.label-class{
+    --inner-padding-start:12px;
+    --inner-padding-end:10px;
+    margin-left: 67px;
+  }
+  .label-class-al{
+    margin-left: 67px;
+  }
+  .ion-input{
+    margin-left: 67px;
+  }
+  .dx-lookup-field {
+    padding: 5px 23px 12px 54px;
+    font-size: 1em;
+  }
+  ion-content {
+    //--background: linear-gradient(90deg, rgba(43,90,148,1) 0%, rgba(45,112,229,1) 35%, rgba(45,112,229,1) 100%);
+   
+      ion-item {
+      // --background: rgb(120, 126, 134);
+        padding: 0;
+       // margin: 14px 0;
+        --border-radius: 14px;
+       // color: #FFFFFF;
+        //font-weight: 600;
+   }
+   ion-searchbar{
+    --border-radius: 14px;
+    --background: rgb(243, 243, 243);
+    margin-top: -13px;
+   }
+  }

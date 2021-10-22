@@ -1,0 +1,42 @@
+<ion-split-pane contentId="main">
+  <ion-menu contentId="main" type="overlay">
+  <ion-content>
+      <ion-list>
+        <ion-item color="primary">
+          <ion-avatar style="height: 62px;
+          width: 68px;" class="ion-margin-start">
+           <img [src]="this.base64textString">
+          </ion-avatar> &nbsp;&nbsp;
+          <ion-label>
+            {{this.userName}} 
+          </ion-label>
+        </ion-item>
+     </ion-list>
+      <ion-list id="inbox-list">
+        <ion-menu-toggle auto-hide="false" *ngFor="let p of pageList; let i = index">
+          <ion-item routerDirection="root"(click)="selectedIndex = i" [routerLink]="[p.url]" (click)="readPath1(p)"  lines="none" detail="false"
+            routerLinkActive="selected" [class.selected]="selectedIndex == i">
+            <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+            <ion-label>{{ p.title }}</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+    
+       </ion-list> 
+       <ion-footer>
+        <ion-toolbar>
+          <ion-row align-items-center>
+            <ion-col></ion-col>
+            <ion-col>
+              <ion-button ion-button full clear icon-left 
+              (click)="logout()">
+              <ion-icon name="log-out-outline"></ion-icon>Logout
+            </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-toolbar>
+      </ion-footer> 
+  </ion-content>
+  </ion-menu>
+  <ion-router-outlet id="main"></ion-router-outlet>
+  </ion-split-pane>
+  

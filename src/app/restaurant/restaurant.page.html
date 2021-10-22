@@ -1,0 +1,116 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary" >
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Restaurant</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form [formGroup]="regform">
+    <ion-item>
+       <ion-label>Full Name </ion-label>
+       <ion-input formControlName="name" type="text"></ion-input>
+       <small class="form-text text-muted" *ngIf="!regform.get('name').valid && regform.get('name').touched" > This field is required! </small> 
+     </ion-item>
+     <ion-item>
+       <ion-label>Location</ion-label>
+       <ion-input formControlName="location" type="number"></ion-input>
+       <ion-icon name="location-outline" (click)="openLocation()"></ion-icon>
+       <small class="form-text text-muted" *ngIf="!regform.get('location').valid && regform.get('location').touched" > This field is required! </small> 
+     </ion-item>
+      <ion-item>
+       <ion-label>Type</ion-label>
+       <ion-input formControlName="type" type="text"></ion-input>
+       <small class="form-text text-muted" *ngIf="!regform.get('type').valid && regform.get('type').touched" > This field is required! </small> 
+     </ion-item>
+     <ion-list>
+        <ion-label style="margin-left: 12px;">Working Hour</ion-label>
+        <ion-item >
+         <ion-label>Start Time</ion-label>
+         <ion-datetime formControlName="startWorkingHour" display-format="h:mm A" picker-format="h:mm A" value="1990-02-19T07:43Z"  placeholder=" please start time"></ion-datetime>
+         &nbsp;&nbsp;&nbsp;
+         <ion-label>End Time</ion-label>
+         <ion-datetime formControlName="endWorkingHour" display-format="h:mm A" picker-format="h:mm A" value="1990-02-19T07:43Z"  placeholder="please end time"></ion-datetime>
+       </ion-item>
+    </ion-list>
+   <ion-item>
+      <ion-label>Area Space</ion-label>
+      <ion-input formControlName="areaSpace" type="number"></ion-input>
+      <small class="form-text text-muted" *ngIf="!regform.get('areaSpace').valid && regform.get('areaSpace').touched" > This field is required! </small> 
+    </ion-item>
+    <ion-item>
+      <ion-label>Phone Number</ion-label>
+      <ion-input formControlName="phoneNumber" type="text"></ion-input>
+      <small class="form-text text-muted" *ngIf="!regform.get('phoneNumber').valid && regform.get('phoneNumber').touched" > This field is required! </small> 
+    </ion-item>
+    <ion-item>
+      <ion-label>Genral Manager</ion-label>
+      <ion-input formControlName="gm" type="text"></ion-input>
+      <small class="form-text text-muted" *ngIf="!regform.get('gm').valid && regform.get('gm').touched" > This field is required! </small> 
+    </ion-item>
+    <ion-item>
+     <ion-label>Contact Person</ion-label>
+     <ion-input formControlName="contactPerson" type="text"></ion-input>
+     <small class="form-text text-muted" *ngIf="!regform.get('contactPerson').valid && regform.get('contactPerson').touched" > This field is required! </small> 
+   </ion-item>   
+   <ion-item> 
+     <ion-label>Account Id</ion-label>
+    <ion-select interface="popover" formControlName="accountId" type="number">
+    <ion-select-option *ngFor="let code of listOfAccount" value="{{code?.id}}">
+      {{code?.fullName}}
+    </ion-select-option>
+  </ion-select>
+  </ion-item>
+  <ion-item> 
+    <ion-label>Category</ion-label>
+   <ion-select multiple interface="popover" formControlName="categoryId" >
+   <ion-select-option *ngFor="let code of listOfCategory" value="{{code?.categoryName}}">
+     {{code?.categoryName}}
+   </ion-select-option>
+ </ion-select>
+ </ion-item>
+   <ion-item>
+     <ion-label>Email</ion-label>
+     <ion-input formControlName="email" type="text"></ion-input>
+     <small class="form-text text-muted" *ngIf="!regform.get('email').valid && regform.get('email').touched" > This field is required! </small> 
+   </ion-item>
+   <ion-item>
+    <ion-label>Status </ion-label>
+    <ion-select interface="popover" formControlName="status">
+      <ion-select-option value="open">open</ion-select-option>
+      <ion-select-option value="close">close</ion-select-option>
+    </ion-select>
+   </ion-item>
+   <div class="picker">
+    <ion-img role="button" class="image" (click)="onPickImage()" [src]="base64textString"
+      *ngIf="base64textString"></ion-img>
+    <ion-button color="primary" (click)="onPickImage()" *ngIf="!base64textString">
+      <ion-icon name="camera" slot="start"></ion-icon>
+      <ion-label>Take Picture</ion-label>
+    </ion-button>
+  </div>
+  <input hidden type="file" accept="image/jpeg" *ngIf="usePicker" #filePicker (change)="onFileChosen($event)" />
+    <div style="text-align: center; margin: auto;">
+       <ion-button id="add items" (click)="saveRestaurant()"> 
+         <ion-icon slot="start" name="add-circle-outline"></ion-icon>
+         {{editMode?'Update Restaurant':'Add Restaurant'}}</ion-button>
+     </div> 
+ </form>
+ <ion-item-sliding  *ngFor="let item of listOfRestaurant " #slidingItem >
+  <ion-item detail>
+    <ion-thumbnail slot="start">
+      <img [src]="item.photo">
+    </ion-thumbnail>
+    <ion-label>{{item.name}}</ion-label>
+    <ion-label>{{item.phoneNumber}}</ion-label>
+    <ion-label>{{item.contactPerson}} </ion-label>
+  </ion-item>
+  <ion-item-options side="start">
+    <ion-item-option color="danger" (click)="edit(item,slidingItem)">
+   <ion-icon  name="create" slot="icon-only"></ion-icon></ion-item-option>
+   <ion-item-option color="danger" (click)="delete(item,slidingItem)">
+    <ion-icon  name="trash" slot="icon-only"></ion-icon></ion-item-option>
+  </ion-item-options>
+</ion-item-sliding>
+</ion-content>

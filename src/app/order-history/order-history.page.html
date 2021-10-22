@@ -1,0 +1,82 @@
+<ion-header>
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-button fill="solid" shape="round" color="light" (click)="backPage()">
+        <ion-icon slot="icon-only" name="arrow-back" color="primary"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title style="text-align: center;">Detail orders</ion-title>
+    <ion-buttons slot="end">
+      <!-- <ion-button fill="solid" shape="round" color="light">
+        <ion-icon slot="icon-only" name="share-outline" color="primary"></ion-icon>
+      </ion-button>
+      <ion-button fill="solid" shape="round" color="light">
+        <ion-icon slot="icon-only" name="search-outline" color="primary"></ion-icon>
+      </ion-button> -->
+      <ion-button  >
+        <ion-badge *ngIf="cart.length > 0">{{ cartItemCount | async }}</ion-badge>
+        <ion-icon slot="icon-only" class="cart-icon" name="cart"></ion-icon>
+      </ion-button> 
+    </ion-buttons>
+   </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <!-- <div class="ion-text-end">
+    <ion-button (click)="close()" fill="clear" color="dark">
+      <ion-icon name="close" slot="start"></ion-icon>
+    </ion-button>
+  </div> -->
+  <div class="ion-padding">
+    <ion-list>
+      <ion-item *ngFor="let p of cart" class="ion-text-wrap">
+        <ion-grid>
+          <ion-row class="ion-align-items-center">
+            <ion-col size="2" class="ion-align-self-center">
+              <ion-button color="medium" fill="clear" >
+                <ion-icon name="remove-circle" slot="icon-only"></ion-icon>
+              </ion-button>
+            </ion-col>
+            <ion-col size="1" class="ion-align-self-center">
+              {{ p.amount }}
+            </ion-col>
+            <ion-col size="2" class="ion-align-self-center">
+              <ion-button color="medium" fill="clear" >
+                <ion-icon name="add-circle" slot="icon-only"></ion-icon>
+              </ion-button>
+            </ion-col>
+            <ion-col size="2" offset="5">
+              <ion-button color="medium" fill="clear" >
+                <ion-icon name="close-circle" slot="icon-only"></ion-icon>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="5">
+              <b>{{ p.Name }}</b>
+            </ion-col>
+            <ion-col size="4">
+              <b>{{ p.Price | currency:'ETB'}}</b>
+            </ion-col>
+            <ion-col size="3" class="ion-text-end">
+              {{ p.amount * p.Price | currency:'ETB' }}
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+      <ion-item>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="9">
+              Total:
+            </ion-col>
+            <ion-col size="3" class="ion-text-end">
+              {{ getTotal() | currency:'ETB' }}
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ion-list>
+   
+  </div>
+</ion-content>

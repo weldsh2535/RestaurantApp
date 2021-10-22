@@ -1,0 +1,36 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons>
+      <ion-back-button defaultHref="profile"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Account Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="regform">
+    <ion-item>
+      <ion-label>Full Name</ion-label>
+      <ion-input formControlName="FullName" type="text"></ion-input>
+      <small class="form-text text-muted" *ngIf="!regform.get('FullName').valid && regform.get('FullName').touched" > This field is required! </small> 
+      </ion-item>
+    <ion-item>
+      <ion-label>Email  </ion-label>
+      <ion-input formControlName="email" type="text"></ion-input>
+      <small class="form-text text-muted" *ngIf="!regform.get('email').valid && regform.get('email').touched" > This field is required! </small> 
+    </ion-item>
+    <ion-item>
+      <ion-label>Phone number</ion-label>
+      <ion-input formControlName="phonenumber" type="text"></ion-input>
+      <small class="form-text text-muted" *ngIf="!regform.get('phonenumber').valid && regform.get('phonenumber').touched" > This field is required! </small> 
+    </ion-item>
+    <ion-item>
+      <ion-label>Password</ion-label>
+      <ion-input formControlName="password" type="text"></ion-input>
+      <small class="form-text text-muted" *ngIf="!regform.get('password').valid && regform.get('password').touched" > This field is required! </small> 
+    </ion-item>
+    <div style="text-align: center; margin: auto;">
+      <ion-button id="add items" (click)="SaveAccount()">Save</ion-button>
+    </div>
+</form>
+</ion-content>

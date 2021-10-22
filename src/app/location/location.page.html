@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button  fill="solid"  shape="round" color="light" (click)="backToHome()" >
+        <ion-icon slot="icon-only" name="arrow-back" color="primary"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Location</ion-title>
+    <ion-buttons slot="end"> </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <div id="map"></div>
+<div *ngIf="location">
+  <ion-item>
+    <button (click)="setLocationPick()">Submit Location</button>
+  </ion-item>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="3">
+        <b>Lattitude</b>
+      </ion-col>
+      <ion-col> {{latitude}} </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="3">
+        <b>Longitude</b>
+      </ion-col>
+      <ion-col> {{longitude}} </ion-col>
+    </ion-row>
+  </ion-grid>
+</div>
+</ion-content>

@@ -1,0 +1,15 @@
+ion-input {
+  --padding-start: 85px;
+}
+ion-content {
+  //--background: linear-gradient(90deg, rgba(43,90,148,1) 0%, rgba(45,112,229,1) 35%, rgba(45,112,229,1) 100%);
+
+  ion-item {
+    // --background: rgb(120, 126, 134);
+    padding: 0;
+    // margin: 14px 0;
+    --border-radius: 14px;
+    // color: #FFFFFF;
+    //font-weight: 600;
+  }
+}

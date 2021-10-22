@@ -1,0 +1,135 @@
+<ion-header>
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-button fill="solid" shape="round" color="light" (click)="onclick()">
+        <ion-icon slot="icon-only" name="arrow-back" color="primary"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title style="text-align: center;">Order Details</ion-title>
+    <ion-buttons slot="end">
+      <ion-button  >
+        <ion-badge *ngIf="cart.length > 0">{{ cartItemCount | async }}</ion-badge>
+        <ion-icon slot="icon-only" class="cart-icon" name="cart"></ion-icon>
+      </ion-button> 
+    </ion-buttons>
+   </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <!-- <div class="ion-text-end">
+    <ion-button (click)="close()" fill="clear" color="dark">
+      <ion-icon name="close" slot="start"></ion-icon>
+    </ion-button>
+  </div> -->
+  <div class="ion-padding">
+    <ion-list>
+      <ion-item *ngFor="let p of cart" class="ion-text-wrap">
+        <ion-grid>
+          <ion-row class="ion-align-items-center">
+            <ion-col size="2" class="ion-align-self-center">
+              <ion-button color="medium" fill="clear" (click)="decreaseCartItem(p)">
+                <ion-icon name="remove-circle" slot="icon-only"></ion-icon>
+              </ion-button>
+            </ion-col>
+            <ion-col size="1" class="ion-align-self-center">
+              {{ p.amount }}
+            </ion-col>
+            <ion-col size="2" class="ion-align-self-center">
+              <ion-button color="medium" fill="clear" (click)="increaseCartItem(p)">
+                <ion-icon name="add-circle" slot="icon-only"></ion-icon>
+              </ion-button>
+            </ion-col>
+            <ion-col size="2" offset="5">
+              <ion-button color="medium" fill="clear" (click)="removeCartItem(p)">
+                <ion-icon name="close-circle" slot="icon-only"></ion-icon>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="5">
+              <b>{{ p.Name }}</b>
+            </ion-col>
+            <ion-col size="4">
+              <b>{{ p.Price | currency:'ETB'}}</b>
+            </ion-col>
+            <ion-col size="3" class="ion-text-end">
+              {{ p.amount * p.Price | currency:'ETB' }}
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+      <ion-item>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="9">
+             Sub Total:
+            </ion-col>
+            <ion-col size="3" class="ion-text-end">
+              {{ getTotal() | currency:'ETB' }}
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+      <ion-item>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="9">
+             Grand Total:
+            </ion-col>
+            <ion-col size="3" class="ion-text-end">
+              {{ getGrandTotal() | currency:'ETB' }}
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ion-list>
+    <form [formGroup]="regform">
+    <ion-item>
+      <ion-label>Transation Type</ion-label>
+      <ion-select interface="popover" formControlName="transactionType">
+        <ion-select-option value="Delivery">Delivery</ion-select-option>
+        <ion-select-option value="Pickup">Pickup</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Delivery Date</ion-label>
+      <ion-datetime formControlName="DeliveryDate" display-format="MMM DD, YYYY HH:mm:ss" value="1990-02-19T07:43Z" [(ngModel)]="currentDate"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label>Delivery fee</ion-label>
+      <ion-input formControlName="DeliveryFee" type="number" (keyup)="getGrandTotal()"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Delivery Time</ion-label>
+      <ion-datetime formControlName="DeliveryTime" display-format="h:mm A" picker-format="h:mm A" value="1990-02-19T07:43Z"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="1">
+            <ion-label>
+              <ion-icon style="height: 27px;
+              width: 19px;" name="location-outline"></ion-icon>
+            </ion-label>
+           </ion-col>
+          <ion-col size="8">
+           <ion-label>
+             <p>Delivery to current Address</p>
+             <p></p>
+           </ion-label>
+          </ion-col>
+          <ion-col size="3">
+            <ion-button (click)="location()">
+              change
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+    <ion-button expand="full" (click)="order(cart)" slot="fixed">
+      Order
+    </ion-button>
+   
+  </form>
+  </div>
+</ion-content>

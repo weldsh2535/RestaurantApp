@@ -1,0 +1,170 @@
+import { Injectable } from '@angular/core';
+import { AngularFirestoreCollection, AngularFirestore } from 'angularfire2/firestore';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { map } from 'rxjs/internal/operators/map';
+import { Order } from 'src/Table/table';
+import { AppError } from '../common/app-error';
+import { BadInput } from '../common/bad-input';
+import { NotFoundError } from '../common/not-found-error';
+import { SharedService } from './shared.service';
+import { HttpClient } from '@angular/common/http';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class OrderService {
+  private cart = [];
+  private cartItemCount = new BehaviorSubject(0);
+  RestaurantId = new BehaviorSubject<any>({});
+  orderStatus = new BehaviorSubject<any>({});
+  private orderCollectionList: AngularFirestoreCollection<any>;
+  private orderList: Observable<Order[]>;
+  amount: number;
+  private order=[];
+  private orderItemCount  = new BehaviorSubject(0);
+  readonly APIURL = 'http://localhost:49347/api';
+  constructor( private http: HttpClient,
+    private sharedService: SharedService) {
+}
+
+  // create(orderObj) {
+  //   let values = this.orderCollectionList.add(orderObj)
+  //     .then((docRef) => {
+  //       this.sharedService.orderId.next(docRef.id);
+  //     })
+  //   return values;
+  // }
+
+  // getOrderBy(id){
+  //   const orderObj = this.db.collection('Order', ref => ref.where('id', '==', id)).snapshotChanges();
+  //   this.orderList = orderObj.pipe(
+  //     map(changes => changes.map(a => {
+  //       const data = a.payload.doc.data() as Order;
+  //       const id = a.payload.doc.id;
+  //       return { id, ...data };
+  //     }))
+  //   );
+  //   return this.orderList;
+  // }
+  // getOrderByDriverId(driverId){
+  //   const orderObj = this.db.collection('Order', ref => ref.where('Driver', '==', driverId)).snapshotChanges();
+  //   this.orderList = orderObj.pipe(
+  //     map(changes => changes.map(a => {
+  //       const data = a.payload.doc.data() as Order;
+  //       const id = a.payload.doc.id;
+  //       return { id, ...data };
+  //     }))
+  //   );
+  //   return this.orderList;
+  // }
+  create(val: any) {
+    return this.http.post(this.APIURL + '/Order', val);
+  }
+  getAllOrder(): Observable<any[]> {
+    return this.http.get<any>(this.APIURL + '/Order');
+  }
+  updateOrder(val: any) {
+    return this.http.put(this.APIURL + '/Order/', val);
+  }
+  updateOrderStatus(val:any){
+    return this.http.put(this.APIURL + '/OrderStatus/', val);
+  }
+  updateRestaurantStatus(val:any){
+    return this.http.put(this.APIURL + '/RestaurantStatus/', val);
+  }
+  updateStatus(val: any){
+    return this.http.put(this.APIURL + '/Status/', val)
+  }
+  removeOrder(id) {
+    return this.http.delete(this.APIURL + '/Order/' + id).toPromise();
+  }
+  private handleError(error: Response) {
+    if (error.status === 400)
+      return Observable.throw(new BadInput(error.json()));
+    if (error.status === 404)
+      return Observable.throw(new NotFoundError());
+    return Observable.throw(new AppError(error));
+  }
+  getCart() {
+    return this.cart;
+  }
+  getOrders(){
+    return this.order;
+  }
+  getCartItemCount() {
+    return this.cartItemCount;
+  }
+  getOrderItemCount(){
+    return this.orderItemCount;
+  }
+  getRestaurantId() {
+    return this.RestaurantId;
+  }
+  getOrderStatus() {
+    return this.orderStatus;
+  }
+  addOrder(items) {
+   this.order =[]
+   this.amount =0;
+    this.order.forEach(el=>{
+      let index = this.order.indexOf(c=>c.orderDetailsId===el.orderDetailsId)
+      this.order.splice(index,1)
+    });
+    this.orderItemCount.next(0);
+    items.forEach(element => {
+    this.amount = this.amount + element.amount
+      let data = {
+        CookingTime: element.CookingTime,
+        DeliveryTime: element.DeliveryTime,
+        Description: element.Description,
+        Name: element.Name,
+        Price: element.Price,
+        amount: element.amount,
+        categoryId: element.categoryId,
+        id: element.Food,
+        picture: element.picture,
+        restaurantId: element.restaurantId,
+        type:element.type,
+        orderDetailsId:element.orderDetailsId,
+      }
+      this.order.push(data);
+      });
+    this.orderItemCount.next(this.orderItemCount.value + this.amount);
+  }
+  addProduct(product) {
+    let added = false;
+    for (let p of this.cart) {
+      if (p.id === product.id) {
+        p.amount += 1;
+        added = true;
+        break;
+      }
+    }
+    if (!added) {
+      product.amount = 1;
+      this.cart.push(product);
+    }
+    this.cartItemCount.next(this.cartItemCount.value + 1);
+  }
+
+  decreaseProduct(product) {
+    for (let [index, p] of this.cart.entries()) {
+      if (p.id === product.id) {
+        p.amount -= 1;
+        if (p.amount == 0) {
+          this.cart.splice(index, 1);
+        }
+      }
+    }
+    this.cartItemCount.next(this.cartItemCount.value - 1);
+  }
+
+  removeProduct(product) {
+    for (let [index, p] of this.cart.entries()) {
+      if (p.id === product.id) {
+        this.cartItemCount.next(this.cartItemCount.value - p.amount);
+        this.cart.splice(index, 1);
+      }
+    }
+  }
+}

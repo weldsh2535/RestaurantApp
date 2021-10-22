@@ -1,0 +1,22 @@
+ion-badge {
+    color: #fff;
+    position: absolute;
+    top: -9px;
+    right: 2px;
+    border-radius: 100%;
+}
+ 
+.cart-icon {
+  font-size: 50px;
+}
+ 
+.cart-length {
+  color: var(--ion-color-primary);
+  position: absolute;
+  top: 18px;
+  left: 25px;
+  font-weight: 600;
+  font-size: 1em;
+  min-width: 25px;
+  z-index: 10;
+}
