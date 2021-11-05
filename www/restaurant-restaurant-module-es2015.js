@@ -1,83 +1,5 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["restaurant-restaurant-module"],{
 
-/***/ "+cje":
-/*!***********************************************!*\
-  !*** ./src/app/Service/restaurant.service.ts ***!
-  \***********************************************/
-/*! exports provided: RestaurantService */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RestaurantService", function() { return RestaurantService; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "fXoL");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "qCKp");
-/* harmony import */ var rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/internal/operators/map */ "q3Kh");
-/* harmony import */ var rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var angularfire2_firestore__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! angularfire2/firestore */ "CqG3");
-/* harmony import */ var angularfire2_firestore__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(angularfire2_firestore__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _common_bad_input__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../common/bad-input */ "XEKg");
-/* harmony import */ var _common_not_found_error__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../common/not-found-error */ "5Jak");
-/* harmony import */ var _common_app_error__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../common/app-error */ "/GcI");
-
-
-
-
-
-
-
-
-let RestaurantService = class RestaurantService {
-    constructor(db) {
-        this.db = db;
-        this.restaurantCollectionList = db.collection('Restaurant');
-    }
-    create(restaurantObj) {
-        return this.restaurantCollectionList.add(restaurantObj);
-    }
-    getAllRestaurant() {
-        this.restaurantList = this.restaurantCollectionList.snapshotChanges().pipe(Object(rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_3__["map"])(actions => {
-            return actions.map(a => {
-                const data = a.payload.doc.data();
-                const id = a.payload.doc.id;
-                return Object.assign({ id }, data);
-            });
-        }));
-        return this.restaurantList;
-    }
-    getRestaurant(id) {
-        return this.restaurantCollectionList.doc(id).valueChanges();
-    }
-    updateRestaurant(restaurantObj, id) {
-        return this.restaurantCollectionList.doc(id).update(restaurantObj)
-            .catch(this.handleError);
-    }
-    removeRestaurant(id) {
-        return this.restaurantCollectionList.doc(id).delete()
-            .catch(this.handleError);
-    }
-    handleError(error) {
-        if (error.status === 400)
-            return rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"].throw(new _common_bad_input__WEBPACK_IMPORTED_MODULE_5__["BadInput"](error.json()));
-        if (error.status === 404)
-            return rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"].throw(new _common_not_found_error__WEBPACK_IMPORTED_MODULE_6__["NotFoundError"]());
-        return rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"].throw(new _common_app_error__WEBPACK_IMPORTED_MODULE_7__["AppError"](error));
-    }
-};
-RestaurantService.ctorParameters = () => [
-    { type: angularfire2_firestore__WEBPACK_IMPORTED_MODULE_4__["AngularFirestore"] }
-];
-RestaurantService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
-        providedIn: 'root'
-    })
-], RestaurantService);
-
-
-
-/***/ }),
-
 /***/ "53D8":
 /*!***************************************************************************************!*\
   !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/restaurant/restaurant.page.html ***!
@@ -87,7 +9,7 @@ RestaurantService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header [translucent]=\"true\">\n  <ion-toolbar color=\"primary\" >\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title>Restaurant</ion-title>\n  </ion-toolbar>\n</ion-header>\n<ion-content>\n  <form [formGroup]=\"regform\">\n    <ion-item>\n       <ion-label>Full Name </ion-label>\n       <ion-input formControlName=\"Name\" type=\"text\"></ion-input>\n       <small class=\"form-text text-muted\" *ngIf=\"!regform.get('Name').valid && regform.get('Name').touched\" > This field is required! </small> \n     </ion-item>\n     <ion-item>\n       <ion-label>Location</ion-label>\n       <ion-input formControlName=\"Location\" type=\"text\"></ion-input>\n       <!-- <h3>\n        <p>\n            Latitude: {{this.latitude}}\n        </p>\n        <p>\n            Longitude: {{this.longtiude}}\n        </p>\n    </h3> -->\n       <ion-icon name=\"location-outline\" (click)=\"openLocation()\"></ion-icon>\n       <small class=\"form-text text-muted\" *ngIf=\"!regform.get('Location').valid && regform.get('Location').touched\" > This field is required! </small> \n     </ion-item>\n     <!-- <div class=\"text-center\">\n\n      <p>\n          <button class=\"btn btn-primary\" (click)=\"openGoogelMapsModal()\">Open Google Map</button>\n      </p>\n      <h1>\n          <p *ngIf=\"coordinates.address\">\n              Address: {{coordinates.address}}\n          </p>\n      </h1>\n      <h3>\n          <p *ngIf=\"coordinates.latitude\">\n              Latitude: {{coordinates.latitude}}\n          </p>\n          <p *ngIf=\"coordinates.longitude\">\n              Longitude: {{coordinates.longitude}}\n          </p>\n      </h3>\n  </div> -->\n      <ion-item>\n       <ion-label>Type</ion-label>\n       <ion-input formControlName=\"Type\" type=\"text\"></ion-input>\n       <small class=\"form-text text-muted\" *ngIf=\"!regform.get('Type').valid && regform.get('Type').touched\" > This field is required! </small> \n     </ion-item>\n     <ion-list>\n        <ion-label style=\"margin-left: 12px;\">Working Hour</ion-label>\n        <ion-item >\n         <ion-label>Start Time</ion-label>\n         <ion-datetime formControlName=\"StartWorkingHour\" display-format=\"h:mm A\" picker-format=\"h:mm A\" value=\"1990-02-19T07:43Z\"></ion-datetime>\n         &nbsp;&nbsp;&nbsp;\n         <ion-label>End Time</ion-label>\n         <ion-datetime formControlName=\"EndWorkingHour\" display-format=\"h:mm A\" picker-format=\"h:mm A\" value=\"1990-02-19T07:43Z\"></ion-datetime>\n       </ion-item>\n    </ion-list>\n   <ion-item>\n      <ion-label>Area Space</ion-label>\n      <ion-input formControlName=\"AreaSpace\" type=\"text\"></ion-input>\n      <small class=\"form-text text-muted\" *ngIf=\"!regform.get('AreaSpace').valid && regform.get('AreaSpace').touched\" > This field is required! </small> \n    </ion-item>\n    <ion-item>\n      <ion-label>Phone Number</ion-label>\n      <ion-input formControlName=\"PhoneNumber\" type=\"text\"></ion-input>\n      <small class=\"form-text text-muted\" *ngIf=\"!regform.get('PhoneNumber').valid && regform.get('PhoneNumber').touched\" > This field is required! </small> \n    </ion-item>\n    <ion-item>\n      <ion-label>Genral Manager</ion-label>\n      <ion-input formControlName=\"GM\" type=\"text\"></ion-input>\n      <small class=\"form-text text-muted\" *ngIf=\"!regform.get('GM').valid && regform.get('GM').touched\" > This field is required! </small> \n    </ion-item>\n    <ion-item>\n     <ion-label>Contact Person</ion-label>\n     <ion-input formControlName=\"ContactPerson\" type=\"text\"></ion-input>\n     <small class=\"form-text text-muted\" *ngIf=\"!regform.get('ContactPerson').valid && regform.get('ContactPerson').touched\" > This field is required! </small> \n   </ion-item>   \n   <ion-item> \n     <ion-label>Account Id</ion-label>\n    <ion-select interface=\"popover\" formControlName=\"accountId\">\n    <ion-select-option *ngFor=\"let code of listOfAccount\" value=\"{{code?.id}}\">\n      {{code?.FullName}}\n    </ion-select-option>\n  </ion-select>\n  </ion-item>\n   <ion-item>\n     <ion-label>Email</ion-label>\n     <ion-input formControlName=\"Email\" type=\"text\"></ion-input>\n     <small class=\"form-text text-muted\" *ngIf=\"!regform.get('Email').valid && regform.get('Email').touched\" > This field is required! </small> \n   </ion-item>\n   <div class=\"picker\">\n    <ion-img role=\"button\" class=\"image\" (click)=\"onPickImage()\" [src]=\"base64textString\"\n      *ngIf=\"base64textString\"></ion-img>\n    <ion-button color=\"primary\" (click)=\"onPickImage()\" *ngIf=\"!base64textString\">\n      <ion-icon name=\"camera\" slot=\"start\"></ion-icon>\n      <ion-label>Take Picture</ion-label>\n    </ion-button>\n  </div>\n  <input hidden type=\"file\" accept=\"image/jpeg\" *ngIf=\"usePicker\" #filePicker (change)=\"onFileChosen($event)\" />\n    <div style=\"text-align: center; margin: auto;\">\n       <ion-button id=\"add items\" (click)=\"saveRestaurant()\"> \n         <ion-icon slot=\"start\" name=\"add-circle-outline\"></ion-icon>\n         {{editMode?'Update Restaurant':'Add Restaurant'}}</ion-button>\n     </div> \n </form>\n <ion-item-sliding  *ngFor=\"let item of listOfRestaurant \" #slidingItem >\n  <ion-item detail>\n    <ion-thumbnail slot=\"start\">\n      <img [src]=\"item.Photo\">\n    </ion-thumbnail>\n    <ion-label>{{item.Name}}</ion-label>\n    <ion-label>{{item.PhoneNumber}}</ion-label>\n    <ion-label>{{item.ContactPerson}} </ion-label>\n  </ion-item>\n  <ion-item-options side=\"start\">\n    <ion-item-option color=\"danger\" (click)=\"edit(item,slidingItem)\">\n   <ion-icon  name=\"create\" slot=\"icon-only\"></ion-icon></ion-item-option>\n   <ion-item-option color=\"danger\" (click)=\"delete(item,slidingItem)\">\n    <ion-icon  name=\"trash\" slot=\"icon-only\"></ion-icon></ion-item-option>\n  </ion-item-options>\n</ion-item-sliding>\n</ion-content>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header [translucent]=\"true\">\n  <ion-toolbar color=\"primary\" >\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title>Restaurant</ion-title>\n  </ion-toolbar>\n</ion-header>\n<ion-content>\n  <form [formGroup]=\"regform\">\n    <ion-item>\n       <ion-label>Full Name </ion-label>\n       <ion-input formControlName=\"name\" type=\"text\"></ion-input>\n       <small class=\"form-text text-muted\" *ngIf=\"!regform.get('name').valid && regform.get('name').touched\" > This field is required! </small> \n     </ion-item>\n     <ion-item>\n       <ion-label>Location</ion-label>\n       <ion-input formControlName=\"location\" type=\"number\"></ion-input>\n       <ion-icon name=\"location-outline\" (click)=\"openLocation()\"></ion-icon>\n       <small class=\"form-text text-muted\" *ngIf=\"!regform.get('location').valid && regform.get('location').touched\" > This field is required! </small> \n     </ion-item>\n      <ion-item>\n       <ion-label>Type</ion-label>\n       <ion-input formControlName=\"type\" type=\"text\"></ion-input>\n       <small class=\"form-text text-muted\" *ngIf=\"!regform.get('type').valid && regform.get('type').touched\" > This field is required! </small> \n     </ion-item>\n     <ion-list>\n        <ion-label style=\"margin-left: 12px;\">Working Hour</ion-label>\n        <ion-item >\n         <ion-label>Start Time</ion-label>\n         <ion-datetime formControlName=\"startWorkingHour\" display-format=\"h:mm A\" picker-format=\"h:mm A\" value=\"1990-02-19T07:43Z\"  placeholder=\" please start time\"></ion-datetime>\n         &nbsp;&nbsp;&nbsp;\n         <ion-label>End Time</ion-label>\n         <ion-datetime formControlName=\"endWorkingHour\" display-format=\"h:mm A\" picker-format=\"h:mm A\" value=\"1990-02-19T07:43Z\"  placeholder=\"please end time\"></ion-datetime>\n       </ion-item>\n    </ion-list>\n   <ion-item>\n      <ion-label>Area Space</ion-label>\n      <ion-input formControlName=\"areaSpace\" type=\"number\"></ion-input>\n      <small class=\"form-text text-muted\" *ngIf=\"!regform.get('areaSpace').valid && regform.get('areaSpace').touched\" > This field is required! </small> \n    </ion-item>\n    <ion-item>\n      <ion-label>Phone Number</ion-label>\n      <ion-input formControlName=\"phoneNumber\" type=\"text\"></ion-input>\n      <small class=\"form-text text-muted\" *ngIf=\"!regform.get('phoneNumber').valid && regform.get('phoneNumber').touched\" > This field is required! </small> \n    </ion-item>\n    <ion-item>\n      <ion-label>Genral Manager</ion-label>\n      <ion-input formControlName=\"gm\" type=\"text\"></ion-input>\n      <small class=\"form-text text-muted\" *ngIf=\"!regform.get('gm').valid && regform.get('gm').touched\" > This field is required! </small> \n    </ion-item>\n    <ion-item>\n     <ion-label>Contact Person</ion-label>\n     <ion-input formControlName=\"contactPerson\" type=\"text\"></ion-input>\n     <small class=\"form-text text-muted\" *ngIf=\"!regform.get('contactPerson').valid && regform.get('contactPerson').touched\" > This field is required! </small> \n   </ion-item>   \n   <ion-item> \n     <ion-label>Account Id</ion-label>\n    <ion-select interface=\"popover\" formControlName=\"accountId\" type=\"number\">\n    <ion-select-option *ngFor=\"let code of listOfAccount\" value=\"{{code?.id}}\">\n      {{code?.fullName}}\n    </ion-select-option>\n  </ion-select>\n  </ion-item>\n  <ion-item> \n    <ion-label>Category</ion-label>\n   <ion-select multiple interface=\"popover\" formControlName=\"categoryId\" >\n   <ion-select-option *ngFor=\"let code of listOfCategory\" value=\"{{code?.categoryName}}\">\n     {{code?.categoryName}}\n   </ion-select-option>\n </ion-select>\n </ion-item>\n   <ion-item>\n     <ion-label>Email</ion-label>\n     <ion-input formControlName=\"email\" type=\"text\"></ion-input>\n     <small class=\"form-text text-muted\" *ngIf=\"!regform.get('email').valid && regform.get('email').touched\" > This field is required! </small> \n   </ion-item>\n   <ion-item>\n    <ion-label>Status </ion-label>\n    <ion-select interface=\"popover\" formControlName=\"status\">\n      <ion-select-option value=\"open\">open</ion-select-option>\n      <ion-select-option value=\"close\">close</ion-select-option>\n    </ion-select>\n   </ion-item>\n   <div class=\"picker\">\n    <ion-img role=\"button\" class=\"image\" (click)=\"onPickImage()\" [src]=\"base64textString\"\n      *ngIf=\"base64textString\"></ion-img>\n    <ion-button color=\"primary\" (click)=\"onPickImage()\" *ngIf=\"!base64textString\">\n      <ion-icon name=\"camera\" slot=\"start\"></ion-icon>\n      <ion-label>Take Picture</ion-label>\n    </ion-button>\n  </div>\n  <input hidden type=\"file\" accept=\"image/jpeg\" *ngIf=\"usePicker\" #filePicker (change)=\"onFileChosen($event)\" />\n    <div style=\"text-align: center; margin: auto;\">\n       <ion-button id=\"add items\" (click)=\"saveRestaurant()\"> \n         <ion-icon slot=\"start\" name=\"add-circle-outline\"></ion-icon>\n         {{editMode?'Update Restaurant':'Add Restaurant'}}</ion-button>\n     </div> \n </form>\n <ion-item-sliding  *ngFor=\"let item of listOfRestaurant \" #slidingItem >\n  <ion-item detail>\n    <ion-thumbnail slot=\"start\">\n      <img [src]=\"item.photo\">\n    </ion-thumbnail>\n    <ion-label>{{item.name}}</ion-label>\n    <ion-label>{{item.phoneNumber}}</ion-label>\n    <ion-label>{{item.contactPerson}} </ion-label>\n  </ion-item>\n  <ion-item-options side=\"start\">\n    <ion-item-option color=\"danger\" (click)=\"edit(item,slidingItem)\">\n   <ion-icon  name=\"create\" slot=\"icon-only\"></ion-icon></ion-item-option>\n   <ion-item-option color=\"danger\" (click)=\"delete(item,slidingItem)\">\n    <ion-icon  name=\"trash\" slot=\"icon-only\"></ion-icon></ion-item-option>\n  </ion-item-options>\n</ion-item-sliding>\n</ion-content>\n");
 
 /***/ }),
 
@@ -111,8 +33,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic/angular */ "TEn/");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/router */ "tyNb");
 /* harmony import */ var _Service_shared_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../Service/shared.service */ "ldse");
-/* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "1kSV");
-/* harmony import */ var _Service_account_service__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../Service/account.service */ "6wYF");
+/* harmony import */ var _Service_account_service__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../Service/account.service */ "6wYF");
+/* harmony import */ var _Service_category_service__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../Service/category.service */ "neG8");
 
 
 
@@ -126,16 +48,15 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let RestaurantPage = class RestaurantPage {
-    constructor(fb, restaurantService, alertController, platform, sharedService, modalCtrl, modalService, accountService, router) {
+    constructor(fb, restaurantService, alertController, platform, sharedService, accountService, router, categoryService) {
         this.fb = fb;
         this.restaurantService = restaurantService;
         this.alertController = alertController;
         this.platform = platform;
         this.sharedService = sharedService;
-        this.modalCtrl = modalCtrl;
-        this.modalService = modalService;
         this.accountService = accountService;
         this.router = router;
+        this.categoryService = categoryService;
         this.regform = this.fb.group({});
         this.usePicker = false;
         this.coordinates = {};
@@ -143,32 +64,37 @@ let RestaurantPage = class RestaurantPage {
     ngAfterViewInit() {
         this.sharedService.restaurant.subscribe(restaurant => {
             this.restaurantId = restaurant.id;
-            this.regform.get('Name').setValue(restaurant.Name);
-            this.regform.get('PhoneNumber').setValue(restaurant.PhoneNumber);
-            this.regform.get('Email').setValue(restaurant.Email);
-            this.regform.get('ContactPerson').setValue(restaurant.ContactPerson);
-            this.regform.get('AreaSpace').setValue(restaurant.AreaSpace);
-            this.regform.get('GM').setValue(restaurant.GM);
-            this.regform.get('Type').setValue(restaurant.Type);
-            this.regform.get('StartWorkingHour').setValue(restaurant.StartWorkingHour);
-            this.regform.get('EndWorkingHour').setValue(restaurant.EndWorkingHour);
+            this.regform.get('name').setValue(restaurant.name);
+            this.regform.get('phoneNumber').setValue(restaurant.phoneNumber);
+            this.regform.get('email').setValue(restaurant.email);
+            this.regform.get('contactPerson').setValue(restaurant.contactPerson);
+            this.regform.get('areaSpace').setValue(restaurant.areaSpace);
+            this.regform.get('gm').setValue(restaurant.gm);
+            this.regform.get('type').setValue(restaurant.type);
+            this.regform.get('startWorkingHour').setValue(restaurant.startWorkingHour);
+            this.regform.get('endWorkingHour').setValue(restaurant.endWorkingHour);
             this.regform.get('accountId').setValue(restaurant.accountId);
+            this.regform.get('status').setValue(restaurant.status);
+            this.regform.get('categoryId').setValue(restaurant.categoryId);
         });
     }
     ngOnInit() {
         this.regform = this.fb.group({
-            Name: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            Location: [""],
-            Type: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            StartWorkingHour: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            EndWorkingHour: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            AreaSpace: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            PhoneNumber: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            GM: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            ContactPerson: [""],
-            Email: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].email],
-            Photo: [""],
-            accountId: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]
+            name: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            location: [''],
+            type: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            startWorkingHour: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            endWorkingHour: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            areaSpace: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            phoneNumber: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            gm: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            contactPerson: [''],
+            email: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].email],
+            photo: [''],
+            accountId: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            status: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            categoryId: [''],
+            resId: ['']
         });
         if ((this.platform.is('mobile') && !this.platform.is('hybrid')) ||
             this.platform.is('desktop')) {
@@ -176,10 +102,16 @@ let RestaurantPage = class RestaurantPage {
         }
         this.getAccount();
         this.getRestaurant();
+        this.getCategory();
         this.sharedService.location.subscribe(res => {
             this.latitude = res.lat;
             this.longtiude = res.lon;
             console.log(res);
+        });
+    }
+    getCategory() {
+        this.categoryService.getAllCategory().subscribe(res => {
+            this.listOfCategory = res;
         });
     }
     getRestaurant() {
@@ -190,23 +122,69 @@ let RestaurantPage = class RestaurantPage {
     getAccount() {
         this.accountService.getAllAccount().subscribe(res => {
             this.listOfAccount = res.filter(c => c.type == "restaurant");
+            console.log(this.listOfAccount);
         });
     }
+    getFormatedStartTime(dateString) {
+        var date = new Date(dateString);
+        var hours = date.getHours() > 12 ? date.getHours() - 12 : date.getHours();
+        var am_pm = date.getHours() >= 12 ? "pm" : "am";
+        var minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+        let time = hours + ":" + minutes + " " + am_pm;
+        this.regform.get('StartWorkingHour').setValue(time);
+        // return time;
+    }
+    getFormatedEndTime(dateString) {
+        var date = new Date(dateString);
+        var hours = date.getHours() > 12 ? date.getHours() - 12 : date.getHours();
+        var am_pm = date.getHours() >= 12 ? "pm" : "am";
+        var minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+        let time = hours + ":" + minutes + " " + am_pm;
+        this.regform.get('EndWorkingHour').setValue(time);
+        // return time;
+    }
     saveRestaurant() {
+        let startWorkTime = this.regform.get('StartWorkingHour').value;
+        //this.getFormatedStartTime(startWorkTime);
+        let EndWorkingHour = this.regform.get('EndWorkingHour').value;
+        // this.getFormatedEndTime(EndWorkingHour);
         if (this.base64textString !== undefined) {
-            this.regform.get('Photo').setValue(this.base64textString);
+            this.regform.get('photo').setValue(this.base64textString);
         }
         let data = {
             lat: this.latitude,
             lon: this.longtiude
         };
-        this.regform.get('Location').setValue(data);
+        this.regform.get('location').setValue(data);
+        this.regform.get('resId').setValue('Res1');
+        const accountId = this.regform.get('accountId').value;
+        this.regform.get('accountId').setValue(+accountId);
         if (this.regform.valid) {
             if (!this.restaurantId) {
                 this.restaurantService.create(this.regform.value);
             }
             else {
-                this.restaurantService.updateRestaurant(this.regform.value, this.restaurantId);
+                const data = {
+                    id: this.restaurantId,
+                    name: this.regform.get('name').value,
+                    phoneNumber: this.regform.get('phoneNumber').value,
+                    email: this.regform.get('email').value,
+                    contactPerson: this.regform.get('contactPerson').value,
+                    areaSpace: this.regform.get('areaSpace').value,
+                    gm: this.regform.get('gm').value,
+                    type: this.regform.get('type').value,
+                    startWorkingHour: this.regform.get('startWorkingHour').value,
+                    endWorkingHour: this.regform.get('endWorkingHour').value,
+                    accountId: this.regform.get('accountId').value,
+                    status: this.regform.get('status').value,
+                    categoryId: this.regform.get('categoryId').value,
+                    location: this.regform.get('location').value,
+                    photo: this.regform.get('photo').value,
+                    resId: this.regform.get('resId').value
+                };
+                this.restaurantService.updateRestaurant(data).subscribe(res => {
+                    alert(res.toString());
+                });
             }
             this.base64textString = '';
             this.restaurantId = null;
@@ -220,18 +198,21 @@ let RestaurantPage = class RestaurantPage {
     edit(restaurant, slide) {
         this.editMode = true;
         this.restaurantId = restaurant.id;
-        this.regform.get('Name').setValue(restaurant.Name);
-        this.regform.get('PhoneNumber').setValue(restaurant.PhoneNumber);
-        this.regform.get('Email').setValue(restaurant.Email);
-        this.regform.get('ContactPerson').setValue(restaurant.ContactPerson);
-        this.regform.get('AreaSpace').setValue(restaurant.AreaSpace);
-        this.regform.get('GM').setValue(restaurant.GM);
-        this.regform.get('Type').setValue(restaurant.Type);
-        this.regform.get('StartWorkingHour').setValue(restaurant.StartWorkingHour);
-        this.regform.get('EndWorkingHour').setValue(restaurant.EndWorkingHour);
-        this.base64textString = restaurant.Photo;
+        this.regform.get('name').setValue(restaurant.name);
+        this.regform.get('phoneNumber').setValue(restaurant.phoneNumber);
+        this.regform.get('email').setValue(restaurant.email);
+        this.regform.get('contactPerson').setValue(restaurant.contactPerson);
+        this.regform.get('areaSpace').setValue(restaurant.areaSpace);
+        this.regform.get('gm').setValue(restaurant.gm);
+        this.regform.get('type').setValue(restaurant.type);
+        this.regform.get('startWorkingHour').setValue(restaurant.startWorkingHour);
+        this.regform.get('endWorkingHour').setValue(restaurant.endWorkingHour);
+        this.regform.get('status').setValue(restaurant.status);
+        this.regform.get('categoryId').setValue(restaurant.categoryId);
+        this.regform.get('location').setValue(restaurant.location);
+        this.base64textString = restaurant.photo;
         this.sharedService.restaurant.next(restaurant);
-        this.sharedService.location.next(restaurant.Location);
+        this.sharedService.location.next(restaurant.location);
         slide.close();
     }
     delete(restaurant, slide) {
@@ -336,10 +317,9 @@ RestaurantPage.ctorParameters = () => [
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_7__["AlertController"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_7__["Platform"] },
     { type: _Service_shared_service__WEBPACK_IMPORTED_MODULE_9__["SharedService"] },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_7__["ModalController"] },
-    { type: _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_10__["NgbModal"] },
-    { type: _Service_account_service__WEBPACK_IMPORTED_MODULE_11__["AccountService"] },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_8__["Router"] }
+    { type: _Service_account_service__WEBPACK_IMPORTED_MODULE_10__["AccountService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_8__["Router"] },
+    { type: _Service_category_service__WEBPACK_IMPORTED_MODULE_11__["CategoryService"] }
 ];
 RestaurantPage.propDecorators = {
     filePickerRef: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["ViewChild"], args: ['filePicker', { static: false },] }]
@@ -402,56 +382,7 @@ RestaurantPageRoutingModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decor
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (".picker {\n  width: 30rem;\n  max-width: 80%;\n  height: 20rem;\n  max-height: 30vh;\n  border: 1px solid var(--ion-color-primary);\n  margin: auto;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n\n.image {\n  width: 100%;\n  height: 100%;\n  -o-object-fit: cover;\n     object-fit: cover;\n}\n\nion-item-sliding .item {\n  --background: linear-gradient(90deg, rgb(223, 226, 230) 0%, rgb(222, 225, 231) 35%, rgb(224, 228, 233) 100%);\n}\n\n.label-class {\n  --inner-padding-start:12px;\n  --inner-padding-end:10px;\n  margin-left: 67px;\n}\n\n.label-class-al {\n  margin-left: 67px;\n}\n\n.ion-input {\n  margin-left: 67px;\n}\n\n.dx-lookup-field {\n  padding: 5px 23px 12px 54px;\n  font-size: 1em;\n}\n\nion-content ion-item {\n  padding: 0;\n  --border-radius: 14px;\n}\n\nion-content ion-searchbar {\n  --border-radius: 14px;\n  --background: rgb(243, 243, 243);\n  margin-top: -13px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXHJlc3RhdXJhbnQucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksWUFBQTtFQUNBLGNBQUE7RUFDQSxhQUFBO0VBQ0EsZ0JBQUE7RUFDQSwwQ0FBQTtFQUNBLFlBQUE7RUFDQSxhQUFBO0VBQ0EsdUJBQUE7RUFDQSxtQkFBQTtBQUNKOztBQUVFO0VBQ0UsV0FBQTtFQUNBLFlBQUE7RUFDQSxvQkFBQTtLQUFBLGlCQUFBO0FBQ0o7O0FBQ0E7RUFDRSw0R0FBQTtBQUVGOztBQU9BO0VBQ0UsMEJBQUE7RUFDQSx3QkFBQTtFQUNBLGlCQUFBO0FBSkY7O0FBTUE7RUFDRSxpQkFBQTtBQUhGOztBQUtBO0VBQ0UsaUJBQUE7QUFGRjs7QUFJQTtFQUNFLDJCQUFBO0VBQ0EsY0FBQTtBQURGOztBQU1JO0VBRUUsVUFBQTtFQUVBLHFCQUFBO0FBTE47O0FBU0M7RUFDQyxxQkFBQTtFQUNBLGdDQUFBO0VBQ0EsaUJBQUE7QUFQRiIsImZpbGUiOiJyZXN0YXVyYW50LnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5waWNrZXIge1xyXG4gICAgd2lkdGg6IDMwcmVtO1xyXG4gICAgbWF4LXdpZHRoOiA4MCU7XHJcbiAgICBoZWlnaHQ6IDIwcmVtO1xyXG4gICAgbWF4LWhlaWdodDogMzB2aDtcclxuICAgIGJvcmRlcjogMXB4IHNvbGlkIHZhcigtLWlvbi1jb2xvci1wcmltYXJ5KTtcclxuICAgIG1hcmdpbjogYXV0bztcclxuICAgIGRpc3BsYXk6IGZsZXg7XHJcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcclxuICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XHJcbiAgfVxyXG4gIFxyXG4gIC5pbWFnZSB7XHJcbiAgICB3aWR0aDogMTAwJTtcclxuICAgIGhlaWdodDogMTAwJTtcclxuICAgIG9iamVjdC1maXQ6IGNvdmVyO1xyXG4gIH1cclxuaW9uLWl0ZW0tc2xpZGluZyAuaXRlbSB7XHJcbiAgLS1iYWNrZ3JvdW5kOiBsaW5lYXItZ3JhZGllbnQoOTBkZWcsIHJnYigyMjMsIDIyNiwgMjMwKSAwJSwgcmdiKDIyMiwgMjI1LCAyMzEpIDM1JSwgcmdiKDIyNCwgMjI4LCAyMzMpIDEwMCUpO1xyXG59XHJcbi8vIC5uZy12YWxpZFtyZXF1aXJlZF0sIC5uZy12YWxpZC5yZXF1aXJlZCAge1xyXG4vLyAgIGJvcmRlci1sZWZ0OiA1cHggc29saWQgI2Y4ZDdkYTsgLyogZ3JlZW4gKi9cclxuLy8gfVxyXG5cclxuLy8gLm5nLWludmFsaWQ6bm90KGZvcm0pICB7XHJcbi8vICAgYm9yZGVyLWxlZnQ6IDVweCBzb2xpZCAjZjhkN2RhOyAvKiByZWQgKi9cclxuLy8gfVxyXG4ubGFiZWwtY2xhc3N7XHJcbiAgLS1pbm5lci1wYWRkaW5nLXN0YXJ0OjEycHg7XHJcbiAgLS1pbm5lci1wYWRkaW5nLWVuZDoxMHB4O1xyXG4gIG1hcmdpbi1sZWZ0OiA2N3B4O1xyXG59XHJcbi5sYWJlbC1jbGFzcy1hbHtcclxuICBtYXJnaW4tbGVmdDogNjdweDtcclxufVxyXG4uaW9uLWlucHV0e1xyXG4gIG1hcmdpbi1sZWZ0OiA2N3B4O1xyXG59XHJcbi5keC1sb29rdXAtZmllbGQge1xyXG4gIHBhZGRpbmc6IDVweCAyM3B4IDEycHggNTRweDtcclxuICBmb250LXNpemU6IDFlbTtcclxufVxyXG5pb24tY29udGVudCB7XHJcbiAgLy8tLWJhY2tncm91bmQ6IGxpbmVhci1ncmFkaWVudCg5MGRlZywgcmdiYSg0Myw5MCwxNDgsMSkgMCUsIHJnYmEoNDUsMTEyLDIyOSwxKSAzNSUsIHJnYmEoNDUsMTEyLDIyOSwxKSAxMDAlKTtcclxuIFxyXG4gICAgaW9uLWl0ZW0ge1xyXG4gICAgLy8gLS1iYWNrZ3JvdW5kOiByZ2IoMTIwLCAxMjYsIDEzNCk7XHJcbiAgICAgIHBhZGRpbmc6IDA7XHJcbiAgICAgLy8gbWFyZ2luOiAxNHB4IDA7XHJcbiAgICAgIC0tYm9yZGVyLXJhZGl1czogMTRweDtcclxuICAgICAvLyBjb2xvcjogI0ZGRkZGRjtcclxuICAgICAgLy9mb250LXdlaWdodDogNjAwO1xyXG4gfVxyXG4gaW9uLXNlYXJjaGJhcntcclxuICAtLWJvcmRlci1yYWRpdXM6IDE0cHg7XHJcbiAgLS1iYWNrZ3JvdW5kOiByZ2IoMjQzLCAyNDMsIDI0Myk7XHJcbiAgbWFyZ2luLXRvcDogLTEzcHg7XHJcbiB9XHJcbn0iXX0= */");
-
-/***/ }),
-
-/***/ "ldse":
-/*!*******************************************!*\
-  !*** ./src/app/Service/shared.service.ts ***!
-  \*******************************************/
-/*! exports provided: SharedService */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SharedService", function() { return SharedService; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "fXoL");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "qCKp");
-
-
-
-let SharedService = class SharedService {
-    constructor() {
-        this.restaurant = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"]({});
-        this.status = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"]({});
-        this.location = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"]({});
-        this.orderId = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"]({});
-        this.RestaurantLocation = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"]({});
-        this.resId = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"]({});
-    }
-    getLocation() {
-        return this.location;
-    }
-    getStatus() {
-        return this.status;
-    }
-    getRestaurantLocation() {
-        return this.RestaurantLocation;
-    }
-    getRestaurantId() {
-        return this.resId;
-    }
-};
-SharedService.ctorParameters = () => [];
-SharedService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
-        providedIn: 'root'
-    })
-], SharedService);
-
-
+/* harmony default export */ __webpack_exports__["default"] = (".picker {\n  width: 30rem;\n  max-width: 80%;\n  height: 20rem;\n  max-height: 30vh;\n  border: 1px solid var(--ion-color-primary);\n  margin: auto;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n\n.image {\n  width: 100%;\n  height: 100%;\n  -o-object-fit: cover;\n     object-fit: cover;\n}\n\nion-item-sliding .item {\n  --background: linear-gradient(90deg, rgb(223, 226, 230) 0%, rgb(222, 225, 231) 35%, rgb(224, 228, 233) 100%);\n}\n\n.label-class {\n  --inner-padding-start:12px;\n  --inner-padding-end:10px;\n  margin-left: 67px;\n}\n\n.label-class-al {\n  margin-left: 67px;\n}\n\n.ion-input {\n  margin-left: 67px;\n}\n\n.dx-lookup-field {\n  padding: 5px 23px 12px 54px;\n  font-size: 1em;\n}\n\nion-content ion-item {\n  padding: 0;\n  --border-radius: 14px;\n}\n\nion-content ion-searchbar {\n  --border-radius: 14px;\n  --background: rgb(243, 243, 243);\n  margin-top: -13px;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXHJlc3RhdXJhbnQucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksWUFBWTtFQUNaLGNBQWM7RUFDZCxhQUFhO0VBQ2IsZ0JBQWdCO0VBQ2hCLDBDQUEwQztFQUMxQyxZQUFZO0VBQ1osYUFBYTtFQUNiLHVCQUF1QjtFQUN2QixtQkFBbUI7QUFDdkI7O0FBRUU7RUFDRSxXQUFXO0VBQ1gsWUFBWTtFQUNaLG9CQUFpQjtLQUFqQixpQkFBaUI7QUFDckI7O0FBQ0E7RUFDRSw0R0FBYTtBQUVmOztBQU9BO0VBQ0UsMEJBQXNCO0VBQ3RCLHdCQUFvQjtFQUNwQixpQkFBaUI7QUFKbkI7O0FBTUE7RUFDRSxpQkFBaUI7QUFIbkI7O0FBS0E7RUFDRSxpQkFBaUI7QUFGbkI7O0FBSUE7RUFDRSwyQkFBMkI7RUFDM0IsY0FBYztBQURoQjs7QUFHQTtFQUtNLFVBQVU7RUFFVixxQkFBZ0I7QUFMdEI7O0FBRkE7RUFZRSxxQkFBZ0I7RUFDaEIsZ0NBQWE7RUFDYixpQkFBaUI7QUFObkIiLCJmaWxlIjoicmVzdGF1cmFudC5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIucGlja2VyIHtcclxuICAgIHdpZHRoOiAzMHJlbTtcclxuICAgIG1heC13aWR0aDogODAlO1xyXG4gICAgaGVpZ2h0OiAyMHJlbTtcclxuICAgIG1heC1oZWlnaHQ6IDMwdmg7XHJcbiAgICBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1pb24tY29sb3ItcHJpbWFyeSk7XHJcbiAgICBtYXJnaW46IGF1dG87XHJcbiAgICBkaXNwbGF5OiBmbGV4O1xyXG4gICAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XHJcbiAgICBhbGlnbi1pdGVtczogY2VudGVyO1xyXG4gIH1cclxuICBcclxuICAuaW1hZ2Uge1xyXG4gICAgd2lkdGg6IDEwMCU7XHJcbiAgICBoZWlnaHQ6IDEwMCU7XHJcbiAgICBvYmplY3QtZml0OiBjb3ZlcjtcclxuICB9XHJcbmlvbi1pdGVtLXNsaWRpbmcgLml0ZW0ge1xyXG4gIC0tYmFja2dyb3VuZDogbGluZWFyLWdyYWRpZW50KDkwZGVnLCByZ2IoMjIzLCAyMjYsIDIzMCkgMCUsIHJnYigyMjIsIDIyNSwgMjMxKSAzNSUsIHJnYigyMjQsIDIyOCwgMjMzKSAxMDAlKTtcclxufVxyXG4vLyAubmctdmFsaWRbcmVxdWlyZWRdLCAubmctdmFsaWQucmVxdWlyZWQgIHtcclxuLy8gICBib3JkZXItbGVmdDogNXB4IHNvbGlkICNmOGQ3ZGE7IC8qIGdyZWVuICovXHJcbi8vIH1cclxuXHJcbi8vIC5uZy1pbnZhbGlkOm5vdChmb3JtKSAge1xyXG4vLyAgIGJvcmRlci1sZWZ0OiA1cHggc29saWQgI2Y4ZDdkYTsgLyogcmVkICovXHJcbi8vIH1cclxuLmxhYmVsLWNsYXNze1xyXG4gIC0taW5uZXItcGFkZGluZy1zdGFydDoxMnB4O1xyXG4gIC0taW5uZXItcGFkZGluZy1lbmQ6MTBweDtcclxuICBtYXJnaW4tbGVmdDogNjdweDtcclxufVxyXG4ubGFiZWwtY2xhc3MtYWx7XHJcbiAgbWFyZ2luLWxlZnQ6IDY3cHg7XHJcbn1cclxuLmlvbi1pbnB1dHtcclxuICBtYXJnaW4tbGVmdDogNjdweDtcclxufVxyXG4uZHgtbG9va3VwLWZpZWxkIHtcclxuICBwYWRkaW5nOiA1cHggMjNweCAxMnB4IDU0cHg7XHJcbiAgZm9udC1zaXplOiAxZW07XHJcbn1cclxuaW9uLWNvbnRlbnQge1xyXG4gIC8vLS1iYWNrZ3JvdW5kOiBsaW5lYXItZ3JhZGllbnQoOTBkZWcsIHJnYmEoNDMsOTAsMTQ4LDEpIDAlLCByZ2JhKDQ1LDExMiwyMjksMSkgMzUlLCByZ2JhKDQ1LDExMiwyMjksMSkgMTAwJSk7XHJcbiBcclxuICAgIGlvbi1pdGVtIHtcclxuICAgIC8vIC0tYmFja2dyb3VuZDogcmdiKDEyMCwgMTI2LCAxMzQpO1xyXG4gICAgICBwYWRkaW5nOiAwO1xyXG4gICAgIC8vIG1hcmdpbjogMTRweCAwO1xyXG4gICAgICAtLWJvcmRlci1yYWRpdXM6IDE0cHg7XHJcbiAgICAgLy8gY29sb3I6ICNGRkZGRkY7XHJcbiAgICAgIC8vZm9udC13ZWlnaHQ6IDYwMDtcclxuIH1cclxuIGlvbi1zZWFyY2hiYXJ7XHJcbiAgLS1ib3JkZXItcmFkaXVzOiAxNHB4O1xyXG4gIC0tYmFja2dyb3VuZDogcmdiKDI0MywgMjQzLCAyNDMpO1xyXG4gIG1hcmdpbi10b3A6IC0xM3B4O1xyXG4gfVxyXG59Il19 */");
 
 /***/ }),
 

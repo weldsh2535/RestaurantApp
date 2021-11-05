@@ -107,79 +107,48 @@
       /* harmony import */
 
 
-      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! @angular/common/http */
+      "tk/3");
+      /* harmony import */
+
+
+      var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/core */
       "fXoL");
-      /* harmony import */
-
-
-      var angularfire2_firestore__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-      /*! angularfire2/firestore */
-      "CqG3");
-      /* harmony import */
-
-
-      var angularfire2_firestore__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(angularfire2_firestore__WEBPACK_IMPORTED_MODULE_2__);
-      /* harmony import */
-
-
-      var rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
-      /*! rxjs/internal/operators/map */
-      "q3Kh");
-      /* harmony import */
-
-
-      var rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_3__);
 
       var UserRoleService = /*#__PURE__*/function () {
-        //db: any;
-        function UserRoleService(db) {
+        function UserRoleService(http) {
           _classCallCheck(this, UserRoleService);
 
-          this.db = db;
-          this.userRoleCollectionList = db.collection('userRole');
+          this.http = http;
+          this.APIURL = 'http://localhost:49347/api';
         }
 
         _createClass(UserRoleService, [{
           key: "create",
-          value: function create(userR) {
-            return this.userRoleCollectionList.add(userR);
+          value: function create(val) {
+            return this.http.post(this.APIURL + '/UserRole', val);
           }
         }, {
           key: "getAllUserRole",
           value: function getAllUserRole() {
-            this.userRoleList = this.userRoleCollectionList.snapshotChanges().pipe(Object(rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_3__["map"])(function (actions) {
-              return actions.map(function (a) {
-                var data = a.payload.doc.data();
-                var id = a.payload.doc.id;
-                return Object.assign({
-                  id: id
-                }, data);
-              });
-            }));
-            return this.userRoleList;
+            return this.http.get(this.APIURL + '/UserRole');
           }
         }, {
-          key: "getUerRoleId",
-          value: function getUerRoleId(id) {
-            var lookUpObj = this.db.collection('userRole', function (ref) {
-              return ref.where('userId', '==', id);
-            }).snapshotChanges();
-            this.userRoleLists = lookUpObj.pipe(Object(rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_3__["map"])(function (changes) {
-              return changes.map(function (a) {
-                var data = a.payload.doc.data();
-                var id = a.payload.doc.id;
-                return Object.assign({
-                  id: id
-                }, data);
-              });
-            }));
-            return this.userRoleLists;
+          key: "updateUserRole",
+          value: function updateUserRole(val) {
+            return this.http.put(this.APIURL + '/UserRole/', val);
           }
         }, {
           key: "deleteUserRole",
           value: function deleteUserRole(id) {
-            return this.userRoleCollectionList.doc(id)["delete"]();
+            return this.http["delete"](this.APIURL + '/UserRole/' + id).toPromise();
+          }
+        }, {
+          key: "getUerRoleId",
+          value: function getUerRoleId(userId) {
+            return this.http.get(this.APIURL + '/UserRole/' + userId);
           }
         }]);
 
@@ -188,11 +157,11 @@
 
       UserRoleService.ctorParameters = function () {
         return [{
-          type: angularfire2_firestore__WEBPACK_IMPORTED_MODULE_2__["AngularFirestore"]
+          type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]
         }];
       };
 
-      UserRoleService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+      UserRoleService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"])({
         providedIn: 'root'
       })], UserRoleService);
       /***/
@@ -226,67 +195,43 @@
       /* harmony import */
 
 
-      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! @angular/common/http */
+      "tk/3");
+      /* harmony import */
+
+
+      var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/core */
       "fXoL");
-      /* harmony import */
-
-
-      var angularfire2_firestore__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-      /*! angularfire2/firestore */
-      "CqG3");
-      /* harmony import */
-
-
-      var angularfire2_firestore__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(angularfire2_firestore__WEBPACK_IMPORTED_MODULE_2__);
-      /* harmony import */
-
-
-      var rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
-      /*! rxjs/internal/operators/map */
-      "q3Kh");
-      /* harmony import */
-
-
-      var rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_3__);
 
       var FunctionalityService = /*#__PURE__*/function () {
-        //db: any;
-        function FunctionalityService(db) {
+        function FunctionalityService(http) {
           _classCallCheck(this, FunctionalityService);
 
-          this.db = db;
-          this.functionalityCollectionList = db.collection('functionality');
+          this.http = http;
+          this.APIURL = 'http://localhost:49347/api';
         }
 
         _createClass(FunctionalityService, [{
           key: "create",
-          value: function create(functionality) {
-            return this.functionalityCollectionList.add(functionality);
+          value: function create(val) {
+            return this.http.post(this.APIURL + '/functionalitie', val);
           }
         }, {
           key: "getAllFunctionality",
           value: function getAllFunctionality() {
-            this.functionlityList = this.functionalityCollectionList.snapshotChanges().pipe(Object(rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_3__["map"])(function (actions) {
-              return actions.map(function (a) {
-                var data = a.payload.doc.data();
-                var id = a.payload.doc.id;
-                return Object.assign({
-                  id: id
-                }, data);
-              });
-            }));
-            return this.functionlityList;
+            return this.http.get(this.APIURL + '/functionalitie');
           }
         }, {
           key: "updateFunctionality",
-          value: function updateFunctionality(funObj, id) {
-            return this.functionalityCollectionList.doc(id).update(funObj);
+          value: function updateFunctionality(val) {
+            return this.http.put(this.APIURL + '/functionalitie/', val);
           }
         }, {
           key: "removeFunctionality",
           value: function removeFunctionality(id) {
-            return this.functionalityCollectionList.doc(id)["delete"]();
+            return this.http["delete"](this.APIURL + '/functionalitie/' + id).toPromise();
           }
         }]);
 
@@ -295,11 +240,11 @@
 
       FunctionalityService.ctorParameters = function () {
         return [{
-          type: angularfire2_firestore__WEBPACK_IMPORTED_MODULE_2__["AngularFirestore"]
+          type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]
         }];
       };
 
-      FunctionalityService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+      FunctionalityService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"])({
         providedIn: 'root'
       })], FunctionalityService);
       /***/
@@ -321,7 +266,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<ion-split-pane contentId=\"main\">\n  <ion-menu contentId=\"main\" type=\"overlay\">\n  <ion-content>\n      <ion-list>\n        <ion-item color=\"primary\">\n          <ion-avatar style=\"height: 62px;\n          width: 68px;\" class=\"ion-margin-start\">\n           <img src=\"./assets/userprofile.jpg\">\n          </ion-avatar> &nbsp;&nbsp;\n          <ion-label>\n            {{this.userName}} \n          </ion-label>\n        </ion-item>\n     </ion-list>\n      <ion-list id=\"inbox-list\">\n        <ion-menu-toggle auto-hide=\"false\" *ngFor=\"let p of pageList; let i = index\">\n          <ion-item routerDirection=\"root\"(click)=\"selectedIndex = i\" [routerLink]=\"[p.url]\" (click)=\"readPath1(p)\"  lines=\"none\" detail=\"false\"\n            routerLinkActive=\"selected\" [class.selected]=\"selectedIndex == i\">\n            <ion-icon slot=\"start\" [ios]=\"p.icon + '-outline'\" [md]=\"p.icon + '-sharp'\"></ion-icon>\n            <ion-label>{{ p.title }}</ion-label>\n          </ion-item>\n        </ion-menu-toggle>\n    \n       </ion-list> \n       <ion-footer>\n        <ion-toolbar>\n          <ion-row align-items-center>\n            <ion-col></ion-col>\n            <ion-col>\n              <ion-button ion-button full clear icon-left \n              (click)=\"logout()\">\n              <ion-icon name=\"log-out-outline\"></ion-icon>Logout\n            </ion-button>\n            </ion-col>\n          </ion-row>\n        </ion-toolbar>\n      </ion-footer> \n  </ion-content>\n  </ion-menu>\n  <ion-router-outlet id=\"main\"></ion-router-outlet>\n  </ion-split-pane>\n  ";
+      __webpack_exports__["default"] = "<ion-split-pane contentId=\"main\">\n  <ion-menu contentId=\"main\" type=\"overlay\">\n  <ion-content>\n      <ion-list>\n        <ion-item color=\"primary\">\n          <ion-avatar style=\"height: 62px;\n          width: 68px;\" class=\"ion-margin-start\">\n           <img [src]=\"this.base64textString\">\n          </ion-avatar> &nbsp;&nbsp;\n          <ion-label>\n            {{this.userName}} \n          </ion-label>\n        </ion-item>\n     </ion-list>\n      <ion-list id=\"inbox-list\">\n        <ion-menu-toggle auto-hide=\"false\" *ngFor=\"let p of pageList; let i = index\">\n          <ion-item routerDirection=\"root\"(click)=\"selectedIndex = i\" [routerLink]=\"[p.url]\" (click)=\"readPath1(p)\"  lines=\"none\" detail=\"false\"\n            routerLinkActive=\"selected\" [class.selected]=\"selectedIndex == i\">\n            <ion-icon slot=\"start\" [ios]=\"p.icon + '-outline'\" [md]=\"p.icon + '-sharp'\"></ion-icon>\n            <ion-label>{{ p.title }}</ion-label>\n          </ion-item>\n        </ion-menu-toggle>\n    \n       </ion-list> \n       <ion-footer>\n        <ion-toolbar>\n          <ion-row align-items-center>\n            <ion-col></ion-col>\n            <ion-col>\n              <ion-button ion-button full clear icon-left \n              (click)=\"logout()\">\n              <ion-icon name=\"log-out-outline\"></ion-icon>Logout\n            </ion-button>\n            </ion-col>\n          </ion-row>\n        </ion-toolbar>\n      </ion-footer> \n  </ion-content>\n  </ion-menu>\n  <ion-router-outlet id=\"main\"></ion-router-outlet>\n  </ion-split-pane>\n  ";
       /***/
     },
 
@@ -341,7 +286,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "ion-menu ion-content {\n  --background: var(--ion-item-background, var(--ion-background-color, #fff));\n}\n\nion-menu.md ion-content {\n  --padding-start: 8px;\n  --padding-end: 8px;\n  --padding-top: 20px;\n  --padding-bottom: 20px;\n}\n\nion-menu.md ion-list {\n  padding: 5px 0;\n}\n\nion-menu.md ion-note {\n  margin-bottom: 30px;\n}\n\nion-menu.md ion-list-header,\nion-menu.md ion-note {\n  padding-left: 10px;\n}\n\nion-menu.md ion-list#inbox-list {\n  border-bottom: 1px solid var(--ion-color-step-150, #d7d8da);\n  background-color: #ebeff3;\n}\n\nion-menu.md ion-list#inbox-list ion-list-header {\n  font-size: 22px;\n  font-weight: 600;\n  min-height: 20px;\n}\n\nion-menu.md ion-list#labels-list ion-list-header {\n  font-size: 16px;\n  margin-bottom: 18px;\n  color: #1f09ec;\n  min-height: 26px;\n}\n\nion-menu.md ion-item {\n  --padding-start: 28px;\n  --padding-end: 17px;\n  --padding-top: 2px;\n  border-radius: 7px;\n  background-color: #dfe6e7;\n}\n\nion-menu.md ion-item.selected {\n  --background: rgba(var(--ion-color-primary-rgb), 0.14);\n}\n\nion-menu.md ion-item.selected ion-icon {\n  color: var(--ion-color-primary);\n}\n\nion-menu.md ion-item ion-icon {\n  color: #616e7e;\n}\n\nion-menu.md ion-item ion-label {\n  font-weight: 500;\n}\n\nion-menu.ios ion-content {\n  --padding-bottom: 20px;\n}\n\nion-menu.ios ion-list {\n  padding: 20px 0 0 0;\n}\n\nion-menu.ios ion-note {\n  line-height: 24px;\n  margin-bottom: 20px;\n}\n\nion-menu.ios ion-item {\n  --padding-start: 16px;\n  --padding-end: 16px;\n  --min-height: 50px;\n}\n\nion-menu.ios ion-item.selected ion-icon {\n  color: var(--ion-color-primary);\n}\n\nion-menu.ios ion-item ion-icon {\n  font-size: 24px;\n  color: #73849a;\n}\n\nion-menu.ios ion-list#labels-list ion-list-header {\n  margin-bottom: 8px;\n}\n\nion-menu.ios ion-list-header,\nion-menu.ios ion-note {\n  padding-left: 16px;\n  padding-right: 16px;\n}\n\nion-menu.ios ion-note {\n  margin-bottom: 8px;\n}\n\nion-note {\n  display: inline-block;\n  font-size: 16px;\n  color: var(--ion-color-medium-shade);\n}\n\nion-item.selected {\n  --color: var(--ion-color-primary);\n}\n\n#sidenav ion-item-group[submenu] {\n  overflow: hidden;\n  display: block;\n  height: 0;\n  transition: height 0.3s linear;\n  padding-left: 20%;\n}\n\n#sidenav ion-item-group[submenu].visible {\n  height: inherit;\n}\n\n.manu-list {\n  margin-left: 11px;\n  text-align: center;\n  background-color: #ffffff;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXG1lbnUucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksMkVBQUE7QUFDSjs7QUFFRTtFQUNFLG9CQUFBO0VBQ0Esa0JBQUE7RUFDQSxtQkFBQTtFQUNBLHNCQUFBO0FBQ0o7O0FBRUU7RUFDRSxjQUFBO0FBQ0o7O0FBRUU7RUFDRSxtQkFBQTtBQUNKOztBQUVFOztFQUVFLGtCQUFBO0FBQ0o7O0FBRUU7RUFDRSwyREFBQTtFQUNBLHlCQUFBO0FBQ0o7O0FBRUU7RUFDRSxlQUFBO0VBQ0EsZ0JBQUE7RUFDQSxnQkFBQTtBQUNKOztBQUVFO0VBQ0UsZUFBQTtFQUNBLG1CQUFBO0VBRUEsY0FBQTtFQUVBLGdCQUFBO0FBREo7O0FBSUU7RUFDRSxxQkFBQTtFQUNBLG1CQUFBO0VBQ0Esa0JBQUE7RUFDQSxrQkFBQTtFQUNBLHlCQUFBO0FBREo7O0FBSUU7RUFDRSxzREFBQTtBQURKOztBQUlFO0VBQ0UsK0JBQUE7QUFESjs7QUFJRTtFQUNFLGNBQUE7QUFESjs7QUFJRTtFQUNFLGdCQUFBO0FBREo7O0FBSUU7RUFDRSxzQkFBQTtBQURKOztBQUlFO0VBQ0UsbUJBQUE7QUFESjs7QUFJRTtFQUNFLGlCQUFBO0VBQ0EsbUJBQUE7QUFESjs7QUFJRTtFQUNFLHFCQUFBO0VBQ0EsbUJBQUE7RUFDQSxrQkFBQTtBQURKOztBQUlFO0VBQ0UsK0JBQUE7QUFESjs7QUFJRTtFQUNFLGVBQUE7RUFDQSxjQUFBO0FBREo7O0FBSUU7RUFDRSxrQkFBQTtBQURKOztBQUlFOztFQUVFLGtCQUFBO0VBQ0EsbUJBQUE7QUFESjs7QUFJRTtFQUNFLGtCQUFBO0FBREo7O0FBSUU7RUFDRSxxQkFBQTtFQUNBLGVBQUE7RUFFQSxvQ0FBQTtBQUZKOztBQUtFO0VBQ0UsaUNBQUE7QUFGSjs7QUFLSTtFQUNFLGdCQUFBO0VBQ0EsY0FBQTtFQUNBLFNBQUE7RUFDQSw4QkFBQTtFQUNBLGlCQUFBO0FBRk47O0FBR007RUFDRSxlQUFBO0FBRFI7O0FBTUU7RUFDSSxpQkFBQTtFQUNBLGtCQUFBO0VBQ0QseUJBQUE7QUFITCIsImZpbGUiOiJtZW51LnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbImlvbi1tZW51IGlvbi1jb250ZW50IHtcclxuICAgIC0tYmFja2dyb3VuZDogdmFyKC0taW9uLWl0ZW0tYmFja2dyb3VuZCwgdmFyKC0taW9uLWJhY2tncm91bmQtY29sb3IsICNmZmYpKTtcclxuICB9XHJcbiAgXHJcbiAgaW9uLW1lbnUubWQgaW9uLWNvbnRlbnQge1xyXG4gICAgLS1wYWRkaW5nLXN0YXJ0OiA4cHg7XHJcbiAgICAtLXBhZGRpbmctZW5kOiA4cHg7XHJcbiAgICAtLXBhZGRpbmctdG9wOiAyMHB4O1xyXG4gICAgLS1wYWRkaW5nLWJvdHRvbTogMjBweDtcclxuICB9XHJcbiAgXHJcbiAgaW9uLW1lbnUubWQgaW9uLWxpc3Qge1xyXG4gICAgcGFkZGluZzogNXB4IDA7XHJcbiAgfVxyXG4gIFxyXG4gIGlvbi1tZW51Lm1kIGlvbi1ub3RlIHtcclxuICAgIG1hcmdpbi1ib3R0b206IDMwcHg7XHJcbiAgfVxyXG4gIFxyXG4gIGlvbi1tZW51Lm1kIGlvbi1saXN0LWhlYWRlcixcclxuICBpb24tbWVudS5tZCBpb24tbm90ZSB7XHJcbiAgICBwYWRkaW5nLWxlZnQ6IDEwcHg7XHJcbiAgfVxyXG4gIFxyXG4gIGlvbi1tZW51Lm1kIGlvbi1saXN0I2luYm94LWxpc3Qge1xyXG4gICAgYm9yZGVyLWJvdHRvbTogMXB4IHNvbGlkIHZhcigtLWlvbi1jb2xvci1zdGVwLTE1MCwgI2Q3ZDhkYSk7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2IoMjM1LCAyMzksIDI0Myk7XHJcbiAgfVxyXG4gIFxyXG4gIGlvbi1tZW51Lm1kIGlvbi1saXN0I2luYm94LWxpc3QgaW9uLWxpc3QtaGVhZGVyIHtcclxuICAgIGZvbnQtc2l6ZTogMjJweDtcclxuICAgIGZvbnQtd2VpZ2h0OiA2MDA7XHJcbiAgICBtaW4taGVpZ2h0OiAyMHB4O1xyXG4gIH1cclxuICBcclxuICBpb24tbWVudS5tZCBpb24tbGlzdCNsYWJlbHMtbGlzdCBpb24tbGlzdC1oZWFkZXIge1xyXG4gICAgZm9udC1zaXplOiAxNnB4O1xyXG4gICAgbWFyZ2luLWJvdHRvbTogMThweDtcclxuICBcclxuICAgIGNvbG9yOiAjMWYwOWVjO1xyXG4gIFxyXG4gICAgbWluLWhlaWdodDogMjZweDtcclxuICB9XHJcbiAgXHJcbiAgaW9uLW1lbnUubWQgaW9uLWl0ZW0ge1xyXG4gICAgLS1wYWRkaW5nLXN0YXJ0OiAyOHB4O1xyXG4gICAgLS1wYWRkaW5nLWVuZDogMTdweDtcclxuICAgIC0tcGFkZGluZy10b3A6IDJweDtcclxuICAgIGJvcmRlci1yYWRpdXM6IDdweDtcclxuICAgIGJhY2tncm91bmQtY29sb3I6ICNkZmU2ZTc7XHJcbiAgfVxyXG4gIFxyXG4gIGlvbi1tZW51Lm1kIGlvbi1pdGVtLnNlbGVjdGVkIHtcclxuICAgIC0tYmFja2dyb3VuZDogcmdiYSh2YXIoLS1pb24tY29sb3ItcHJpbWFyeS1yZ2IpLCAwLjE0KTtcclxuICB9XHJcbiAgXHJcbiAgaW9uLW1lbnUubWQgaW9uLWl0ZW0uc2VsZWN0ZWQgaW9uLWljb24ge1xyXG4gICAgY29sb3I6IHZhcigtLWlvbi1jb2xvci1wcmltYXJ5KTtcclxuICB9XHJcbiAgXHJcbiAgaW9uLW1lbnUubWQgaW9uLWl0ZW0gaW9uLWljb24ge1xyXG4gICAgY29sb3I6ICM2MTZlN2U7XHJcbiAgfVxyXG4gIFxyXG4gIGlvbi1tZW51Lm1kIGlvbi1pdGVtIGlvbi1sYWJlbCB7XHJcbiAgICBmb250LXdlaWdodDogNTAwO1xyXG4gIH1cclxuICBcclxuICBpb24tbWVudS5pb3MgaW9uLWNvbnRlbnQge1xyXG4gICAgLS1wYWRkaW5nLWJvdHRvbTogMjBweDtcclxuICB9XHJcbiAgXHJcbiAgaW9uLW1lbnUuaW9zIGlvbi1saXN0IHtcclxuICAgIHBhZGRpbmc6IDIwcHggMCAwIDA7XHJcbiAgfVxyXG4gIFxyXG4gIGlvbi1tZW51LmlvcyBpb24tbm90ZSB7XHJcbiAgICBsaW5lLWhlaWdodDogMjRweDtcclxuICAgIG1hcmdpbi1ib3R0b206IDIwcHg7XHJcbiAgfVxyXG4gIFxyXG4gIGlvbi1tZW51LmlvcyBpb24taXRlbSB7XHJcbiAgICAtLXBhZGRpbmctc3RhcnQ6IDE2cHg7XHJcbiAgICAtLXBhZGRpbmctZW5kOiAxNnB4O1xyXG4gICAgLS1taW4taGVpZ2h0OiA1MHB4O1xyXG4gIH1cclxuICBcclxuICBpb24tbWVudS5pb3MgaW9uLWl0ZW0uc2VsZWN0ZWQgaW9uLWljb24ge1xyXG4gICAgY29sb3I6IHZhcigtLWlvbi1jb2xvci1wcmltYXJ5KTtcclxuICB9XHJcbiAgXHJcbiAgaW9uLW1lbnUuaW9zIGlvbi1pdGVtIGlvbi1pY29uIHtcclxuICAgIGZvbnQtc2l6ZTogMjRweDtcclxuICAgIGNvbG9yOiAjNzM4NDlhO1xyXG4gIH1cclxuICBcclxuICBpb24tbWVudS5pb3MgaW9uLWxpc3QjbGFiZWxzLWxpc3QgaW9uLWxpc3QtaGVhZGVyIHtcclxuICAgIG1hcmdpbi1ib3R0b206IDhweDtcclxuICB9XHJcbiAgXHJcbiAgaW9uLW1lbnUuaW9zIGlvbi1saXN0LWhlYWRlcixcclxuICBpb24tbWVudS5pb3MgaW9uLW5vdGUge1xyXG4gICAgcGFkZGluZy1sZWZ0OiAxNnB4O1xyXG4gICAgcGFkZGluZy1yaWdodDogMTZweDtcclxuICB9XHJcbiAgXHJcbiAgaW9uLW1lbnUuaW9zIGlvbi1ub3RlIHtcclxuICAgIG1hcmdpbi1ib3R0b206IDhweDtcclxuICB9XHJcbiAgXHJcbiAgaW9uLW5vdGUge1xyXG4gICAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xyXG4gICAgZm9udC1zaXplOiAxNnB4O1xyXG4gIFxyXG4gICAgY29sb3I6IHZhcigtLWlvbi1jb2xvci1tZWRpdW0tc2hhZGUpO1xyXG4gIH1cclxuICBcclxuICBpb24taXRlbS5zZWxlY3RlZCB7XHJcbiAgICAtLWNvbG9yOiB2YXIoLS1pb24tY29sb3ItcHJpbWFyeSk7XHJcbiAgfVxyXG4gICNzaWRlbmF2IHtcclxuICAgIGlvbi1pdGVtLWdyb3VwW3N1Ym1lbnVdIHtcclxuICAgICAgb3ZlcmZsb3c6IGhpZGRlbjtcclxuICAgICAgZGlzcGxheTogYmxvY2s7XHJcbiAgICAgIGhlaWdodDogMDtcclxuICAgICAgdHJhbnNpdGlvbjogaGVpZ2h0IDAuM3MgbGluZWFyO1xyXG4gICAgICBwYWRkaW5nLWxlZnQ6IDIwJTtcclxuICAgICAgJi52aXNpYmxlIHtcclxuICAgICAgICBoZWlnaHQ6IGluaGVyaXQ7XHJcbiAgICAgICAgLy8gdGhpcyBpcyBqdXN0IHNhbXBsZSB2YWx1ZSwgY2FsY3VsYXRlIGhvdyBtdWNoIHNwYWNlIHlvdSBuZWVkIGZvciB5b3VyIG1lbnUgaXRlbXNcclxuICAgICAgfVxyXG4gICAgfVxyXG4gIH1cclxuICAubWFudS1saXN0e1xyXG4gICAgICBtYXJnaW4tbGVmdDogMTFweDtcclxuICAgICAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG4gICAgIGJhY2tncm91bmQtY29sb3I6ICNmZmZmZmY7XHJcbiAgfSJdfQ== */";
+      __webpack_exports__["default"] = "ion-menu ion-content {\n  --background: var(--ion-item-background, var(--ion-background-color, #fff));\n}\n\nion-menu.md ion-content {\n  --padding-start: 8px;\n  --padding-end: 8px;\n  --padding-top: 20px;\n  --padding-bottom: 20px;\n}\n\nion-menu.md ion-list {\n  padding: 5px 0;\n}\n\nion-menu.md ion-note {\n  margin-bottom: 30px;\n}\n\nion-menu.md ion-list-header,\nion-menu.md ion-note {\n  padding-left: 10px;\n}\n\nion-menu.md ion-list#inbox-list {\n  border-bottom: 1px solid var(--ion-color-step-150, #d7d8da);\n  background-color: #ebeff3;\n}\n\nion-menu.md ion-list#inbox-list ion-list-header {\n  font-size: 22px;\n  font-weight: 600;\n  min-height: 20px;\n}\n\nion-menu.md ion-list#labels-list ion-list-header {\n  font-size: 16px;\n  margin-bottom: 18px;\n  color: #1f09ec;\n  min-height: 26px;\n}\n\nion-menu.md ion-item {\n  --padding-start: 28px;\n  --padding-end: 17px;\n  --padding-top: 2px;\n  border-radius: 7px;\n  background-color: #dfe6e7;\n}\n\nion-menu.md ion-item.selected {\n  --background: rgba(var(--ion-color-primary-rgb), 0.14);\n}\n\nion-menu.md ion-item.selected ion-icon {\n  color: var(--ion-color-primary);\n}\n\nion-menu.md ion-item ion-icon {\n  color: #616e7e;\n}\n\nion-menu.md ion-item ion-label {\n  font-weight: 500;\n}\n\nion-menu.ios ion-content {\n  --padding-bottom: 20px;\n}\n\nion-menu.ios ion-list {\n  padding: 20px 0 0 0;\n}\n\nion-menu.ios ion-note {\n  line-height: 24px;\n  margin-bottom: 20px;\n}\n\nion-menu.ios ion-item {\n  --padding-start: 16px;\n  --padding-end: 16px;\n  --min-height: 50px;\n}\n\nion-menu.ios ion-item.selected ion-icon {\n  color: var(--ion-color-primary);\n}\n\nion-menu.ios ion-item ion-icon {\n  font-size: 24px;\n  color: #73849a;\n}\n\nion-menu.ios ion-list#labels-list ion-list-header {\n  margin-bottom: 8px;\n}\n\nion-menu.ios ion-list-header,\nion-menu.ios ion-note {\n  padding-left: 16px;\n  padding-right: 16px;\n}\n\nion-menu.ios ion-note {\n  margin-bottom: 8px;\n}\n\nion-note {\n  display: inline-block;\n  font-size: 16px;\n  color: var(--ion-color-medium-shade);\n}\n\nion-item.selected {\n  --color: var(--ion-color-primary);\n}\n\n#sidenav ion-item-group[submenu] {\n  overflow: hidden;\n  display: block;\n  height: 0;\n  transition: height 0.3s linear;\n  padding-left: 20%;\n}\n\n#sidenav ion-item-group[submenu].visible {\n  height: inherit;\n}\n\n.manu-list {\n  margin-left: 11px;\n  text-align: center;\n  background-color: #ffffff;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXG1lbnUucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksMkVBQWE7QUFDakI7O0FBRUU7RUFDRSxvQkFBZ0I7RUFDaEIsa0JBQWM7RUFDZCxtQkFBYztFQUNkLHNCQUFpQjtBQUNyQjs7QUFFRTtFQUNFLGNBQWM7QUFDbEI7O0FBRUU7RUFDRSxtQkFBbUI7QUFDdkI7O0FBRUU7O0VBRUUsa0JBQWtCO0FBQ3RCOztBQUVFO0VBQ0UsMkRBQTJEO0VBQzNELHlCQUFvQztBQUN4Qzs7QUFFRTtFQUNFLGVBQWU7RUFDZixnQkFBZ0I7RUFDaEIsZ0JBQWdCO0FBQ3BCOztBQUVFO0VBQ0UsZUFBZTtFQUNmLG1CQUFtQjtFQUVuQixjQUFjO0VBRWQsZ0JBQWdCO0FBRHBCOztBQUlFO0VBQ0UscUJBQWdCO0VBQ2hCLG1CQUFjO0VBQ2Qsa0JBQWM7RUFDZCxrQkFBa0I7RUFDbEIseUJBQXlCO0FBRDdCOztBQUlFO0VBQ0Usc0RBQWE7QUFEakI7O0FBSUU7RUFDRSwrQkFBK0I7QUFEbkM7O0FBSUU7RUFDRSxjQUFjO0FBRGxCOztBQUlFO0VBQ0UsZ0JBQWdCO0FBRHBCOztBQUlFO0VBQ0Usc0JBQWlCO0FBRHJCOztBQUlFO0VBQ0UsbUJBQW1CO0FBRHZCOztBQUlFO0VBQ0UsaUJBQWlCO0VBQ2pCLG1CQUFtQjtBQUR2Qjs7QUFJRTtFQUNFLHFCQUFnQjtFQUNoQixtQkFBYztFQUNkLGtCQUFhO0FBRGpCOztBQUlFO0VBQ0UsK0JBQStCO0FBRG5DOztBQUlFO0VBQ0UsZUFBZTtFQUNmLGNBQWM7QUFEbEI7O0FBSUU7RUFDRSxrQkFBa0I7QUFEdEI7O0FBSUU7O0VBRUUsa0JBQWtCO0VBQ2xCLG1CQUFtQjtBQUR2Qjs7QUFJRTtFQUNFLGtCQUFrQjtBQUR0Qjs7QUFJRTtFQUNFLHFCQUFxQjtFQUNyQixlQUFlO0VBRWYsb0NBQW9DO0FBRnhDOztBQUtFO0VBQ0UsaUNBQVE7QUFGWjs7QUFJRTtFQUVJLGdCQUFnQjtFQUNoQixjQUFjO0VBQ2QsU0FBUztFQUNULDhCQUE4QjtFQUM5QixpQkFBaUI7QUFGdkI7O0FBSkU7RUFRTSxlQUFlO0FBQXZCOztBQUtFO0VBQ0ksaUJBQWlCO0VBQ2pCLGtCQUFrQjtFQUNuQix5QkFBeUI7QUFGOUIiLCJmaWxlIjoibWVudS5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJpb24tbWVudSBpb24tY29udGVudCB7XHJcbiAgICAtLWJhY2tncm91bmQ6IHZhcigtLWlvbi1pdGVtLWJhY2tncm91bmQsIHZhcigtLWlvbi1iYWNrZ3JvdW5kLWNvbG9yLCAjZmZmKSk7XHJcbiAgfVxyXG4gIFxyXG4gIGlvbi1tZW51Lm1kIGlvbi1jb250ZW50IHtcclxuICAgIC0tcGFkZGluZy1zdGFydDogOHB4O1xyXG4gICAgLS1wYWRkaW5nLWVuZDogOHB4O1xyXG4gICAgLS1wYWRkaW5nLXRvcDogMjBweDtcclxuICAgIC0tcGFkZGluZy1ib3R0b206IDIwcHg7XHJcbiAgfVxyXG4gIFxyXG4gIGlvbi1tZW51Lm1kIGlvbi1saXN0IHtcclxuICAgIHBhZGRpbmc6IDVweCAwO1xyXG4gIH1cclxuICBcclxuICBpb24tbWVudS5tZCBpb24tbm90ZSB7XHJcbiAgICBtYXJnaW4tYm90dG9tOiAzMHB4O1xyXG4gIH1cclxuICBcclxuICBpb24tbWVudS5tZCBpb24tbGlzdC1oZWFkZXIsXHJcbiAgaW9uLW1lbnUubWQgaW9uLW5vdGUge1xyXG4gICAgcGFkZGluZy1sZWZ0OiAxMHB4O1xyXG4gIH1cclxuICBcclxuICBpb24tbWVudS5tZCBpb24tbGlzdCNpbmJveC1saXN0IHtcclxuICAgIGJvcmRlci1ib3R0b206IDFweCBzb2xpZCB2YXIoLS1pb24tY29sb3Itc3RlcC0xNTAsICNkN2Q4ZGEpO1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogcmdiKDIzNSwgMjM5LCAyNDMpO1xyXG4gIH1cclxuICBcclxuICBpb24tbWVudS5tZCBpb24tbGlzdCNpbmJveC1saXN0IGlvbi1saXN0LWhlYWRlciB7XHJcbiAgICBmb250LXNpemU6IDIycHg7XHJcbiAgICBmb250LXdlaWdodDogNjAwO1xyXG4gICAgbWluLWhlaWdodDogMjBweDtcclxuICB9XHJcbiAgXHJcbiAgaW9uLW1lbnUubWQgaW9uLWxpc3QjbGFiZWxzLWxpc3QgaW9uLWxpc3QtaGVhZGVyIHtcclxuICAgIGZvbnQtc2l6ZTogMTZweDtcclxuICAgIG1hcmdpbi1ib3R0b206IDE4cHg7XHJcbiAgXHJcbiAgICBjb2xvcjogIzFmMDllYztcclxuICBcclxuICAgIG1pbi1oZWlnaHQ6IDI2cHg7XHJcbiAgfVxyXG4gIFxyXG4gIGlvbi1tZW51Lm1kIGlvbi1pdGVtIHtcclxuICAgIC0tcGFkZGluZy1zdGFydDogMjhweDtcclxuICAgIC0tcGFkZGluZy1lbmQ6IDE3cHg7XHJcbiAgICAtLXBhZGRpbmctdG9wOiAycHg7XHJcbiAgICBib3JkZXItcmFkaXVzOiA3cHg7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjZGZlNmU3O1xyXG4gIH1cclxuICBcclxuICBpb24tbWVudS5tZCBpb24taXRlbS5zZWxlY3RlZCB7XHJcbiAgICAtLWJhY2tncm91bmQ6IHJnYmEodmFyKC0taW9uLWNvbG9yLXByaW1hcnktcmdiKSwgMC4xNCk7XHJcbiAgfVxyXG4gIFxyXG4gIGlvbi1tZW51Lm1kIGlvbi1pdGVtLnNlbGVjdGVkIGlvbi1pY29uIHtcclxuICAgIGNvbG9yOiB2YXIoLS1pb24tY29sb3ItcHJpbWFyeSk7XHJcbiAgfVxyXG4gIFxyXG4gIGlvbi1tZW51Lm1kIGlvbi1pdGVtIGlvbi1pY29uIHtcclxuICAgIGNvbG9yOiAjNjE2ZTdlO1xyXG4gIH1cclxuICBcclxuICBpb24tbWVudS5tZCBpb24taXRlbSBpb24tbGFiZWwge1xyXG4gICAgZm9udC13ZWlnaHQ6IDUwMDtcclxuICB9XHJcbiAgXHJcbiAgaW9uLW1lbnUuaW9zIGlvbi1jb250ZW50IHtcclxuICAgIC0tcGFkZGluZy1ib3R0b206IDIwcHg7XHJcbiAgfVxyXG4gIFxyXG4gIGlvbi1tZW51LmlvcyBpb24tbGlzdCB7XHJcbiAgICBwYWRkaW5nOiAyMHB4IDAgMCAwO1xyXG4gIH1cclxuICBcclxuICBpb24tbWVudS5pb3MgaW9uLW5vdGUge1xyXG4gICAgbGluZS1oZWlnaHQ6IDI0cHg7XHJcbiAgICBtYXJnaW4tYm90dG9tOiAyMHB4O1xyXG4gIH1cclxuICBcclxuICBpb24tbWVudS5pb3MgaW9uLWl0ZW0ge1xyXG4gICAgLS1wYWRkaW5nLXN0YXJ0OiAxNnB4O1xyXG4gICAgLS1wYWRkaW5nLWVuZDogMTZweDtcclxuICAgIC0tbWluLWhlaWdodDogNTBweDtcclxuICB9XHJcbiAgXHJcbiAgaW9uLW1lbnUuaW9zIGlvbi1pdGVtLnNlbGVjdGVkIGlvbi1pY29uIHtcclxuICAgIGNvbG9yOiB2YXIoLS1pb24tY29sb3ItcHJpbWFyeSk7XHJcbiAgfVxyXG4gIFxyXG4gIGlvbi1tZW51LmlvcyBpb24taXRlbSBpb24taWNvbiB7XHJcbiAgICBmb250LXNpemU6IDI0cHg7XHJcbiAgICBjb2xvcjogIzczODQ5YTtcclxuICB9XHJcbiAgXHJcbiAgaW9uLW1lbnUuaW9zIGlvbi1saXN0I2xhYmVscy1saXN0IGlvbi1saXN0LWhlYWRlciB7XHJcbiAgICBtYXJnaW4tYm90dG9tOiA4cHg7XHJcbiAgfVxyXG4gIFxyXG4gIGlvbi1tZW51LmlvcyBpb24tbGlzdC1oZWFkZXIsXHJcbiAgaW9uLW1lbnUuaW9zIGlvbi1ub3RlIHtcclxuICAgIHBhZGRpbmctbGVmdDogMTZweDtcclxuICAgIHBhZGRpbmctcmlnaHQ6IDE2cHg7XHJcbiAgfVxyXG4gIFxyXG4gIGlvbi1tZW51LmlvcyBpb24tbm90ZSB7XHJcbiAgICBtYXJnaW4tYm90dG9tOiA4cHg7XHJcbiAgfVxyXG4gIFxyXG4gIGlvbi1ub3RlIHtcclxuICAgIGRpc3BsYXk6IGlubGluZS1ibG9jaztcclxuICAgIGZvbnQtc2l6ZTogMTZweDtcclxuICBcclxuICAgIGNvbG9yOiB2YXIoLS1pb24tY29sb3ItbWVkaXVtLXNoYWRlKTtcclxuICB9XHJcbiAgXHJcbiAgaW9uLWl0ZW0uc2VsZWN0ZWQge1xyXG4gICAgLS1jb2xvcjogdmFyKC0taW9uLWNvbG9yLXByaW1hcnkpO1xyXG4gIH1cclxuICAjc2lkZW5hdiB7XHJcbiAgICBpb24taXRlbS1ncm91cFtzdWJtZW51XSB7XHJcbiAgICAgIG92ZXJmbG93OiBoaWRkZW47XHJcbiAgICAgIGRpc3BsYXk6IGJsb2NrO1xyXG4gICAgICBoZWlnaHQ6IDA7XHJcbiAgICAgIHRyYW5zaXRpb246IGhlaWdodCAwLjNzIGxpbmVhcjtcclxuICAgICAgcGFkZGluZy1sZWZ0OiAyMCU7XHJcbiAgICAgICYudmlzaWJsZSB7XHJcbiAgICAgICAgaGVpZ2h0OiBpbmhlcml0O1xyXG4gICAgICAgIC8vIHRoaXMgaXMganVzdCBzYW1wbGUgdmFsdWUsIGNhbGN1bGF0ZSBob3cgbXVjaCBzcGFjZSB5b3UgbmVlZCBmb3IgeW91ciBtZW51IGl0ZW1zXHJcbiAgICAgIH1cclxuICAgIH1cclxuICB9XHJcbiAgLm1hbnUtbGlzdHtcclxuICAgICAgbWFyZ2luLWxlZnQ6IDExcHg7XHJcbiAgICAgIHRleHQtYWxpZ246IGNlbnRlcjtcclxuICAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjZmZmZmZmO1xyXG4gIH0iXX0= */";
       /***/
     },
 
@@ -397,7 +342,7 @@
           loadChildren: function loadChildren() {
             return Promise.all(
             /*! import() | restaurant-restaurant-module */
-            [__webpack_require__.e("default~category-category-module~driver-driver-module~food-food-module~restaurant-restaurant-module"), __webpack_require__.e("restaurant-restaurant-module")]).then(__webpack_require__.bind(null,
+            [__webpack_require__.e("default~food-food-module~profile-profile-module~restaurant-restaurant-module"), __webpack_require__.e("common"), __webpack_require__.e("restaurant-restaurant-module")]).then(__webpack_require__.bind(null,
             /*! ../restaurant/restaurant.module */
             "xt6y")).then(function (m) {
               return m.RestaurantPageModule;
@@ -406,23 +351,12 @@
         }, {
           path: 'rest-menu',
           loadChildren: function loadChildren() {
-            return __webpack_require__.e(
+            return Promise.all(
             /*! import() | rest-menu-rest-menu-module */
-            "rest-menu-rest-menu-module").then(__webpack_require__.bind(null,
+            [__webpack_require__.e("common"), __webpack_require__.e("rest-menu-rest-menu-module")]).then(__webpack_require__.bind(null,
             /*! ../rest-menu/rest-menu.module */
             "PDtb")).then(function (m) {
               return m.RestMenuPageModule;
-            });
-          }
-        }, {
-          path: 'driver',
-          loadChildren: function loadChildren() {
-            return Promise.all(
-            /*! import() | driver-driver-module */
-            [__webpack_require__.e("default~category-category-module~driver-driver-module~food-food-module~restaurant-restaurant-module"), __webpack_require__.e("common"), __webpack_require__.e("driver-driver-module")]).then(__webpack_require__.bind(null,
-            /*! ../driver/driver.module */
-            "qfjS")).then(function (m) {
-              return m.DriverPageModule;
             });
           }
         }, {
@@ -430,7 +364,7 @@
           loadChildren: function loadChildren() {
             return Promise.all(
             /*! import() | food-food-module */
-            [__webpack_require__.e("default~category-category-module~driver-driver-module~food-food-module~restaurant-restaurant-module"), __webpack_require__.e("common"), __webpack_require__.e("food-food-module")]).then(__webpack_require__.bind(null,
+            [__webpack_require__.e("default~food-food-module~profile-profile-module~restaurant-restaurant-module"), __webpack_require__.e("common"), __webpack_require__.e("food-food-module")]).then(__webpack_require__.bind(null,
             /*! ../food/food.module */
             "d3P2")).then(function (m) {
               return m.FoodPageModule;
@@ -439,53 +373,20 @@
         }, {
           path: 'account',
           loadChildren: function loadChildren() {
-            return __webpack_require__.e(
+            return Promise.all(
             /*! import() | account-account-module */
-            "account-account-module").then(__webpack_require__.bind(null,
+            [__webpack_require__.e("common"), __webpack_require__.e("account-account-module")]).then(__webpack_require__.bind(null,
             /*! ../account/account.module */
             "jcJX")).then(function (m) {
               return m.AccountPageModule;
             });
           }
         }, {
-          path: 'order',
-          loadChildren: function loadChildren() {
-            return Promise.all(
-            /*! import() | order-order-module */
-            [__webpack_require__.e("default~cart-modal-cart-modal-module~details-details-module~driver-home-driver-home-module~order-his~85fcea61"), __webpack_require__.e("order-order-module")]).then(__webpack_require__.bind(null,
-            /*! ../order/order.module */
-            "+p+5")).then(function (m) {
-              return m.OrderPageModule;
-            });
-          }
-        }, {
-          path: 'user-role',
-          loadChildren: function loadChildren() {
-            return __webpack_require__.e(
-            /*! import() | user-role-user-role-module */
-            "user-role-user-role-module").then(__webpack_require__.bind(null,
-            /*! ../user-role/user-role.module */
-            "tVnk")).then(function (m) {
-              return m.UserRolePageModule;
-            });
-          }
-        }, {
-          path: 'functionality',
-          loadChildren: function loadChildren() {
-            return __webpack_require__.e(
-            /*! import() | functionality-functionality-module */
-            "functionality-functionality-module").then(__webpack_require__.bind(null,
-            /*! ../functionality/functionality.module */
-            "jEtB")).then(function (m) {
-              return m.FunctionalityPageModule;
-            });
-          }
-        }, {
           path: 'food-content',
           loadChildren: function loadChildren() {
-            return __webpack_require__.e(
+            return Promise.all(
             /*! import() | food-content-food-content-module */
-            "food-content-food-content-module").then(__webpack_require__.bind(null,
+            [__webpack_require__.e("common"), __webpack_require__.e("food-content-food-content-module")]).then(__webpack_require__.bind(null,
             /*! ../food-content/food-content.module */
             "igtm")).then(function (m) {
               return m.FoodContentPageModule;
@@ -496,43 +397,10 @@
           loadChildren: function loadChildren() {
             return Promise.all(
             /*! import() | location-location-module */
-            [__webpack_require__.e("default~driver-history-driver-history-module~location-location-module~menu-menu-module~restaurant-hi~a290b5de"), __webpack_require__.e("location-location-module")]).then(__webpack_require__.bind(null,
+            [__webpack_require__.e("common"), __webpack_require__.e("location-location-module")]).then(__webpack_require__.bind(null,
             /*! ../location/location.module */
             "cf3W")).then(function (m) {
               return m.LocationPageModule;
-            });
-          }
-        }, {
-          path: 'vehicle',
-          loadChildren: function loadChildren() {
-            return Promise.all(
-            /*! import() | vehicle-vehicle-module */
-            [__webpack_require__.e("common"), __webpack_require__.e("vehicle-vehicle-module")]).then(__webpack_require__.bind(null,
-            /*! ../vehicle/vehicle.module */
-            "Qq7v")).then(function (m) {
-              return m.VehiclePageModule;
-            });
-          }
-        }, {
-          path: 'details/:id',
-          loadChildren: function loadChildren() {
-            return Promise.all(
-            /*! import() | details-details-module */
-            [__webpack_require__.e("default~cart-modal-cart-modal-module~details-details-module~driver-home-driver-home-module~order-his~85fcea61"), __webpack_require__.e("default~cart-modal-cart-modal-module~details-details-module"), __webpack_require__.e("common"), __webpack_require__.e("details-details-module")]).then(__webpack_require__.bind(null,
-            /*! ../details/details.module */
-            "QR/W")).then(function (m) {
-              return m.DetailsPageModule;
-            });
-          }
-        }, {
-          path: 'home',
-          loadChildren: function loadChildren() {
-            return Promise.all(
-            /*! import() | home-home-module */
-            [__webpack_require__.e("common"), __webpack_require__.e("home-home-module")]).then(__webpack_require__.bind(null,
-            /*! ../home/home.module */
-            "ct+p")).then(function (m) {
-              return m.HomePageModule;
             });
           }
         }, {
@@ -540,21 +408,10 @@
           loadChildren: function loadChildren() {
             return Promise.all(
             /*! import() | cart-modal-cart-modal-module */
-            [__webpack_require__.e("default~cart-modal-cart-modal-module~details-details-module~driver-home-driver-home-module~order-his~85fcea61"), __webpack_require__.e("default~cart-modal-cart-modal-module~details-details-module"), __webpack_require__.e("cart-modal-cart-modal-module")]).then(__webpack_require__.bind(null,
+            [__webpack_require__.e("common"), __webpack_require__.e("cart-modal-cart-modal-module")]).then(__webpack_require__.bind(null,
             /*! ../cart-modal/cart-modal.module */
             "pUdO")).then(function (m) {
               return m.CartModalPageModule;
-            });
-          }
-        }, {
-          path: 'category',
-          loadChildren: function loadChildren() {
-            return Promise.all(
-            /*! import() | category-category-module */
-            [__webpack_require__.e("default~category-category-module~driver-driver-module~food-food-module~restaurant-restaurant-module"), __webpack_require__.e("common"), __webpack_require__.e("category-category-module")]).then(__webpack_require__.bind(null,
-            /*! ../category/category.module */
-            "Ak7V")).then(function (m) {
-              return m.CategoryPageModule;
             });
           }
         }, {
@@ -573,21 +430,10 @@
           loadChildren: function loadChildren() {
             return Promise.all(
             /*! import() | order-history-order-history-module */
-            [__webpack_require__.e("default~cart-modal-cart-modal-module~details-details-module~driver-home-driver-home-module~order-his~85fcea61"), __webpack_require__.e("order-history-order-history-module")]).then(__webpack_require__.bind(null,
+            [__webpack_require__.e("common"), __webpack_require__.e("order-history-order-history-module")]).then(__webpack_require__.bind(null,
             /*! ../order-history/order-history.module */
             "piv+")).then(function (m) {
               return m.OrderHistoryPageModule;
-            });
-          }
-        }, {
-          path: 'driver-home',
-          loadChildren: function loadChildren() {
-            return Promise.all(
-            /*! import() | driver-home-driver-home-module */
-            [__webpack_require__.e("default~cart-modal-cart-modal-module~details-details-module~driver-home-driver-home-module~order-his~85fcea61"), __webpack_require__.e("common"), __webpack_require__.e("driver-home-driver-home-module")]).then(__webpack_require__.bind(null,
-            /*! ../driver-home/driver-home.module */
-            "R1vZ")).then(function (m) {
-              return m.DriverHomePageModule;
             });
           }
         }, {
@@ -595,21 +441,10 @@
           loadChildren: function loadChildren() {
             return Promise.all(
             /*! import() | restaurant-home-restaurant-home-module */
-            [__webpack_require__.e("default~cart-modal-cart-modal-module~details-details-module~driver-home-driver-home-module~order-his~85fcea61"), __webpack_require__.e("restaurant-home-restaurant-home-module")]).then(__webpack_require__.bind(null,
+            [__webpack_require__.e("common"), __webpack_require__.e("restaurant-home-restaurant-home-module")]).then(__webpack_require__.bind(null,
             /*! ../restaurant-home/restaurant-home.module */
             "YGi6")).then(function (m) {
               return m.RestaurantHomePageModule;
-            });
-          }
-        }, {
-          path: 'driver-history',
-          loadChildren: function loadChildren() {
-            return Promise.all(
-            /*! import() | driver-history-driver-history-module */
-            [__webpack_require__.e("default~driver-history-driver-history-module~location-location-module~menu-menu-module~restaurant-hi~a290b5de"), __webpack_require__.e("common"), __webpack_require__.e("driver-history-driver-history-module")]).then(__webpack_require__.bind(null,
-            /*! ../driver-history/driver-history.module */
-            "odG3")).then(function (m) {
-              return m.DriverHistoryPageModule;
             });
           }
         }, {
@@ -617,10 +452,21 @@
           loadChildren: function loadChildren() {
             return Promise.all(
             /*! import() | restaurant-history-restaurant-history-module */
-            [__webpack_require__.e("default~cart-modal-cart-modal-module~details-details-module~driver-home-driver-home-module~order-his~85fcea61"), __webpack_require__.e("default~driver-history-driver-history-module~location-location-module~menu-menu-module~restaurant-hi~a290b5de"), __webpack_require__.e("common"), __webpack_require__.e("restaurant-history-restaurant-history-module")]).then(__webpack_require__.bind(null,
+            [__webpack_require__.e("common"), __webpack_require__.e("restaurant-history-restaurant-history-module")]).then(__webpack_require__.bind(null,
             /*! ../restaurant-history/restaurant-history.module */
             "qmIW")).then(function (m) {
               return m.RestaurantHistoryPageModule;
+            });
+          }
+        }, {
+          path: 'profile',
+          loadChildren: function loadChildren() {
+            return Promise.all(
+            /*! import() | profile-profile-module */
+            [__webpack_require__.e("default~food-food-module~profile-profile-module~restaurant-restaurant-module"), __webpack_require__.e("common"), __webpack_require__.e("profile-profile-module")]).then(__webpack_require__.bind(null,
+            /*! ../profile/profile.module */
+            "cRhG")).then(function (m) {
+              return m.ProfilePageModule;
             });
           }
         }, {
@@ -753,23 +599,10 @@
             if (path !== undefined) {// this.selectedIndex = this.appPages.findIndex(page => page.title.toLowerCase() === path.toLowerCase());
             }
 
-            this.getRoute();
-          }
-        }, {
-          key: "ionViewWillEnter",
-          value: function ionViewWillEnter() {
             this.ListOfMenu1 = [{
               title: 'restaurant',
               url: '/restaurant',
               icon: 'restaurant'
-            }, {
-              title: 'customer',
-              url: '/customer',
-              icon: 'person-add'
-            }, {
-              title: 'driver',
-              url: '/driver',
-              icon: 'bus'
             }, {
               title: 'order',
               url: '/order',
@@ -779,22 +612,6 @@
               url: '/food',
               icon: 'fast-food'
             }, {
-              title: 'rest-menu',
-              url: '/rest-menu',
-              icon: 'menu'
-            }, {
-              title: 'account',
-              url: '/account',
-              icon: 'person-add'
-            }, {
-              title: 'user-role',
-              url: '/user-role',
-              icon: 'person-circle'
-            }, {
-              title: 'functionality',
-              url: '/functionality',
-              icon: 'add'
-            }, {
               title: 'food-content',
               url: '/food-content',
               icon: 'list'
@@ -803,62 +620,61 @@
               url: '/location',
               icon: 'locate'
             }, {
-              title: 'vehicle',
-              url: '/vehicle',
-              icon: 'bus'
-            }, {
-              title: 'category',
-              url: '/category',
-              icon: 'menu'
-            }, {
-              title: 'home',
-              url: '/home',
-              icon: 'home'
-            }, {
-              title: 'Home',
-              url: '/driver-home',
-              icon: 'home'
-            }, {
               title: 'orders',
               url: '/restaurant-home',
-              icon: 'cart'
-            }, {
-              title: 'Orders',
-              url: '/driver-history',
               icon: 'cart'
             }, {
               title: 'My orders',
               url: '/restaurant-history',
               icon: 'cart'
+            }, {
+              title: 'profile',
+              url: '/profile',
+              icon: 'person'
             }];
+            this.getRoute();
+            this.getAccount();
+          }
+        }, {
+          key: "getAccount",
+          value: function getAccount() {
+            var _this = this;
+
+            this.accountService.getAllAccount().subscribe(function (res) {
+              _this.listOfAccount = res;
+              _this.base64textString = res.find(function (c) {
+                return c.id == localStorage.getItem("userId");
+              }).photo;
+            });
           }
         }, {
           key: "getRoute",
           value: function getRoute() {
-            var _this = this;
+            var _this2 = this;
 
             this.functionalityService.getAllFunctionality().subscribe(function (result) {
-              _this.listOfFunctionality = result;
+              _this2.listOfFunctionality = result; //console.log(result)
 
               if (result.length > 0) {
-                _this.roleType = localStorage.getItem("roleType");
-                _this.userName = localStorage.getItem("fullName");
+                _this2.roleType = localStorage.getItem("roleType");
+                _this2.userName = localStorage.getItem("fullName");
 
-                _this.userRoleService.getUerRoleId(_this.roleType).subscribe(function (res) {
+                _this2.userRoleService.getAllUserRole().subscribe(function (res) {
+                  // console.log(res)
                   var result = res.filter(function (c) {
-                    return c.userId == _this.roleType;
+                    return c.userId == _this2.roleType;
                   });
                   var active = localStorage.getItem("active");
 
                   if (result.length > 0 && active == "true") {
                     //To check transcation menu in user role
                     result.forEach(function (element) {
-                      var isFound = _this.listOfFunctionality.filter(function (c) {
-                        return c.SN == +element.funId;
+                      var isFound = _this2.listOfFunctionality.filter(function (c) {
+                        return c.id == +element.funId;
                       });
 
                       if (isFound.length > 0) {
-                        var rol = _this.ListOfMenu1.filter(function (c) {
+                        var rol = _this2.ListOfMenu1.filter(function (c) {
                           return c.title == isFound[0].compName;
                         })[0];
 
@@ -869,7 +685,7 @@
                             icon: rol.icon
                           };
 
-                          _this.pageList.push(y);
+                          _this2.pageList.push(y);
                         }
                       }
                     });
@@ -919,21 +735,20 @@
           key: "logout",
           value: function logout() {
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
-              var _this2 = this;
+              var _this3 = this;
 
               return regeneratorRuntime.wrap(function _callee3$(_context3) {
                 while (1) {
                   switch (_context3.prev = _context3.next) {
                     case 0:
-                      this.authServices.logOutUser().then(function () {
-                        localStorage.setItem("userId", null);
-                        localStorage.setItem("fullName", null);
-                        localStorage.setItem("active", null);
-                        localStorage.setItem("roleType", null);
+                      localStorage.setItem("userId", null);
+                      localStorage.setItem("fullName", null);
+                      localStorage.setItem("active", null);
+                      localStorage.setItem("roleType", null);
+                      this.router.navigateByUrl('login');
 
-                        _this2.router.navigateByUrl('login');
-                      }, function (error) {
-                        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this2, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+                      (function (error) {
+                        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this3, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
                           var alert;
                           return regeneratorRuntime.wrap(function _callee2$(_context2) {
                             while (1) {
@@ -962,7 +777,7 @@
                         }));
                       });
 
-                    case 1:
+                    case 6:
                     case "end":
                       return _context3.stop();
                   }

@@ -1,9 +1,37 @@
 (function () {
+  function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+  function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+  function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+  function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+  function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+  function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+  function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
   function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
   function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
   function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+  function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+  function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+  function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+  function _possibleConstructorReturn(self, call) { if (call && (typeof call === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+  function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+  function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+  function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
   function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -12,6 +40,155 @@
   function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
   (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["common"], {
+    /***/
+    "+cje":
+    /*!***********************************************!*\
+      !*** ./src/app/Service/restaurant.service.ts ***!
+      \***********************************************/
+
+    /*! exports provided: RestaurantService */
+
+    /***/
+    function cje(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "RestaurantService", function () {
+        return RestaurantService;
+      });
+      /* harmony import */
+
+
+      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! tslib */
+      "mrSG");
+      /* harmony import */
+
+
+      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! @angular/core */
+      "fXoL");
+      /* harmony import */
+
+
+      var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! rxjs */
+      "qCKp");
+      /* harmony import */
+
+
+      var _common_bad_input__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      /*! ../common/bad-input */
+      "XEKg");
+      /* harmony import */
+
+
+      var _common_not_found_error__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      /*! ../common/not-found-error */
+      "5Jak");
+      /* harmony import */
+
+
+      var _common_app_error__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      /*! ../common/app-error */
+      "/GcI");
+      /* harmony import */
+
+
+      var _angular_common_http__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      /*! @angular/common/http */
+      "tk/3");
+
+      var RestaurantService = /*#__PURE__*/function () {
+        function RestaurantService(http) {
+          _classCallCheck(this, RestaurantService);
+
+          this.http = http;
+          this.APIURL = 'http://localhost:49347/api';
+        }
+
+        _createClass(RestaurantService, [{
+          key: "create",
+          value: function create(val) {
+            return this.http.post(this.APIURL + '/Restaurant', val);
+          }
+        }, {
+          key: "getAllRestaurant",
+          value: function getAllRestaurant() {
+            return this.http.get(this.APIURL + '/Restaurant');
+          }
+        }, {
+          key: "updateRestaurant",
+          value: function updateRestaurant(val) {
+            return this.http.put(this.APIURL + '/Restaurant/', val);
+          }
+        }, {
+          key: "removeRestaurant",
+          value: function removeRestaurant(id) {
+            return this.http["delete"](this.APIURL + '/Restaurant/' + id).toPromise();
+          }
+        }, {
+          key: "handleError",
+          value: function handleError(error) {
+            if (error.status === 400) {
+              return rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"]["throw"](new _common_bad_input__WEBPACK_IMPORTED_MODULE_3__["BadInput"](error.json()));
+            }
+
+            if (error.status === 404) {
+              return rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"]["throw"](new _common_not_found_error__WEBPACK_IMPORTED_MODULE_4__["NotFoundError"]());
+            }
+
+            return rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"]["throw"](new _common_app_error__WEBPACK_IMPORTED_MODULE_5__["AppError"](error));
+          }
+        }]);
+
+        return RestaurantService;
+      }();
+
+      RestaurantService.ctorParameters = function () {
+        return [{
+          type: _angular_common_http__WEBPACK_IMPORTED_MODULE_6__["HttpClient"]
+        }];
+      };
+
+      RestaurantService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+        providedIn: 'root'
+      })], RestaurantService);
+      /***/
+    },
+
+    /***/
+    "/GcI":
+    /*!*************************************!*\
+      !*** ./src/app/common/app-error.ts ***!
+      \*************************************/
+
+    /*! exports provided: AppError */
+
+    /***/
+    function GcI(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "AppError", function () {
+        return AppError;
+      });
+
+      var AppError = function AppError(originalError) {
+        _classCallCheck(this, AppError);
+
+        this.originalError = originalError;
+      };
+      /***/
+
+    },
+
     /***/
     "0/6H":
     /*!*********************************************************************!*\
@@ -135,287 +312,46 @@
     },
 
     /***/
-    "1D3i":
+    "5Jak":
     /*!*******************************************!*\
-      !*** ./src/app/Service/driver.service.ts ***!
+      !*** ./src/app/common/not-found-error.ts ***!
       \*******************************************/
 
-    /*! exports provided: DriverService */
+    /*! exports provided: NotFoundError */
 
     /***/
-    function D3i(module, __webpack_exports__, __webpack_require__) {
+    function Jak(module, __webpack_exports__, __webpack_require__) {
       "use strict";
 
       __webpack_require__.r(__webpack_exports__);
       /* harmony export (binding) */
 
 
-      __webpack_require__.d(__webpack_exports__, "DriverService", function () {
-        return DriverService;
+      __webpack_require__.d(__webpack_exports__, "NotFoundError", function () {
+        return NotFoundError;
       });
       /* harmony import */
 
 
-      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-      /*! tslib */
-      "mrSG");
-      /* harmony import */
-
-
-      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-      /*! @angular/core */
-      "fXoL");
-      /* harmony import */
-
-
-      var angularfire2_firestore__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-      /*! angularfire2/firestore */
-      "CqG3");
-      /* harmony import */
-
-
-      var angularfire2_firestore__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(angularfire2_firestore__WEBPACK_IMPORTED_MODULE_2__);
-      /* harmony import */
-
-
-      var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
-      /*! rxjs */
-      "qCKp");
-      /* harmony import */
-
-
-      var rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
-      /*! rxjs/internal/operators/map */
-      "q3Kh");
-      /* harmony import */
-
-
-      var rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_4__);
-      /* harmony import */
-
-
-      var _common_app_error__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
-      /*! ../common/app-error */
+      var _app_error__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! ./app-error */
       "/GcI");
-      /* harmony import */
 
+      var NotFoundError = /*#__PURE__*/function (_app_error__WEBPACK_I) {
+        _inherits(NotFoundError, _app_error__WEBPACK_I);
 
-      var _common_bad_input__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
-      /*! ../common/bad-input */
-      "XEKg");
-      /* harmony import */
+        var _super = _createSuper(NotFoundError);
 
+        function NotFoundError() {
+          _classCallCheck(this, NotFoundError);
 
-      var _common_not_found_error__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
-      /*! ../common/not-found-error */
-      "5Jak");
-
-      var DriverService = /*#__PURE__*/function () {
-        function DriverService(db) {
-          _classCallCheck(this, DriverService);
-
-          this.db = db;
-          this.driverCollectionList = db.collection('Driver');
+          return _super.apply(this, arguments);
         }
 
-        _createClass(DriverService, [{
-          key: "create",
-          value: function create(driverObj) {
-            return this.driverCollectionList.add(driverObj);
-          }
-        }, {
-          key: "getAllDriver",
-          value: function getAllDriver() {
-            this.driverList = this.driverCollectionList.snapshotChanges().pipe(Object(rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_4__["map"])(function (actions) {
-              return actions.map(function (a) {
-                var data = a.payload.doc.data();
-                var id = a.payload.doc.id;
-                return Object.assign({
-                  id: id
-                }, data);
-              });
-            }));
-            return this.driverList;
-          }
-        }, {
-          key: "getDriver",
-          value: function getDriver(id) {
-            return this.driverCollectionList.doc(id).valueChanges();
-          }
-        }, {
-          key: "updateDriver",
-          value: function updateDriver(driverObj, id) {
-            return this.driverCollectionList.doc(id).update(driverObj)["catch"](this.handleError);
-          }
-        }, {
-          key: "removeDriver",
-          value: function removeDriver(id) {
-            return this.driverCollectionList.doc(id)["delete"]()["catch"](this.handleError);
-          }
-        }, {
-          key: "handleError",
-          value: function handleError(error) {
-            if (error.status === 400) return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"]["throw"](new _common_bad_input__WEBPACK_IMPORTED_MODULE_6__["BadInput"](error.json()));
-            if (error.status === 404) return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"]["throw"](new _common_not_found_error__WEBPACK_IMPORTED_MODULE_7__["NotFoundError"]());
-            return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"]["throw"](new _common_app_error__WEBPACK_IMPORTED_MODULE_5__["AppError"](error));
-          }
-        }]);
-
-        return DriverService;
-      }();
-
-      DriverService.ctorParameters = function () {
-        return [{
-          type: angularfire2_firestore__WEBPACK_IMPORTED_MODULE_2__["AngularFirestore"]
-        }];
-      };
-
-      DriverService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
-        providedIn: 'root'
-      })], DriverService);
+        return NotFoundError;
+      }(_app_error__WEBPACK_IMPORTED_MODULE_0__["AppError"]);
       /***/
-    },
 
-    /***/
-    "5ZJP":
-    /*!********************************************!*\
-      !*** ./src/app/Service/vehicle.service.ts ***!
-      \********************************************/
-
-    /*! exports provided: VehicleService */
-
-    /***/
-    function ZJP(module, __webpack_exports__, __webpack_require__) {
-      "use strict";
-
-      __webpack_require__.r(__webpack_exports__);
-      /* harmony export (binding) */
-
-
-      __webpack_require__.d(__webpack_exports__, "VehicleService", function () {
-        return VehicleService;
-      });
-      /* harmony import */
-
-
-      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-      /*! tslib */
-      "mrSG");
-      /* harmony import */
-
-
-      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-      /*! @angular/core */
-      "fXoL");
-      /* harmony import */
-
-
-      var angularfire2_firestore__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-      /*! angularfire2/firestore */
-      "CqG3");
-      /* harmony import */
-
-
-      var angularfire2_firestore__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(angularfire2_firestore__WEBPACK_IMPORTED_MODULE_2__);
-      /* harmony import */
-
-
-      var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
-      /*! rxjs */
-      "qCKp");
-      /* harmony import */
-
-
-      var rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
-      /*! rxjs/internal/operators/map */
-      "q3Kh");
-      /* harmony import */
-
-
-      var rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_4__);
-      /* harmony import */
-
-
-      var _common_app_error__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
-      /*! ../common/app-error */
-      "/GcI");
-      /* harmony import */
-
-
-      var _common_bad_input__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
-      /*! ../common/bad-input */
-      "XEKg");
-      /* harmony import */
-
-
-      var _common_not_found_error__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
-      /*! ../common/not-found-error */
-      "5Jak");
-
-      var VehicleService = /*#__PURE__*/function () {
-        function VehicleService(db) {
-          _classCallCheck(this, VehicleService);
-
-          this.db = db;
-          this.vehicleCollectionList = db.collection('Vehicle');
-        }
-
-        _createClass(VehicleService, [{
-          key: "create",
-          value: function create(vehicleObj) {
-            return this.vehicleCollectionList.add(vehicleObj);
-          }
-        }, {
-          key: "getAllVehicle",
-          value: function getAllVehicle() {
-            this.vehicleList = this.vehicleCollectionList.snapshotChanges().pipe(Object(rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_4__["map"])(function (actions) {
-              return actions.map(function (a) {
-                var data = a.payload.doc.data();
-                var id = a.payload.doc.id;
-                return Object.assign({
-                  id: id
-                }, data);
-              });
-            }));
-            return this.vehicleList;
-          }
-        }, {
-          key: "getVehicle",
-          value: function getVehicle(id) {
-            return this.vehicleCollectionList.doc(id).valueChanges();
-          }
-        }, {
-          key: "updateVehicle",
-          value: function updateVehicle(vehicleObj, id) {
-            return this.vehicleCollectionList.doc(id).update(vehicleObj)["catch"](this.handleError);
-          }
-        }, {
-          key: "removeVehicle",
-          value: function removeVehicle(id) {
-            return this.vehicleCollectionList.doc(id)["delete"]()["catch"](this.handleError);
-          }
-        }, {
-          key: "handleError",
-          value: function handleError(error) {
-            if (error.status === 400) return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"]["throw"](new _common_bad_input__WEBPACK_IMPORTED_MODULE_6__["BadInput"](error.json()));
-            if (error.status === 404) return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"]["throw"](new _common_not_found_error__WEBPACK_IMPORTED_MODULE_7__["NotFoundError"]());
-            return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"]["throw"](new _common_app_error__WEBPACK_IMPORTED_MODULE_5__["AppError"](error));
-          }
-        }]);
-
-        return VehicleService;
-      }();
-
-      VehicleService.ctorParameters = function () {
-        return [{
-          type: angularfire2_firestore__WEBPACK_IMPORTED_MODULE_2__["AngularFirestore"]
-        }];
-      };
-
-      VehicleService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
-        providedIn: 'root'
-      })], VehicleService);
-      /***/
     },
 
     /***/
@@ -446,19 +382,15 @@
       /* harmony import */
 
 
-      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! @angular/common/http */
+      "tk/3");
+      /* harmony import */
+
+
+      var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/core */
       "fXoL");
-      /* harmony import */
-
-
-      var angularfire2_firestore__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-      /*! angularfire2/firestore */
-      "CqG3");
-      /* harmony import */
-
-
-      var angularfire2_firestore__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(angularfire2_firestore__WEBPACK_IMPORTED_MODULE_2__);
       /* harmony import */
 
 
@@ -468,97 +400,62 @@
       /* harmony import */
 
 
-      var rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
-      /*! rxjs/internal/operators/map */
-      "q3Kh");
-      /* harmony import */
-
-
-      var rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_4__);
-      /* harmony import */
-
-
-      var _common_app_error__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      var _common_app_error__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! ../common/app-error */
       "/GcI");
       /* harmony import */
 
 
-      var _common_bad_input__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      var _common_bad_input__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! ../common/bad-input */
       "XEKg");
       /* harmony import */
 
 
-      var _common_not_found_error__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+      var _common_not_found_error__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! ../common/not-found-error */
       "5Jak");
 
       var AccountService = /*#__PURE__*/function () {
-        function AccountService(db) {
+        function AccountService(http) {
           _classCallCheck(this, AccountService);
 
-          this.db = db;
-          this.accountCollectionList = db.collection('Account');
+          this.http = http;
+          this.APIURL = 'http://localhost:49347/api';
         }
 
         _createClass(AccountService, [{
           key: "create",
-          value: function create(accountObj) {
-            return this.accountCollectionList.add(accountObj);
+          value: function create(val) {
+            return this.http.post(this.APIURL + '/Account', val);
           }
         }, {
           key: "getAllAccount",
           value: function getAllAccount() {
-            this.accountList = this.accountCollectionList.snapshotChanges().pipe(Object(rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_4__["map"])(function (actions) {
-              return actions.map(function (a) {
-                var data = a.payload.doc.data();
-                var id = a.payload.doc.id;
-                return Object.assign({
-                  id: id
-                }, data);
-              });
-            }));
-            return this.accountList;
-          }
-        }, {
-          key: "getAccountById",
-          value: function getAccountById(id) {
-            var accountObj = this.db.collection('Account', function (ref) {
-              return ref.where('id', '==', id);
-            }).snapshotChanges();
-            this.accountList = accountObj.pipe(Object(rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_4__["map"])(function (changes) {
-              return changes.map(function (a) {
-                var data = a.payload.doc.data();
-                var id = a.payload.doc.id;
-                return Object.assign({
-                  id: id
-                }, data);
-              });
-            }));
-            return this.accountList;
-          }
-        }, {
-          key: "getAccount",
-          value: function getAccount(id) {
-            return this.accountCollectionList.doc(id).valueChanges();
+            return this.http.get(this.APIURL + '/Account');
           }
         }, {
           key: "updateAccount",
-          value: function updateAccount(accountObj, id) {
-            return this.accountCollectionList.doc(id).update(accountObj)["catch"](this.handleError);
+          value: function updateAccount(val) {
+            return this.http.put(this.APIURL + '/Account/', val);
           }
         }, {
           key: "removeAccount",
           value: function removeAccount(id) {
-            return this.accountCollectionList.doc(id)["delete"]()["catch"](this.handleError);
+            return this.http["delete"](this.APIURL + '/Account/' + id).toPromise();
           }
         }, {
           key: "handleError",
           value: function handleError(error) {
-            if (error.status === 400) return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"]["throw"](new _common_bad_input__WEBPACK_IMPORTED_MODULE_6__["BadInput"](error.json()));
-            if (error.status === 404) return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"]["throw"](new _common_not_found_error__WEBPACK_IMPORTED_MODULE_7__["NotFoundError"]());
-            return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"]["throw"](new _common_app_error__WEBPACK_IMPORTED_MODULE_5__["AppError"](error));
+            if (error.status === 400) {
+              return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"]["throw"](new _common_bad_input__WEBPACK_IMPORTED_MODULE_5__["BadInput"](error.json()));
+            }
+
+            if (error.status === 404) {
+              return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"]["throw"](new _common_not_found_error__WEBPACK_IMPORTED_MODULE_6__["NotFoundError"]());
+            }
+
+            return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"]["throw"](new _common_app_error__WEBPACK_IMPORTED_MODULE_4__["AppError"](error));
           }
         }]);
 
@@ -567,11 +464,11 @@
 
       AccountService.ctorParameters = function () {
         return [{
-          type: angularfire2_firestore__WEBPACK_IMPORTED_MODULE_2__["AngularFirestore"]
+          type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]
         }];
       };
 
-      AccountService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+      AccountService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"])({
         providedIn: 'root'
       })], AccountService);
       /***/
@@ -699,23 +596,263 @@
     },
 
     /***/
-    "XRg5":
+    "8D9V":
     /*!*************************************************!*\
-      !*** ./src/app/directive/parallax.directive.ts ***!
+      !*** ./src/app/Service/order-detail.service.ts ***!
       \*************************************************/
 
-    /*! exports provided: ParallaxDirective */
+    /*! exports provided: OrderDetailService */
 
     /***/
-    function XRg5(module, __webpack_exports__, __webpack_require__) {
+    function D9V(module, __webpack_exports__, __webpack_require__) {
       "use strict";
 
       __webpack_require__.r(__webpack_exports__);
       /* harmony export (binding) */
 
 
-      __webpack_require__.d(__webpack_exports__, "ParallaxDirective", function () {
-        return ParallaxDirective;
+      __webpack_require__.d(__webpack_exports__, "OrderDetailService", function () {
+        return OrderDetailService;
+      });
+      /* harmony import */
+
+
+      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! tslib */
+      "mrSG");
+      /* harmony import */
+
+
+      var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! @angular/common/http */
+      "tk/3");
+      /* harmony import */
+
+
+      var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! @angular/core */
+      "fXoL");
+      /* harmony import */
+
+
+      var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      /*! rxjs */
+      "qCKp");
+      /* harmony import */
+
+
+      var _common_app_error__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      /*! ../common/app-error */
+      "/GcI");
+      /* harmony import */
+
+
+      var _common_bad_input__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      /*! ../common/bad-input */
+      "XEKg");
+      /* harmony import */
+
+
+      var _common_not_found_error__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      /*! ../common/not-found-error */
+      "5Jak");
+
+      var OrderDetailService = /*#__PURE__*/function () {
+        function OrderDetailService(http) {
+          _classCallCheck(this, OrderDetailService);
+
+          this.http = http;
+          this.APIURL = 'http://localhost:49347/api';
+        }
+
+        _createClass(OrderDetailService, [{
+          key: "create",
+          value: function create(val) {
+            return this.http.post(this.APIURL + '/OrderDetail', val);
+          }
+        }, {
+          key: "getAllOrderDetail",
+          value: function getAllOrderDetail() {
+            return this.http.get(this.APIURL + '/OrderDetail');
+          }
+        }, {
+          key: "updateOrderDetail",
+          value: function updateOrderDetail(val) {
+            return this.http.put(this.APIURL + '/OrderDetail/', val);
+          }
+        }, {
+          key: "removeOrderDetail",
+          value: function removeOrderDetail(id) {
+            return this.http["delete"](this.APIURL + '/OrderDetail/' + id).toPromise();
+          }
+        }, {
+          key: "handleError",
+          value: function handleError(error) {
+            if (error.status === 400) {
+              return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"]["throw"](new _common_bad_input__WEBPACK_IMPORTED_MODULE_5__["BadInput"](error.json()));
+            }
+
+            if (error.status === 404) {
+              return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"]["throw"](new _common_not_found_error__WEBPACK_IMPORTED_MODULE_6__["NotFoundError"]());
+            }
+
+            return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"]["throw"](new _common_app_error__WEBPACK_IMPORTED_MODULE_4__["AppError"](error));
+          }
+        }]);
+
+        return OrderDetailService;
+      }();
+
+      OrderDetailService.ctorParameters = function () {
+        return [{
+          type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]
+        }];
+      };
+
+      OrderDetailService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"])({
+        providedIn: 'root'
+      })], OrderDetailService);
+      /***/
+    },
+
+    /***/
+    "Dkj+":
+    /*!*****************************************!*\
+      !*** ./src/app/Service/food.service.ts ***!
+      \*****************************************/
+
+    /*! exports provided: FoodService */
+
+    /***/
+    function Dkj(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "FoodService", function () {
+        return FoodService;
+      });
+      /* harmony import */
+
+
+      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! tslib */
+      "mrSG");
+      /* harmony import */
+
+
+      var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! @angular/common/http */
+      "tk/3");
+      /* harmony import */
+
+
+      var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! @angular/core */
+      "fXoL");
+      /* harmony import */
+
+
+      var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      /*! rxjs */
+      "qCKp");
+      /* harmony import */
+
+
+      var _common_app_error__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      /*! ../common/app-error */
+      "/GcI");
+      /* harmony import */
+
+
+      var _common_bad_input__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      /*! ../common/bad-input */
+      "XEKg");
+      /* harmony import */
+
+
+      var _common_not_found_error__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      /*! ../common/not-found-error */
+      "5Jak");
+
+      var FoodService = /*#__PURE__*/function () {
+        function FoodService(http) {
+          _classCallCheck(this, FoodService);
+
+          this.http = http;
+          this.APIURL = 'http://localhost:49347/api';
+        }
+
+        _createClass(FoodService, [{
+          key: "create",
+          value: function create(val) {
+            return this.http.post(this.APIURL + '/Food', val);
+          }
+        }, {
+          key: "getAllFood",
+          value: function getAllFood() {
+            return this.http.get(this.APIURL + '/Food');
+          }
+        }, {
+          key: "updateFood",
+          value: function updateFood(val) {
+            return this.http.put(this.APIURL + '/Food/', val);
+          }
+        }, {
+          key: "removeFood",
+          value: function removeFood(id) {
+            return this.http["delete"](this.APIURL + '/Food/' + id).toPromise();
+          }
+        }, {
+          key: "handleError",
+          value: function handleError(error) {
+            if (error.status === 400) {
+              return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"]["throw"](new _common_bad_input__WEBPACK_IMPORTED_MODULE_5__["BadInput"](error.json()));
+            }
+
+            if (error.status === 404) {
+              return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"]["throw"](new _common_not_found_error__WEBPACK_IMPORTED_MODULE_6__["NotFoundError"]());
+            }
+
+            return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"]["throw"](new _common_app_error__WEBPACK_IMPORTED_MODULE_4__["AppError"](error));
+          }
+        }]);
+
+        return FoodService;
+      }();
+
+      FoodService.ctorParameters = function () {
+        return [{
+          type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]
+        }];
+      };
+
+      FoodService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"])({
+        providedIn: 'root'
+      })], FoodService);
+      /***/
+    },
+
+    /***/
+    "VNSQ":
+    /*!******************************************!*\
+      !*** ./src/app/Service/order.service.ts ***!
+      \******************************************/
+
+    /*! exports provided: OrderService */
+
+    /***/
+    function VNSQ(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "OrderService", function () {
+        return OrderService;
       });
       /* harmony import */
 
@@ -732,65 +869,334 @@
       /* harmony import */
 
 
-      var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-      /*! @ionic/angular */
-      "TEn/");
+      var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! rxjs */
+      "qCKp");
+      /* harmony import */
 
-      var ParallaxDirective = /*#__PURE__*/function () {
-        function ParallaxDirective( // private renderer: Renderer2,
-        domCtrl) {
-          _classCallCheck(this, ParallaxDirective);
 
-          this.domCtrl = domCtrl;
-        }
+      var _common_app_error__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      /*! ../common/app-error */
+      "/GcI");
+      /* harmony import */
 
-        _createClass(ParallaxDirective, [{
-          key: "onContentScroll",
-          value: function onContentScroll($event) {
-            var scrollTop = $event.detail.scrollTop;
 
-            if (scrollTop > 0) {
-              // Use higher values to move the image out faster
-              // Use lower values to move it out slower
-              this.moveImage = scrollTop / 1.6;
-              this.scaleImage = 1;
-            } else {
-              // +1 at the end as the other part can become 0
-              // and the image would disappear
-              this.scaleImage = -scrollTop / 200 + 1;
-              this.moveImage = scrollTop / 1.6;
-            } // this.domCtrl.write(() => {
-            //   this.renderer.setStyle(this.imageEl, 'webkitTransform',
-            //     'translate3d(0,' + this.moveImage + 'px,0) scale(' + this.scaleImage + ',' + this.scaleImage + ')'
-            //   );
-            // });
+      var _common_bad_input__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      /*! ../common/bad-input */
+      "XEKg");
+      /* harmony import */
 
+
+      var _common_not_found_error__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      /*! ../common/not-found-error */
+      "5Jak");
+      /* harmony import */
+
+
+      var _shared_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      /*! ./shared.service */
+      "ldse");
+      /* harmony import */
+
+
+      var _angular_common_http__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+      /*! @angular/common/http */
+      "tk/3");
+
+      var OrderService = /*#__PURE__*/function () {
+        function OrderService(http, sharedService) {
+          _classCallCheck(this, OrderService);
+
+          this.http = http;
+          this.sharedService = sharedService;
+          this.cart = [];
+          this.cartItemCount = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"](0);
+          this.RestaurantId = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"]({});
+          this.orderStatus = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"]({});
+          this.order = [];
+          this.orderItemCount = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"](0);
+          this.APIURL = 'http://localhost:49347/api';
+        } // create(orderObj) {
+        //   let values = this.orderCollectionList.add(orderObj)
+        //     .then((docRef) => {
+        //       this.sharedService.orderId.next(docRef.id);
+        //     })
+        //   return values;
+        // }
+        // getOrderBy(id){
+        //   const orderObj = this.db.collection('Order', ref => ref.where('id', '==', id)).snapshotChanges();
+        //   this.orderList = orderObj.pipe(
+        //     map(changes => changes.map(a => {
+        //       const data = a.payload.doc.data() as Order;
+        //       const id = a.payload.doc.id;
+        //       return { id, ...data };
+        //     }))
+        //   );
+        //   return this.orderList;
+        // }
+        // getOrderByDriverId(driverId){
+        //   const orderObj = this.db.collection('Order', ref => ref.where('Driver', '==', driverId)).snapshotChanges();
+        //   this.orderList = orderObj.pipe(
+        //     map(changes => changes.map(a => {
+        //       const data = a.payload.doc.data() as Order;
+        //       const id = a.payload.doc.id;
+        //       return { id, ...data };
+        //     }))
+        //   );
+        //   return this.orderList;
+        // }
+
+
+        _createClass(OrderService, [{
+          key: "create",
+          value: function create(val) {
+            return this.http.post(this.APIURL + '/Order', val);
+          }
+        }, {
+          key: "getAllOrder",
+          value: function getAllOrder() {
+            return this.http.get(this.APIURL + '/Order');
+          }
+        }, {
+          key: "updateOrder",
+          value: function updateOrder(val) {
+            return this.http.put(this.APIURL + '/Order/', val);
+          }
+        }, {
+          key: "updateOrderStatus",
+          value: function updateOrderStatus(val) {
+            return this.http.put(this.APIURL + '/OrderStatus/', val);
+          }
+        }, {
+          key: "updateRestaurantStatus",
+          value: function updateRestaurantStatus(val) {
+            return this.http.put(this.APIURL + '/RestaurantStatus/', val);
+          }
+        }, {
+          key: "updateStatus",
+          value: function updateStatus(val) {
+            return this.http.put(this.APIURL + '/Status/', val);
+          }
+        }, {
+          key: "removeOrder",
+          value: function removeOrder(id) {
+            return this.http["delete"](this.APIURL + '/Order/' + id).toPromise();
+          }
+        }, {
+          key: "handleError",
+          value: function handleError(error) {
+            if (error.status === 400) return rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"]["throw"](new _common_bad_input__WEBPACK_IMPORTED_MODULE_4__["BadInput"](error.json()));
+            if (error.status === 404) return rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"]["throw"](new _common_not_found_error__WEBPACK_IMPORTED_MODULE_5__["NotFoundError"]());
+            return rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"]["throw"](new _common_app_error__WEBPACK_IMPORTED_MODULE_3__["AppError"](error));
+          }
+        }, {
+          key: "getCart",
+          value: function getCart() {
+            return this.cart;
+          }
+        }, {
+          key: "getOrders",
+          value: function getOrders() {
+            return this.order;
+          }
+        }, {
+          key: "getCartItemCount",
+          value: function getCartItemCount() {
+            return this.cartItemCount;
+          }
+        }, {
+          key: "getOrderItemCount",
+          value: function getOrderItemCount() {
+            return this.orderItemCount;
+          }
+        }, {
+          key: "getRestaurantId",
+          value: function getRestaurantId() {
+            return this.RestaurantId;
+          }
+        }, {
+          key: "getOrderStatus",
+          value: function getOrderStatus() {
+            return this.orderStatus;
+          }
+        }, {
+          key: "addOrder",
+          value: function addOrder(items) {
+            var _this = this;
+
+            this.order = [];
+            this.amount = 0;
+            this.order.forEach(function (el) {
+              var index = _this.order.indexOf(function (c) {
+                return c.orderDetailsId === el.orderDetailsId;
+              });
+
+              _this.order.splice(index, 1);
+            });
+            this.orderItemCount.next(0);
+            items.forEach(function (element) {
+              _this.amount = _this.amount + element.amount;
+              var data = {
+                CookingTime: element.CookingTime,
+                DeliveryTime: element.DeliveryTime,
+                Description: element.Description,
+                Name: element.Name,
+                Price: element.Price,
+                amount: element.amount,
+                categoryId: element.categoryId,
+                id: element.Food,
+                picture: element.picture,
+                restaurantId: element.restaurantId,
+                type: element.type,
+                orderDetailsId: element.orderDetailsId
+              };
+
+              _this.order.push(data);
+            });
+            this.orderItemCount.next(this.orderItemCount.value + this.amount);
+          }
+        }, {
+          key: "addProduct",
+          value: function addProduct(product) {
+            var added = false;
+
+            var _iterator = _createForOfIteratorHelper(this.cart),
+                _step;
+
+            try {
+              for (_iterator.s(); !(_step = _iterator.n()).done;) {
+                var p = _step.value;
+
+                if (p.id === product.id) {
+                  p.amount += 1;
+                  added = true;
+                  break;
+                }
+              }
+            } catch (err) {
+              _iterator.e(err);
+            } finally {
+              _iterator.f();
+            }
+
+            if (!added) {
+              product.amount = 1;
+              this.cart.push(product);
+            }
+
+            this.cartItemCount.next(this.cartItemCount.value + 1);
+          }
+        }, {
+          key: "decreaseProduct",
+          value: function decreaseProduct(product) {
+            var _iterator2 = _createForOfIteratorHelper(this.cart.entries()),
+                _step2;
+
+            try {
+              for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+                var _step2$value = _slicedToArray(_step2.value, 2),
+                    index = _step2$value[0],
+                    p = _step2$value[1];
+
+                if (p.id === product.id) {
+                  p.amount -= 1;
+
+                  if (p.amount == 0) {
+                    this.cart.splice(index, 1);
+                  }
+                }
+              }
+            } catch (err) {
+              _iterator2.e(err);
+            } finally {
+              _iterator2.f();
+            }
+
+            this.cartItemCount.next(this.cartItemCount.value - 1);
+          }
+        }, {
+          key: "removeProduct",
+          value: function removeProduct(product) {
+            var _iterator3 = _createForOfIteratorHelper(this.cart.entries()),
+                _step3;
+
+            try {
+              for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+                var _step3$value = _slicedToArray(_step3.value, 2),
+                    index = _step3$value[0],
+                    p = _step3$value[1];
+
+                if (p.id === product.id) {
+                  this.cartItemCount.next(this.cartItemCount.value - p.amount);
+                  this.cart.splice(index, 1);
+                }
+              }
+            } catch (err) {
+              _iterator3.e(err);
+            } finally {
+              _iterator3.f();
+            }
           }
         }]);
 
-        return ParallaxDirective;
+        return OrderService;
       }();
 
-      ParallaxDirective.ctorParameters = function () {
+      OrderService.ctorParameters = function () {
         return [{
-          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["DomController"]
+          type: _angular_common_http__WEBPACK_IMPORTED_MODULE_7__["HttpClient"]
+        }, {
+          type: _shared_service__WEBPACK_IMPORTED_MODULE_6__["SharedService"]
         }];
       };
 
-      ParallaxDirective.propDecorators = {
-        imageEl: [{
-          type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"],
-          args: ['appParallax']
-        }],
-        onContentScroll: [{
-          type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["HostListener"],
-          args: ['ionScroll', ['$event']]
-        }]
-      };
-      ParallaxDirective = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Directive"])({
-        selector: '[appParallax]'
-      })], ParallaxDirective);
+      OrderService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+        providedIn: 'root'
+      })], OrderService);
       /***/
+    },
+
+    /***/
+    "XEKg":
+    /*!*************************************!*\
+      !*** ./src/app/common/bad-input.ts ***!
+      \*************************************/
+
+    /*! exports provided: BadInput */
+
+    /***/
+    function XEKg(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "BadInput", function () {
+        return BadInput;
+      });
+      /* harmony import */
+
+
+      var _app_error__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! ./app-error */
+      "/GcI");
+
+      var BadInput = /*#__PURE__*/function (_app_error__WEBPACK_I2) {
+        _inherits(BadInput, _app_error__WEBPACK_I2);
+
+        var _super2 = _createSuper(BadInput);
+
+        function BadInput() {
+          _classCallCheck(this, BadInput);
+
+          return _super2.apply(this, arguments);
+        }
+
+        return BadInput;
+      }(_app_error__WEBPACK_IMPORTED_MODULE_0__["AppError"]);
+      /***/
+
     },
 
     /***/
@@ -894,68 +1300,6 @@
       };
       /***/
 
-    },
-
-    /***/
-    "bLo3":
-    /*!******************************************************!*\
-      !*** ./src/app/directive/shard-directives.module.ts ***!
-      \******************************************************/
-
-    /*! exports provided: ShardDirectivesModule */
-
-    /***/
-    function bLo3(module, __webpack_exports__, __webpack_require__) {
-      "use strict";
-
-      __webpack_require__.r(__webpack_exports__);
-      /* harmony export (binding) */
-
-
-      __webpack_require__.d(__webpack_exports__, "ShardDirectivesModule", function () {
-        return ShardDirectivesModule;
-      });
-      /* harmony import */
-
-
-      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-      /*! tslib */
-      "mrSG");
-      /* harmony import */
-
-
-      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-      /*! @angular/core */
-      "fXoL");
-      /* harmony import */
-
-
-      var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-      /*! @angular/common */
-      "ofXK");
-      /* harmony import */
-
-
-      var _parallax_directive__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
-      /*! ./parallax.directive */
-      "XRg5");
-      /* harmony import */
-
-
-      var _hide_header_directive__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
-      /*! ./hide-header.directive */
-      "kQ4E");
-
-      var ShardDirectivesModule = function ShardDirectivesModule() {
-        _classCallCheck(this, ShardDirectivesModule);
-      };
-
-      ShardDirectivesModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-        declarations: [_parallax_directive__WEBPACK_IMPORTED_MODULE_3__["ParallaxDirective"], _hide_header_directive__WEBPACK_IMPORTED_MODULE_4__["HideHeaderDirective"]],
-        imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"]],
-        exports: [_parallax_directive__WEBPACK_IMPORTED_MODULE_3__["ParallaxDirective"], _hide_header_directive__WEBPACK_IMPORTED_MODULE_4__["HideHeaderDirective"]]
-      })], ShardDirectivesModule);
-      /***/
     },
 
     /***/
@@ -1090,23 +1434,23 @@
     },
 
     /***/
-    "kQ4E":
-    /*!****************************************************!*\
-      !*** ./src/app/directive/hide-header.directive.ts ***!
-      \****************************************************/
+    "ldse":
+    /*!*******************************************!*\
+      !*** ./src/app/Service/shared.service.ts ***!
+      \*******************************************/
 
-    /*! exports provided: HideHeaderDirective */
+    /*! exports provided: SharedService */
 
     /***/
-    function kQ4E(module, __webpack_exports__, __webpack_require__) {
+    function ldse(module, __webpack_exports__, __webpack_require__) {
       "use strict";
 
       __webpack_require__.r(__webpack_exports__);
       /* harmony export (binding) */
 
 
-      __webpack_require__.d(__webpack_exports__, "HideHeaderDirective", function () {
-        return HideHeaderDirective;
+      __webpack_require__.d(__webpack_exports__, "SharedService", function () {
+        return SharedService;
       });
       /* harmony import */
 
@@ -1123,66 +1467,60 @@
       /* harmony import */
 
 
-      var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-      /*! @ionic/angular */
-      "TEn/");
+      var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! rxjs */
+      "qCKp");
 
-      var HideHeaderDirective = /*#__PURE__*/function () {
-        function HideHeaderDirective( //  private renderer: Renderer2,
-        domCtrl) {
-          _classCallCheck(this, HideHeaderDirective);
+      var SharedService = /*#__PURE__*/function () {
+        function SharedService() {
+          _classCallCheck(this, SharedService);
 
-          this.domCtrl = domCtrl;
-          this.headerHeight = Object(_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["isPlatform"])('ios') ? 44 : 56;
+          this.restaurant = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"]({});
+          this.status = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"]({});
+          this.location = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"]({});
+          this.orderId = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"]({});
+          this.RestaurantLocation = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"]({});
+          this.resId = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"]({});
+          this.listOfCatagoryFilter = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"]({});
         }
 
-        _createClass(HideHeaderDirective, [{
-          key: "ngAfterViewInit",
-          value: function ngAfterViewInit() {
-            this.header = this.header.el;
-            this.children = this.header.children;
+        _createClass(SharedService, [{
+          key: "getMenuFilter",
+          value: function getMenuFilter() {
+            return this.listOfCatagoryFilter;
           }
         }, {
-          key: "onContentScroll",
-          value: function onContentScroll($event) {
-            var scrollTop = $event.detail.scrollTop;
-            var newPosition = -scrollTop;
-
-            if (newPosition < -this.headerHeight) {
-              newPosition = -this.headerHeight;
-            }
-
-            var newOpacity = 1 - newPosition / -this.headerHeight; // this.domCtrl.write(() => {
-            //   this.renderer.setStyle(this.header, 'top', newPosition + 'px');
-            //   for (let c of this.children) {
-            //     this.renderer.setStyle(c, 'opacity', newOpacity);
-            //   }
-            // });
+          key: "getLocation",
+          value: function getLocation() {
+            return this.location;
+          }
+        }, {
+          key: "getStatus",
+          value: function getStatus() {
+            return this.status;
+          }
+        }, {
+          key: "getRestaurantLocation",
+          value: function getRestaurantLocation() {
+            return this.RestaurantLocation;
+          }
+        }, {
+          key: "getRestaurantId",
+          value: function getRestaurantId() {
+            return this.resId;
           }
         }]);
 
-        return HideHeaderDirective;
+        return SharedService;
       }();
 
-      HideHeaderDirective.ctorParameters = function () {
-        return [{
-          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["DomController"]
-        }];
+      SharedService.ctorParameters = function () {
+        return [];
       };
 
-      HideHeaderDirective.propDecorators = {
-        header: [{
-          type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"],
-          args: ['appHideHeader']
-        }],
-        onContentScroll: [{
-          type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["HostListener"],
-          args: ['ionScroll', ['$event']]
-        }]
-      };
-      HideHeaderDirective = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Directive"])({
-        selector: '[appHideHeader]'
-      })], HideHeaderDirective);
+      SharedService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+        providedIn: 'root'
+      })], SharedService);
       /***/
     },
 
@@ -1214,19 +1552,15 @@
       /* harmony import */
 
 
-      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! @angular/common/http */
+      "tk/3");
+      /* harmony import */
+
+
+      var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/core */
       "fXoL");
-      /* harmony import */
-
-
-      var angularfire2_firestore__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-      /*! angularfire2/firestore */
-      "CqG3");
-      /* harmony import */
-
-
-      var angularfire2_firestore__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(angularfire2_firestore__WEBPACK_IMPORTED_MODULE_2__);
       /* harmony import */
 
 
@@ -1236,80 +1570,62 @@
       /* harmony import */
 
 
-      var rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
-      /*! rxjs/internal/operators/map */
-      "q3Kh");
-      /* harmony import */
-
-
-      var rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_4__);
-      /* harmony import */
-
-
-      var _common_app_error__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      var _common_app_error__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! ../common/app-error */
       "/GcI");
       /* harmony import */
 
 
-      var _common_bad_input__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      var _common_bad_input__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! ../common/bad-input */
       "XEKg");
       /* harmony import */
 
 
-      var _common_not_found_error__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+      var _common_not_found_error__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! ../common/not-found-error */
       "5Jak");
 
       var CategoryService = /*#__PURE__*/function () {
-        function CategoryService(db) {
+        function CategoryService(http) {
           _classCallCheck(this, CategoryService);
 
-          this.db = db;
-          this.categoryCollectionList = db.collection('Category');
+          this.http = http;
+          this.APIURL = 'http://localhost:49347/api';
         }
 
         _createClass(CategoryService, [{
           key: "create",
-          value: function create(categoryObj) {
-            return this.categoryCollectionList.add(categoryObj);
+          value: function create(val) {
+            return this.http.post(this.APIURL + '/Categorie', val);
           }
         }, {
           key: "getAllCategory",
           value: function getAllCategory() {
-            this.categoryList = this.categoryCollectionList.snapshotChanges().pipe(Object(rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_4__["map"])(function (actions) {
-              return actions.map(function (a) {
-                var data = a.payload.doc.data();
-                var id = a.payload.doc.id;
-                return Object.assign({
-                  id: id
-                }, data);
-              });
-            }));
-            return this.categoryList;
-          }
-        }, {
-          key: "getCategory",
-          value: function getCategory(id) {
-            return this.categoryCollectionList.doc(id).valueChanges();
+            return this.http.get(this.APIURL + '/Categorie');
           }
         }, {
           key: "updateCategory",
-          value: function updateCategory(categoryObj, id) {
-            return this.categoryCollectionList.doc(id).update(categoryObj)["catch"](this.handleError);
+          value: function updateCategory(val) {
+            return this.http.put(this.APIURL + '/Categorie/', val);
           }
         }, {
           key: "removeCategory",
           value: function removeCategory(id) {
-            return this.categoryCollectionList.doc(id)["delete"]()["catch"](this.handleError);
+            return this.http["delete"](this.APIURL + '/Categorie/' + id).toPromise();
           }
         }, {
           key: "handleError",
           value: function handleError(error) {
-            if (error.status === 400) return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"]["throw"](new _common_bad_input__WEBPACK_IMPORTED_MODULE_6__["BadInput"](error.json()));
-            if (error.status === 404) return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"]["throw"](new _common_not_found_error__WEBPACK_IMPORTED_MODULE_7__["NotFoundError"]());
-            return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"]["throw"](new _common_app_error__WEBPACK_IMPORTED_MODULE_5__["AppError"](error));
+            if (error.status === 400) {
+              return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"]["throw"](new _common_bad_input__WEBPACK_IMPORTED_MODULE_5__["BadInput"](error.json()));
+            }
+
+            if (error.status === 404) {
+              return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"]["throw"](new _common_not_found_error__WEBPACK_IMPORTED_MODULE_6__["NotFoundError"]());
+            }
+
+            return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"]["throw"](new _common_app_error__WEBPACK_IMPORTED_MODULE_4__["AppError"](error));
           }
         }]);
 
@@ -1318,11 +1634,11 @@
 
       CategoryService.ctorParameters = function () {
         return [{
-          type: angularfire2_firestore__WEBPACK_IMPORTED_MODULE_2__["AngularFirestore"]
+          type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]
         }];
       };
 
-      CategoryService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+      CategoryService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"])({
         providedIn: 'root'
       })], CategoryService);
       /***/

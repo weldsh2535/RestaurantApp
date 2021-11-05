@@ -104,24 +104,18 @@
             var password = this.regform.get("password").value;
 
             if (this.regform.valid) {
-              this.authServices.signUpUser(email, password).subscribe(function (result) {
+              this.authServices.getAllAccount().subscribe(function (res) {
+                var result = res.filter(function (c) {
+                  return c.email == email && c.password == password;
+                });
+
                 if (result.length > 0) {
                   localStorage.setItem("userId", result[0].id);
-                  localStorage.setItem("fullName", result[0].FullName);
+                  localStorage.setItem("fullName", result[0].fullName);
                   localStorage.setItem("roleType", result[0].type);
                   localStorage.setItem('active', result[0].active);
 
-                  if (result[0].type == "driver") {
-                    if (result[0].active == "true") {
-                      _this.router.navigate(['/menu/driver-home']);
-
-                      _this.presentAlert("Login successfully.");
-
-                      _this.regform.reset();
-                    } else {
-                      _this.presentAlert("Please contact your system administrator");
-                    }
-                  } else if (result[0].type == "restaurant") {
+                  if (result[0].type == "restaurant") {
                     if (result[0].active == "true") {
                       _this.router.navigate(['/menu/restaurant-home']);
 
@@ -131,12 +125,6 @@
                     } else {
                       _this.presentAlert("Please contact your system administrator");
                     }
-                  } else {
-                    _this.router.navigate(['/menu']);
-
-                    _this.presentAlert("Login successfully.");
-
-                    _this.regform.reset();
                   }
                 } else {
                   _this.presentAlert("Please enter correct username and password!!");

@@ -1,5 +1,88 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["common"],{
 
+/***/ "+cje":
+/*!***********************************************!*\
+  !*** ./src/app/Service/restaurant.service.ts ***!
+  \***********************************************/
+/*! exports provided: RestaurantService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RestaurantService", function() { return RestaurantService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "qCKp");
+/* harmony import */ var _common_bad_input__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../common/bad-input */ "XEKg");
+/* harmony import */ var _common_not_found_error__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../common/not-found-error */ "5Jak");
+/* harmony import */ var _common_app_error__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../common/app-error */ "/GcI");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/common/http */ "tk/3");
+
+
+
+
+
+
+
+let RestaurantService = class RestaurantService {
+    constructor(http) {
+        this.http = http;
+        this.APIURL = 'http://localhost:49347/api';
+    }
+    create(val) {
+        return this.http.post(this.APIURL + '/Restaurant', val);
+    }
+    getAllRestaurant() {
+        return this.http.get(this.APIURL + '/Restaurant');
+    }
+    updateRestaurant(val) {
+        return this.http.put(this.APIURL + '/Restaurant/', val);
+    }
+    removeRestaurant(id) {
+        return this.http.delete(this.APIURL + '/Restaurant/' + id).toPromise();
+    }
+    handleError(error) {
+        if (error.status === 400) {
+            return rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"].throw(new _common_bad_input__WEBPACK_IMPORTED_MODULE_3__["BadInput"](error.json()));
+        }
+        if (error.status === 404) {
+            return rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"].throw(new _common_not_found_error__WEBPACK_IMPORTED_MODULE_4__["NotFoundError"]());
+        }
+        return rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"].throw(new _common_app_error__WEBPACK_IMPORTED_MODULE_5__["AppError"](error));
+    }
+};
+RestaurantService.ctorParameters = () => [
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_6__["HttpClient"] }
+];
+RestaurantService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+        providedIn: 'root'
+    })
+], RestaurantService);
+
+
+
+/***/ }),
+
+/***/ "/GcI":
+/*!*************************************!*\
+  !*** ./src/app/common/app-error.ts ***!
+  \*************************************/
+/*! exports provided: AppError */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppError", function() { return AppError; });
+class AppError {
+    constructor(originalError) {
+        this.originalError = originalError;
+    }
+}
+
+
+/***/ }),
+
 /***/ "0/6H":
 /*!*********************************************************************!*\
   !*** ./node_modules/@ionic/core/dist/esm/button-active-a6787d69.js ***!
@@ -81,158 +164,20 @@ const createButtonActiveGesture = (el, isButton) => {
 
 /***/ }),
 
-/***/ "1D3i":
+/***/ "5Jak":
 /*!*******************************************!*\
-  !*** ./src/app/Service/driver.service.ts ***!
+  !*** ./src/app/common/not-found-error.ts ***!
   \*******************************************/
-/*! exports provided: DriverService */
+/*! exports provided: NotFoundError */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DriverService", function() { return DriverService; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "fXoL");
-/* harmony import */ var angularfire2_firestore__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! angularfire2/firestore */ "CqG3");
-/* harmony import */ var angularfire2_firestore__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(angularfire2_firestore__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "qCKp");
-/* harmony import */ var rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/internal/operators/map */ "q3Kh");
-/* harmony import */ var rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _common_app_error__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../common/app-error */ "/GcI");
-/* harmony import */ var _common_bad_input__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../common/bad-input */ "XEKg");
-/* harmony import */ var _common_not_found_error__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../common/not-found-error */ "5Jak");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NotFoundError", function() { return NotFoundError; });
+/* harmony import */ var _app_error__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./app-error */ "/GcI");
 
-
-
-
-
-
-
-
-let DriverService = class DriverService {
-    constructor(db) {
-        this.db = db;
-        this.driverCollectionList = db.collection('Driver');
-    }
-    create(driverObj) {
-        return this.driverCollectionList.add(driverObj);
-    }
-    getAllDriver() {
-        this.driverList = this.driverCollectionList.snapshotChanges().pipe(Object(rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_4__["map"])(actions => {
-            return actions.map(a => {
-                const data = a.payload.doc.data();
-                const id = a.payload.doc.id;
-                return Object.assign({ id }, data);
-            });
-        }));
-        return this.driverList;
-    }
-    getDriver(id) {
-        return this.driverCollectionList.doc(id).valueChanges();
-    }
-    updateDriver(driverObj, id) {
-        return this.driverCollectionList.doc(id).update(driverObj)
-            .catch(this.handleError);
-    }
-    removeDriver(id) {
-        return this.driverCollectionList.doc(id).delete()
-            .catch(this.handleError);
-    }
-    handleError(error) {
-        if (error.status === 400)
-            return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"].throw(new _common_bad_input__WEBPACK_IMPORTED_MODULE_6__["BadInput"](error.json()));
-        if (error.status === 404)
-            return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"].throw(new _common_not_found_error__WEBPACK_IMPORTED_MODULE_7__["NotFoundError"]());
-        return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"].throw(new _common_app_error__WEBPACK_IMPORTED_MODULE_5__["AppError"](error));
-    }
-};
-DriverService.ctorParameters = () => [
-    { type: angularfire2_firestore__WEBPACK_IMPORTED_MODULE_2__["AngularFirestore"] }
-];
-DriverService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
-        providedIn: 'root'
-    })
-], DriverService);
-
-
-
-/***/ }),
-
-/***/ "5ZJP":
-/*!********************************************!*\
-  !*** ./src/app/Service/vehicle.service.ts ***!
-  \********************************************/
-/*! exports provided: VehicleService */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VehicleService", function() { return VehicleService; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "fXoL");
-/* harmony import */ var angularfire2_firestore__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! angularfire2/firestore */ "CqG3");
-/* harmony import */ var angularfire2_firestore__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(angularfire2_firestore__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "qCKp");
-/* harmony import */ var rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/internal/operators/map */ "q3Kh");
-/* harmony import */ var rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _common_app_error__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../common/app-error */ "/GcI");
-/* harmony import */ var _common_bad_input__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../common/bad-input */ "XEKg");
-/* harmony import */ var _common_not_found_error__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../common/not-found-error */ "5Jak");
-
-
-
-
-
-
-
-
-let VehicleService = class VehicleService {
-    constructor(db) {
-        this.db = db;
-        this.vehicleCollectionList = db.collection('Vehicle');
-    }
-    create(vehicleObj) {
-        return this.vehicleCollectionList.add(vehicleObj);
-    }
-    getAllVehicle() {
-        this.vehicleList = this.vehicleCollectionList.snapshotChanges().pipe(Object(rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_4__["map"])(actions => {
-            return actions.map(a => {
-                const data = a.payload.doc.data();
-                const id = a.payload.doc.id;
-                return Object.assign({ id }, data);
-            });
-        }));
-        return this.vehicleList;
-    }
-    getVehicle(id) {
-        return this.vehicleCollectionList.doc(id).valueChanges();
-    }
-    updateVehicle(vehicleObj, id) {
-        return this.vehicleCollectionList.doc(id).update(vehicleObj)
-            .catch(this.handleError);
-    }
-    removeVehicle(id) {
-        return this.vehicleCollectionList.doc(id).delete()
-            .catch(this.handleError);
-    }
-    handleError(error) {
-        if (error.status === 400)
-            return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"].throw(new _common_bad_input__WEBPACK_IMPORTED_MODULE_6__["BadInput"](error.json()));
-        if (error.status === 404)
-            return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"].throw(new _common_not_found_error__WEBPACK_IMPORTED_MODULE_7__["NotFoundError"]());
-        return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"].throw(new _common_app_error__WEBPACK_IMPORTED_MODULE_5__["AppError"](error));
-    }
-};
-VehicleService.ctorParameters = () => [
-    { type: angularfire2_firestore__WEBPACK_IMPORTED_MODULE_2__["AngularFirestore"] }
-];
-VehicleService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
-        providedIn: 'root'
-    })
-], VehicleService);
-
+class NotFoundError extends _app_error__WEBPACK_IMPORTED_MODULE_0__["AppError"] {
+}
 
 
 /***/ }),
@@ -248,16 +193,12 @@ VehicleService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AccountService", function() { return AccountService; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "fXoL");
-/* harmony import */ var angularfire2_firestore__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! angularfire2/firestore */ "CqG3");
-/* harmony import */ var angularfire2_firestore__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(angularfire2_firestore__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "tk/3");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "qCKp");
-/* harmony import */ var rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/internal/operators/map */ "q3Kh");
-/* harmony import */ var rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _common_app_error__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../common/app-error */ "/GcI");
-/* harmony import */ var _common_bad_input__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../common/bad-input */ "XEKg");
-/* harmony import */ var _common_not_found_error__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../common/not-found-error */ "5Jak");
-
+/* harmony import */ var _common_app_error__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../common/app-error */ "/GcI");
+/* harmony import */ var _common_bad_input__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../common/bad-input */ "XEKg");
+/* harmony import */ var _common_not_found_error__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../common/not-found-error */ "5Jak");
 
 
 
@@ -266,56 +207,37 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let AccountService = class AccountService {
-    constructor(db) {
-        this.db = db;
-        this.accountCollectionList = db.collection('Account');
+    constructor(http) {
+        this.http = http;
+        this.APIURL = 'http://localhost:49347/api';
     }
-    create(accountObj) {
-        return this.accountCollectionList.add(accountObj);
+    create(val) {
+        return this.http.post(this.APIURL + '/Account', val);
     }
     getAllAccount() {
-        this.accountList = this.accountCollectionList.snapshotChanges().pipe(Object(rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_4__["map"])(actions => {
-            return actions.map(a => {
-                const data = a.payload.doc.data();
-                const id = a.payload.doc.id;
-                return Object.assign({ id }, data);
-            });
-        }));
-        return this.accountList;
+        return this.http.get(this.APIURL + '/Account');
     }
-    getAccountById(id) {
-        const accountObj = this.db.collection('Account', ref => ref.where('id', '==', id)).snapshotChanges();
-        this.accountList = accountObj.pipe(Object(rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_4__["map"])(changes => changes.map(a => {
-            const data = a.payload.doc.data();
-            const id = a.payload.doc.id;
-            return Object.assign({ id }, data);
-        })));
-        return this.accountList;
-    }
-    getAccount(id) {
-        return this.accountCollectionList.doc(id).valueChanges();
-    }
-    updateAccount(accountObj, id) {
-        return this.accountCollectionList.doc(id).update(accountObj)
-            .catch(this.handleError);
+    updateAccount(val) {
+        return this.http.put(this.APIURL + '/Account/', val);
     }
     removeAccount(id) {
-        return this.accountCollectionList.doc(id).delete()
-            .catch(this.handleError);
+        return this.http.delete(this.APIURL + '/Account/' + id).toPromise();
     }
     handleError(error) {
-        if (error.status === 400)
-            return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"].throw(new _common_bad_input__WEBPACK_IMPORTED_MODULE_6__["BadInput"](error.json()));
-        if (error.status === 404)
-            return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"].throw(new _common_not_found_error__WEBPACK_IMPORTED_MODULE_7__["NotFoundError"]());
-        return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"].throw(new _common_app_error__WEBPACK_IMPORTED_MODULE_5__["AppError"](error));
+        if (error.status === 400) {
+            return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"].throw(new _common_bad_input__WEBPACK_IMPORTED_MODULE_5__["BadInput"](error.json()));
+        }
+        if (error.status === 404) {
+            return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"].throw(new _common_not_found_error__WEBPACK_IMPORTED_MODULE_6__["NotFoundError"]());
+        }
+        return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"].throw(new _common_app_error__WEBPACK_IMPORTED_MODULE_4__["AppError"](error));
     }
 };
 AccountService.ctorParameters = () => [
-    { type: angularfire2_firestore__WEBPACK_IMPORTED_MODULE_2__["AngularFirestore"] }
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"] }
 ];
 AccountService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"])({
         providedIn: 'root'
     })
 ], AccountService);
@@ -380,62 +302,338 @@ const openURL = async (url, ev, direction, animation) => {
 
 /***/ }),
 
-/***/ "XRg5":
+/***/ "8D9V":
 /*!*************************************************!*\
-  !*** ./src/app/directive/parallax.directive.ts ***!
+  !*** ./src/app/Service/order-detail.service.ts ***!
   \*************************************************/
-/*! exports provided: ParallaxDirective */
+/*! exports provided: OrderDetailService */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ParallaxDirective", function() { return ParallaxDirective; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OrderDetailService", function() { return OrderDetailService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "tk/3");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "qCKp");
+/* harmony import */ var _common_app_error__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../common/app-error */ "/GcI");
+/* harmony import */ var _common_bad_input__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../common/bad-input */ "XEKg");
+/* harmony import */ var _common_not_found_error__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../common/not-found-error */ "5Jak");
+
+
+
+
+
+
+
+let OrderDetailService = class OrderDetailService {
+    constructor(http) {
+        this.http = http;
+        this.APIURL = 'http://localhost:49347/api';
+    }
+    create(val) {
+        return this.http.post(this.APIURL + '/OrderDetail', val);
+    }
+    getAllOrderDetail() {
+        return this.http.get(this.APIURL + '/OrderDetail');
+    }
+    updateOrderDetail(val) {
+        return this.http.put(this.APIURL + '/OrderDetail/', val);
+    }
+    removeOrderDetail(id) {
+        return this.http.delete(this.APIURL + '/OrderDetail/' + id).toPromise();
+    }
+    handleError(error) {
+        if (error.status === 400) {
+            return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"].throw(new _common_bad_input__WEBPACK_IMPORTED_MODULE_5__["BadInput"](error.json()));
+        }
+        if (error.status === 404) {
+            return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"].throw(new _common_not_found_error__WEBPACK_IMPORTED_MODULE_6__["NotFoundError"]());
+        }
+        return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"].throw(new _common_app_error__WEBPACK_IMPORTED_MODULE_4__["AppError"](error));
+    }
+};
+OrderDetailService.ctorParameters = () => [
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"] }
+];
+OrderDetailService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"])({
+        providedIn: 'root'
+    })
+], OrderDetailService);
+
+
+
+/***/ }),
+
+/***/ "Dkj+":
+/*!*****************************************!*\
+  !*** ./src/app/Service/food.service.ts ***!
+  \*****************************************/
+/*! exports provided: FoodService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FoodService", function() { return FoodService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "tk/3");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "qCKp");
+/* harmony import */ var _common_app_error__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../common/app-error */ "/GcI");
+/* harmony import */ var _common_bad_input__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../common/bad-input */ "XEKg");
+/* harmony import */ var _common_not_found_error__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../common/not-found-error */ "5Jak");
+
+
+
+
+
+
+
+let FoodService = class FoodService {
+    constructor(http) {
+        this.http = http;
+        this.APIURL = 'http://localhost:49347/api';
+    }
+    create(val) {
+        return this.http.post(this.APIURL + '/Food', val);
+    }
+    getAllFood() {
+        return this.http.get(this.APIURL + '/Food');
+    }
+    updateFood(val) {
+        return this.http.put(this.APIURL + '/Food/', val);
+    }
+    removeFood(id) {
+        return this.http.delete(this.APIURL + '/Food/' + id).toPromise();
+    }
+    handleError(error) {
+        if (error.status === 400) {
+            return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"].throw(new _common_bad_input__WEBPACK_IMPORTED_MODULE_5__["BadInput"](error.json()));
+        }
+        if (error.status === 404) {
+            return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"].throw(new _common_not_found_error__WEBPACK_IMPORTED_MODULE_6__["NotFoundError"]());
+        }
+        return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"].throw(new _common_app_error__WEBPACK_IMPORTED_MODULE_4__["AppError"](error));
+    }
+};
+FoodService.ctorParameters = () => [
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"] }
+];
+FoodService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"])({
+        providedIn: 'root'
+    })
+], FoodService);
+
+
+
+/***/ }),
+
+/***/ "VNSQ":
+/*!******************************************!*\
+  !*** ./src/app/Service/order.service.ts ***!
+  \******************************************/
+/*! exports provided: OrderService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OrderService", function() { return OrderService; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "fXoL");
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "TEn/");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "qCKp");
+/* harmony import */ var _common_app_error__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../common/app-error */ "/GcI");
+/* harmony import */ var _common_bad_input__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../common/bad-input */ "XEKg");
+/* harmony import */ var _common_not_found_error__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../common/not-found-error */ "5Jak");
+/* harmony import */ var _shared_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./shared.service */ "ldse");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/common/http */ "tk/3");
 
 
 
-let ParallaxDirective = class ParallaxDirective {
-    constructor(
-    // private renderer: Renderer2,
-    domCtrl) {
-        this.domCtrl = domCtrl;
+
+
+
+
+
+let OrderService = class OrderService {
+    constructor(http, sharedService) {
+        this.http = http;
+        this.sharedService = sharedService;
+        this.cart = [];
+        this.cartItemCount = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"](0);
+        this.RestaurantId = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"]({});
+        this.orderStatus = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"]({});
+        this.order = [];
+        this.orderItemCount = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"](0);
+        this.APIURL = 'http://localhost:49347/api';
     }
-    onContentScroll($event) {
-        const scrollTop = $event.detail.scrollTop;
-        if (scrollTop > 0) {
-            // Use higher values to move the image out faster
-            // Use lower values to move it out slower
-            this.moveImage = scrollTop / 1.6;
-            this.scaleImage = 1;
+    // create(orderObj) {
+    //   let values = this.orderCollectionList.add(orderObj)
+    //     .then((docRef) => {
+    //       this.sharedService.orderId.next(docRef.id);
+    //     })
+    //   return values;
+    // }
+    // getOrderBy(id){
+    //   const orderObj = this.db.collection('Order', ref => ref.where('id', '==', id)).snapshotChanges();
+    //   this.orderList = orderObj.pipe(
+    //     map(changes => changes.map(a => {
+    //       const data = a.payload.doc.data() as Order;
+    //       const id = a.payload.doc.id;
+    //       return { id, ...data };
+    //     }))
+    //   );
+    //   return this.orderList;
+    // }
+    // getOrderByDriverId(driverId){
+    //   const orderObj = this.db.collection('Order', ref => ref.where('Driver', '==', driverId)).snapshotChanges();
+    //   this.orderList = orderObj.pipe(
+    //     map(changes => changes.map(a => {
+    //       const data = a.payload.doc.data() as Order;
+    //       const id = a.payload.doc.id;
+    //       return { id, ...data };
+    //     }))
+    //   );
+    //   return this.orderList;
+    // }
+    create(val) {
+        return this.http.post(this.APIURL + '/Order', val);
+    }
+    getAllOrder() {
+        return this.http.get(this.APIURL + '/Order');
+    }
+    updateOrder(val) {
+        return this.http.put(this.APIURL + '/Order/', val);
+    }
+    updateOrderStatus(val) {
+        return this.http.put(this.APIURL + '/OrderStatus/', val);
+    }
+    updateRestaurantStatus(val) {
+        return this.http.put(this.APIURL + '/RestaurantStatus/', val);
+    }
+    updateStatus(val) {
+        return this.http.put(this.APIURL + '/Status/', val);
+    }
+    removeOrder(id) {
+        return this.http.delete(this.APIURL + '/Order/' + id).toPromise();
+    }
+    handleError(error) {
+        if (error.status === 400)
+            return rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"].throw(new _common_bad_input__WEBPACK_IMPORTED_MODULE_4__["BadInput"](error.json()));
+        if (error.status === 404)
+            return rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"].throw(new _common_not_found_error__WEBPACK_IMPORTED_MODULE_5__["NotFoundError"]());
+        return rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"].throw(new _common_app_error__WEBPACK_IMPORTED_MODULE_3__["AppError"](error));
+    }
+    getCart() {
+        return this.cart;
+    }
+    getOrders() {
+        return this.order;
+    }
+    getCartItemCount() {
+        return this.cartItemCount;
+    }
+    getOrderItemCount() {
+        return this.orderItemCount;
+    }
+    getRestaurantId() {
+        return this.RestaurantId;
+    }
+    getOrderStatus() {
+        return this.orderStatus;
+    }
+    addOrder(items) {
+        this.order = [];
+        this.amount = 0;
+        this.order.forEach(el => {
+            let index = this.order.indexOf(c => c.orderDetailsId === el.orderDetailsId);
+            this.order.splice(index, 1);
+        });
+        this.orderItemCount.next(0);
+        items.forEach(element => {
+            this.amount = this.amount + element.amount;
+            let data = {
+                CookingTime: element.CookingTime,
+                DeliveryTime: element.DeliveryTime,
+                Description: element.Description,
+                Name: element.Name,
+                Price: element.Price,
+                amount: element.amount,
+                categoryId: element.categoryId,
+                id: element.Food,
+                picture: element.picture,
+                restaurantId: element.restaurantId,
+                type: element.type,
+                orderDetailsId: element.orderDetailsId,
+            };
+            this.order.push(data);
+        });
+        this.orderItemCount.next(this.orderItemCount.value + this.amount);
+    }
+    addProduct(product) {
+        let added = false;
+        for (let p of this.cart) {
+            if (p.id === product.id) {
+                p.amount += 1;
+                added = true;
+                break;
+            }
         }
-        else {
-            // +1 at the end as the other part can become 0
-            // and the image would disappear
-            this.scaleImage = -scrollTop / 200 + 1;
-            this.moveImage = scrollTop / 1.6;
+        if (!added) {
+            product.amount = 1;
+            this.cart.push(product);
         }
-        // this.domCtrl.write(() => {
-        //   this.renderer.setStyle(this.imageEl, 'webkitTransform',
-        //     'translate3d(0,' + this.moveImage + 'px,0) scale(' + this.scaleImage + ',' + this.scaleImage + ')'
-        //   );
-        // });
+        this.cartItemCount.next(this.cartItemCount.value + 1);
+    }
+    decreaseProduct(product) {
+        for (let [index, p] of this.cart.entries()) {
+            if (p.id === product.id) {
+                p.amount -= 1;
+                if (p.amount == 0) {
+                    this.cart.splice(index, 1);
+                }
+            }
+        }
+        this.cartItemCount.next(this.cartItemCount.value - 1);
+    }
+    removeProduct(product) {
+        for (let [index, p] of this.cart.entries()) {
+            if (p.id === product.id) {
+                this.cartItemCount.next(this.cartItemCount.value - p.amount);
+                this.cart.splice(index, 1);
+            }
+        }
     }
 };
-ParallaxDirective.ctorParameters = () => [
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["DomController"] }
+OrderService.ctorParameters = () => [
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_7__["HttpClient"] },
+    { type: _shared_service__WEBPACK_IMPORTED_MODULE_6__["SharedService"] }
 ];
-ParallaxDirective.propDecorators = {
-    imageEl: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"], args: ['appParallax',] }],
-    onContentScroll: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["HostListener"], args: ['ionScroll', ['$event'],] }]
-};
-ParallaxDirective = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Directive"])({
-        selector: '[appParallax]'
+OrderService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+        providedIn: 'root'
     })
-], ParallaxDirective);
+], OrderService);
 
+
+
+/***/ }),
+
+/***/ "XEKg":
+/*!*************************************!*\
+  !*** ./src/app/common/bad-input.ts ***!
+  \*************************************/
+/*! exports provided: BadInput */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BadInput", function() { return BadInput; });
+/* harmony import */ var _app_error__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./app-error */ "/GcI");
+
+class BadInput extends _app_error__WEBPACK_IMPORTED_MODULE_0__["AppError"] {
+}
 
 
 /***/ }),
@@ -484,42 +682,6 @@ const detachComponent = (delegate, element) => {
   return Promise.resolve();
 };
 
-
-
-
-/***/ }),
-
-/***/ "bLo3":
-/*!******************************************************!*\
-  !*** ./src/app/directive/shard-directives.module.ts ***!
-  \******************************************************/
-/*! exports provided: ShardDirectivesModule */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ShardDirectivesModule", function() { return ShardDirectivesModule; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "fXoL");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "ofXK");
-/* harmony import */ var _parallax_directive__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./parallax.directive */ "XRg5");
-/* harmony import */ var _hide_header_directive__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./hide-header.directive */ "kQ4E");
-
-
-
-
-
-let ShardDirectivesModule = class ShardDirectivesModule {
-};
-ShardDirectivesModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-        declarations: [_parallax_directive__WEBPACK_IMPORTED_MODULE_3__["ParallaxDirective"], _hide_header_directive__WEBPACK_IMPORTED_MODULE_4__["HideHeaderDirective"]],
-        imports: [
-            _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"]
-        ],
-        exports: [_parallax_directive__WEBPACK_IMPORTED_MODULE_3__["ParallaxDirective"], _hide_header_directive__WEBPACK_IMPORTED_MODULE_4__["HideHeaderDirective"]],
-    })
-], ShardDirectivesModule);
 
 
 
@@ -649,60 +811,54 @@ const SPINNERS = spinners;
 
 /***/ }),
 
-/***/ "kQ4E":
-/*!****************************************************!*\
-  !*** ./src/app/directive/hide-header.directive.ts ***!
-  \****************************************************/
-/*! exports provided: HideHeaderDirective */
+/***/ "ldse":
+/*!*******************************************!*\
+  !*** ./src/app/Service/shared.service.ts ***!
+  \*******************************************/
+/*! exports provided: SharedService */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HideHeaderDirective", function() { return HideHeaderDirective; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SharedService", function() { return SharedService; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "fXoL");
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "TEn/");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "qCKp");
 
 
 
-let HideHeaderDirective = class HideHeaderDirective {
-    constructor(
-    //  private renderer: Renderer2,
-    domCtrl) {
-        this.domCtrl = domCtrl;
-        this.headerHeight = Object(_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["isPlatform"])('ios') ? 44 : 56;
+let SharedService = class SharedService {
+    constructor() {
+        this.restaurant = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"]({});
+        this.status = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"]({});
+        this.location = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"]({});
+        this.orderId = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"]({});
+        this.RestaurantLocation = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"]({});
+        this.resId = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"]({});
+        this.listOfCatagoryFilter = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"]({});
     }
-    ngAfterViewInit() {
-        this.header = this.header.el;
-        this.children = this.header.children;
+    getMenuFilter() {
+        return this.listOfCatagoryFilter;
     }
-    onContentScroll($event) {
-        const scrollTop = $event.detail.scrollTop;
-        let newPosition = -scrollTop;
-        if (newPosition < -this.headerHeight) {
-            newPosition = -this.headerHeight;
-        }
-        let newOpacity = 1 - (newPosition / -this.headerHeight);
-        // this.domCtrl.write(() => {
-        //   this.renderer.setStyle(this.header, 'top', newPosition + 'px');
-        //   for (let c of this.children) {
-        //     this.renderer.setStyle(c, 'opacity', newOpacity);
-        //   }
-        // });
+    getLocation() {
+        return this.location;
+    }
+    getStatus() {
+        return this.status;
+    }
+    getRestaurantLocation() {
+        return this.RestaurantLocation;
+    }
+    getRestaurantId() {
+        return this.resId;
     }
 };
-HideHeaderDirective.ctorParameters = () => [
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["DomController"] }
-];
-HideHeaderDirective.propDecorators = {
-    header: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"], args: ['appHideHeader',] }],
-    onContentScroll: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["HostListener"], args: ['ionScroll', ['$event'],] }]
-};
-HideHeaderDirective = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Directive"])({
-        selector: '[appHideHeader]'
+SharedService.ctorParameters = () => [];
+SharedService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+        providedIn: 'root'
     })
-], HideHeaderDirective);
+], SharedService);
 
 
 
@@ -719,16 +875,12 @@ HideHeaderDirective = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CategoryService", function() { return CategoryService; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "fXoL");
-/* harmony import */ var angularfire2_firestore__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! angularfire2/firestore */ "CqG3");
-/* harmony import */ var angularfire2_firestore__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(angularfire2_firestore__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "tk/3");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "qCKp");
-/* harmony import */ var rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/internal/operators/map */ "q3Kh");
-/* harmony import */ var rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _common_app_error__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../common/app-error */ "/GcI");
-/* harmony import */ var _common_bad_input__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../common/bad-input */ "XEKg");
-/* harmony import */ var _common_not_found_error__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../common/not-found-error */ "5Jak");
-
+/* harmony import */ var _common_app_error__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../common/app-error */ "/GcI");
+/* harmony import */ var _common_bad_input__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../common/bad-input */ "XEKg");
+/* harmony import */ var _common_not_found_error__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../common/not-found-error */ "5Jak");
 
 
 
@@ -737,47 +889,37 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let CategoryService = class CategoryService {
-    constructor(db) {
-        this.db = db;
-        this.categoryCollectionList = db.collection('Category');
+    constructor(http) {
+        this.http = http;
+        this.APIURL = 'http://localhost:49347/api';
     }
-    create(categoryObj) {
-        return this.categoryCollectionList.add(categoryObj);
+    create(val) {
+        return this.http.post(this.APIURL + '/Categorie', val);
     }
     getAllCategory() {
-        this.categoryList = this.categoryCollectionList.snapshotChanges().pipe(Object(rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_4__["map"])(actions => {
-            return actions.map(a => {
-                const data = a.payload.doc.data();
-                const id = a.payload.doc.id;
-                return Object.assign({ id }, data);
-            });
-        }));
-        return this.categoryList;
+        return this.http.get(this.APIURL + '/Categorie');
     }
-    getCategory(id) {
-        return this.categoryCollectionList.doc(id).valueChanges();
-    }
-    updateCategory(categoryObj, id) {
-        return this.categoryCollectionList.doc(id).update(categoryObj)
-            .catch(this.handleError);
+    updateCategory(val) {
+        return this.http.put(this.APIURL + '/Categorie/', val);
     }
     removeCategory(id) {
-        return this.categoryCollectionList.doc(id).delete()
-            .catch(this.handleError);
+        return this.http.delete(this.APIURL + '/Categorie/' + id).toPromise();
     }
     handleError(error) {
-        if (error.status === 400)
-            return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"].throw(new _common_bad_input__WEBPACK_IMPORTED_MODULE_6__["BadInput"](error.json()));
-        if (error.status === 404)
-            return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"].throw(new _common_not_found_error__WEBPACK_IMPORTED_MODULE_7__["NotFoundError"]());
-        return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"].throw(new _common_app_error__WEBPACK_IMPORTED_MODULE_5__["AppError"](error));
+        if (error.status === 400) {
+            return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"].throw(new _common_bad_input__WEBPACK_IMPORTED_MODULE_5__["BadInput"](error.json()));
+        }
+        if (error.status === 404) {
+            return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"].throw(new _common_not_found_error__WEBPACK_IMPORTED_MODULE_6__["NotFoundError"]());
+        }
+        return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"].throw(new _common_app_error__WEBPACK_IMPORTED_MODULE_4__["AppError"](error));
     }
 };
 CategoryService.ctorParameters = () => [
-    { type: angularfire2_firestore__WEBPACK_IMPORTED_MODULE_2__["AngularFirestore"] }
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"] }
 ];
 CategoryService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"])({
         providedIn: 'root'
     })
 ], CategoryService);

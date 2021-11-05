@@ -1,153 +1,11 @@
 (function () {
-  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
   function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
   function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
   (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["location-location-module"], {
-    /***/
-    "C85p":
-    /*!*********************************************!*\
-      !*** ./src/app/Service/location.service.ts ***!
-      \*********************************************/
-
-    /*! exports provided: LocationService */
-
-    /***/
-    function C85p(module, __webpack_exports__, __webpack_require__) {
-      "use strict";
-
-      __webpack_require__.r(__webpack_exports__);
-      /* harmony export (binding) */
-
-
-      __webpack_require__.d(__webpack_exports__, "LocationService", function () {
-        return LocationService;
-      });
-      /* harmony import */
-
-
-      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-      /*! tslib */
-      "mrSG");
-      /* harmony import */
-
-
-      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-      /*! @angular/core */
-      "fXoL");
-      /* harmony import */
-
-
-      var angularfire2_firestore__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-      /*! angularfire2/firestore */
-      "CqG3");
-      /* harmony import */
-
-
-      var angularfire2_firestore__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(angularfire2_firestore__WEBPACK_IMPORTED_MODULE_2__);
-      /* harmony import */
-
-
-      var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
-      /*! rxjs */
-      "qCKp");
-      /* harmony import */
-
-
-      var rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
-      /*! rxjs/internal/operators/map */
-      "q3Kh");
-      /* harmony import */
-
-
-      var rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_4__);
-      /* harmony import */
-
-
-      var _common_app_error__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
-      /*! ../common/app-error */
-      "/GcI");
-      /* harmony import */
-
-
-      var _common_bad_input__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
-      /*! ../common/bad-input */
-      "XEKg");
-      /* harmony import */
-
-
-      var _common_not_found_error__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
-      /*! ../common/not-found-error */
-      "5Jak");
-
-      var LocationService = /*#__PURE__*/function () {
-        function LocationService(db) {
-          _classCallCheck(this, LocationService);
-
-          this.db = db;
-          this.locationCollectionList = db.collection('Location');
-        }
-
-        _createClass(LocationService, [{
-          key: "create",
-          value: function create(locationObj) {
-            return this.locationCollectionList.add(locationObj);
-          }
-        }, {
-          key: "getAllLocation",
-          value: function getAllLocation() {
-            this.locationList = this.locationCollectionList.snapshotChanges().pipe(Object(rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_4__["map"])(function (actions) {
-              return actions.map(function (a) {
-                var data = a.payload.doc.data();
-                var id = a.payload.doc.id;
-                return Object.assign({
-                  id: id
-                }, data);
-              });
-            }));
-            return this.locationList;
-          }
-        }, {
-          key: "getLocation",
-          value: function getLocation(id) {
-            return this.locationCollectionList.doc(id).valueChanges();
-          }
-        }, {
-          key: "updateLocation",
-          value: function updateLocation(locationObj, id) {
-            return this.locationCollectionList.doc(id).update(locationObj)["catch"](this.handleError);
-          }
-        }, {
-          key: "removeLocation",
-          value: function removeLocation(id) {
-            return this.locationCollectionList.doc(id)["delete"]()["catch"](this.handleError);
-          }
-        }, {
-          key: "handleError",
-          value: function handleError(error) {
-            if (error.status === 400) return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"]["throw"](new _common_bad_input__WEBPACK_IMPORTED_MODULE_6__["BadInput"](error.json()));
-            if (error.status === 404) return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"]["throw"](new _common_not_found_error__WEBPACK_IMPORTED_MODULE_7__["NotFoundError"]());
-            return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"]["throw"](new _common_app_error__WEBPACK_IMPORTED_MODULE_5__["AppError"](error));
-          }
-        }]);
-
-        return LocationService;
-      }();
-
-      LocationService.ctorParameters = function () {
-        return [{
-          type: angularfire2_firestore__WEBPACK_IMPORTED_MODULE_2__["AngularFirestore"]
-        }];
-      };
-
-      LocationService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
-        providedIn: 'root'
-      })], LocationService);
-      /***/
-    },
-
     /***/
     "HAMg":
     /*!******************************************************************!*\
@@ -388,92 +246,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "#map {\n  width: 100%;\n  height: 580px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXGxvY2F0aW9uLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFDRTtFQUNFLFdBQUE7RUFDQSxhQUFBO0FBQUoiLCJmaWxlIjoibG9jYXRpb24ucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiXHJcbiAgI21hcCB7XHJcbiAgICB3aWR0aDogMTAwJTtcclxuICAgIGhlaWdodDogNTgwcHg7XHJcbn0iXX0= */";
-      /***/
-    },
-
-    /***/
-    "ldse":
-    /*!*******************************************!*\
-      !*** ./src/app/Service/shared.service.ts ***!
-      \*******************************************/
-
-    /*! exports provided: SharedService */
-
-    /***/
-    function ldse(module, __webpack_exports__, __webpack_require__) {
-      "use strict";
-
-      __webpack_require__.r(__webpack_exports__);
-      /* harmony export (binding) */
-
-
-      __webpack_require__.d(__webpack_exports__, "SharedService", function () {
-        return SharedService;
-      });
-      /* harmony import */
-
-
-      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-      /*! tslib */
-      "mrSG");
-      /* harmony import */
-
-
-      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-      /*! @angular/core */
-      "fXoL");
-      /* harmony import */
-
-
-      var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-      /*! rxjs */
-      "qCKp");
-
-      var SharedService = /*#__PURE__*/function () {
-        function SharedService() {
-          _classCallCheck(this, SharedService);
-
-          this.restaurant = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"]({});
-          this.status = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"]({});
-          this.location = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"]({});
-          this.orderId = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"]({});
-          this.RestaurantLocation = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"]({});
-          this.resId = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"]({});
-        }
-
-        _createClass(SharedService, [{
-          key: "getLocation",
-          value: function getLocation() {
-            return this.location;
-          }
-        }, {
-          key: "getStatus",
-          value: function getStatus() {
-            return this.status;
-          }
-        }, {
-          key: "getRestaurantLocation",
-          value: function getRestaurantLocation() {
-            return this.RestaurantLocation;
-          }
-        }, {
-          key: "getRestaurantId",
-          value: function getRestaurantId() {
-            return this.resId;
-          }
-        }]);
-
-        return SharedService;
-      }();
-
-      SharedService.ctorParameters = function () {
-        return [];
-      };
-
-      SharedService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
-        providedIn: 'root'
-      })], SharedService);
+      __webpack_exports__["default"] = "#map {\n  width: 100%;\n  height: 580px;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXGxvY2F0aW9uLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFDRTtFQUNFLFdBQVc7RUFDWCxhQUFhO0FBQWpCIiwiZmlsZSI6ImxvY2F0aW9uLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIlxyXG4gICNtYXAge1xyXG4gICAgd2lkdGg6IDEwMCU7XHJcbiAgICBoZWlnaHQ6IDU4MHB4O1xyXG59XHJcbiJdfQ== */";
       /***/
     },
 
@@ -583,82 +356,163 @@
       /* harmony import */
 
 
-      var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
-      /*! @angular/forms */
-      "3Pt+");
-      /* harmony import */
-
-
-      var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @ionic/angular */
       "TEn/");
       /* harmony import */
 
 
-      var _Service_location_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
-      /*! ../Service/location.service */
-      "C85p");
-      /* harmony import */
-
-
-      var location_picker__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+      var location_picker__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! location-picker */
       "HAMg");
       /* harmony import */
 
 
-      var _Service_shared_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+      var _Service_shared_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! ../Service/shared.service */
       "ldse");
       /* harmony import */
 
 
-      var _angular_router__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+      var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/router */
       "tyNb");
+      /* harmony import */
+
+
+      var _Service_restaurant_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+      /*! ../Service/restaurant.service */
+      "+cje");
 
       var LocationPage = /*#__PURE__*/function () {
-        function LocationPage(fb, locationService, alertController, sharedService, router, platform) {
+        function LocationPage(sharedService, router, platform, restaurantService) {
           _classCallCheck(this, LocationPage);
 
-          this.fb = fb;
-          this.locationService = locationService;
-          this.alertController = alertController;
           this.sharedService = sharedService;
           this.router = router;
           this.platform = platform;
-          this.currentMapTrack = null;
-          this.isTracking = false;
-          this.trackedRoute = [];
-          this.previousTracks = [];
-          this.regform = this.fb.group({});
+          this.restaurantService = restaurantService;
           this.location = false;
-        }
+          this.map = null;
+          this.directionsService = new google.maps.DirectionsService();
+          this.directionsDisplay = new google.maps.DirectionsRenderer();
+          this.markers = [// {
+            //   position: {
+            //     lat: 9.015762798263422,
+            //     lng: 38.76962972750053,
+            //   },
+            //   title: 'Africana Restaurant and Bar'
+            // },
+            // {
+            //   position: {
+            //     lat: 8.98339179692712,
+            //     lng: 38.773790006329726,
+            //   },
+            //   title: 'Ethiopian Skylight Hotel'
+            // },
+            // {
+            //   position: {
+            //     lat: 9.0255328494506,
+            //     lng: 38.78723060144852,
+            //   },
+            //   title: 'Andualem Cafe and Restaurant'
+            // },
+            // {
+            //   position: {
+            //     lat: 9.02164486810647,
+            //     lng: 38.773880346562024,
+            //   },
+            //   title: ' Dashen Traditional Restaurant'
+            // },
+          ];
+        } //  getRestaurant(){
+        //    this.restaurantService.getAllRestaurant().subscribe(res=>{
+        //      this.listOfRestaurant = res;
+        //      res.forEach(ele=>{
+        //        let postions ={
+        //          lat:ele.Location.lat,
+        //          lng:ele.Location.lon
+        //        }
+        //        let data ={
+        //         position:postions,
+        //         title:ele.Name
+        //        }
+        //        this.markers.push(data);
+        //       })
+        //    })
+        //  }
+
 
         _createClass(LocationPage, [{
+          key: "loadMap",
+          value: function loadMap() {
+            var _this2 = this;
+
+            // create a new map by passing HTMLElement
+            var mapEle = document.getElementById('map'); // create LatLng object
+
+            var myLatLng = {
+              lat: 8.98339179692712,
+              lng: 38.773790006329726
+            }; // create map
+
+            this.map = new google.maps.Map(mapEle, {
+              center: myLatLng,
+              zoom: 12
+            });
+            google.maps.event.addListenerOnce(this.map, 'idle', function () {
+              _this2.renderMarkers();
+
+              mapEle.classList.add('show-map');
+            });
+          }
+        }, {
+          key: "renderMarkers",
+          value: function renderMarkers() {
+            var _this3 = this;
+
+            this.markers.forEach(function (marker) {
+              _this3.addMarker(marker);
+            });
+          }
+        }, {
+          key: "addMarker",
+          value: function addMarker(marker) {
+            return new google.maps.Marker({
+              position: marker.position,
+              map: this.map,
+              title: marker.title
+            });
+          }
+        }, {
           key: "ngOnInit",
           value: function ngOnInit() {
-            this.regform = this.fb.group({
-              Latitude: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-              Longitude: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-              Description: [""]
-            });
-
+            //this.getRestaurant();
             if (this.platform.is('mobile') && !this.platform.is('hybrid') || this.platform.is('desktop')) {
               this.usePicker = true;
             }
 
-            this.getLocation();
             this.status = this.sharedService.status.value;
 
             if (this.status == "driver-home" || this.status == "restaurant-home" || this.status == "order" || this.status == "restaurant-history") {
               this.location = false;
+              this.loadMap();
             } else {
+              this.setLocation();
               this.location = true;
             } // console.log(this.status);
 
 
             this.RestaurantLocation = this.sharedService.RestaurantLocation.value;
+            var pos = {
+              lat: this.RestaurantLocation.latitude,
+              lng: this.RestaurantLocation.longtude
+            };
+            var data = {
+              position: pos,
+              title: null
+            };
+            this.markers.push(data);
             console.log(this.RestaurantLocation);
           }
         }, {
@@ -686,21 +540,14 @@
             this.map = new google.maps.Map(this.mapElement.nativeElement, options);
           }
         }, {
-          key: "ionViewDidEnter",
-          value: function ionViewDidEnter() {
-            this.lp = new location_picker__WEBPACK_IMPORTED_MODULE_7__["default"]('map', {
+          key: "setLocation",
+          value: function setLocation() {
+            this.lp = new location_picker__WEBPACK_IMPORTED_MODULE_5__["default"]('map', {
               setCurrentPosition: true
             }, {
               zoom: 15 // You can set any google map options here, zoom defaults to 15
 
             });
-            var lat = this.RestaurantLocation.lat;
-            var lng = this.RestaurantLocation.lon;
-            this.setLocation(lat, lng);
-          }
-        }, {
-          key: "setLocation",
-          value: function setLocation(lat, lng) {// this.map.setCenter(new google.maps.LatLng(lat, lng))
           }
         }, {
           key: "getMarkerPosition",
@@ -710,156 +557,6 @@
               lat: latLng.lat(),
               lng: latLng.lng()
             };
-          }
-        }, {
-          key: "getLocation",
-          value: function getLocation() {
-            var _this2 = this;
-
-            this.locationService.getAllLocation().subscribe(function (res) {
-              _this2.listOfLocation = res;
-            });
-          }
-        }, {
-          key: "saveLocation",
-          value: function saveLocation() {
-            if (this.regform.valid) {
-              if (!this.locationId) {
-                this.locationService.create(this.regform.value);
-              } else {
-                this.locationService.updateLocation(this.regform.value, this.locationId);
-              }
-
-              this.presentAlert();
-              this.regform.reset();
-            } else {
-              this.ErrorAlert();
-            }
-          }
-        }, {
-          key: "Edit",
-          value: function Edit(location, slidingItem) {
-            this.editMode = true;
-            this.locationId = location.id;
-            this.regform.get('Description').setValue(location.Description);
-            this.regform.get('Latitude').setValue(location.Latitude);
-            this.regform.get('Longitude').setValue(location.Longitude);
-            slidingItem.close();
-          }
-        }, {
-          key: "delete",
-          value: function _delete(location, slidingItem) {
-            this.presentAlertConfirm(location);
-            slidingItem.close();
-          }
-        }, {
-          key: "presentAlertConfirm",
-          value: function presentAlertConfirm(location) {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-              var _this3 = this;
-
-              var alert;
-              return regeneratorRuntime.wrap(function _callee$(_context) {
-                while (1) {
-                  switch (_context.prev = _context.next) {
-                    case 0:
-                      _context.next = 2;
-                      return this.alertController.create({
-                        header: 'Confirm!',
-                        message: '<strong>Are you sure you want delete?</strong>',
-                        buttons: [{
-                          text: 'Cancel',
-                          role: 'cancel',
-                          cssClass: 'secondary',
-                          handler: function handler(blah) {
-                            console.log('Confirm Cancel: blah');
-                          }
-                        }, {
-                          text: 'OK',
-                          handler: function handler() {
-                            _this3.locationService.removeLocation(location.id);
-
-                            _this3.regform.reset();
-
-                            _this3.locationId = null;
-                          }
-                        }]
-                      });
-
-                    case 2:
-                      alert = _context.sent;
-                      _context.next = 5;
-                      return alert.present();
-
-                    case 5:
-                    case "end":
-                      return _context.stop();
-                  }
-                }
-              }, _callee, this);
-            }));
-          }
-        }, {
-          key: "ErrorAlert",
-          value: function ErrorAlert() {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-              var alert;
-              return regeneratorRuntime.wrap(function _callee2$(_context2) {
-                while (1) {
-                  switch (_context2.prev = _context2.next) {
-                    case 0:
-                      _context2.next = 2;
-                      return this.alertController.create({
-                        cssClass: 'my-custom-class',
-                        header: 'Error',
-                        // subHeader: 'Subtitle',
-                        message: 'Please Enter All field.',
-                        buttons: ['OK']
-                      });
-
-                    case 2:
-                      alert = _context2.sent;
-                      _context2.next = 5;
-                      return alert.present();
-
-                    case 5:
-                    case "end":
-                      return _context2.stop();
-                  }
-                }
-              }, _callee2, this);
-            }));
-          }
-        }, {
-          key: "presentAlert",
-          value: function presentAlert() {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
-              var alert;
-              return regeneratorRuntime.wrap(function _callee3$(_context3) {
-                while (1) {
-                  switch (_context3.prev = _context3.next) {
-                    case 0:
-                      _context3.next = 2;
-                      return this.alertController.create({
-                        cssClass: 'my-custom-class',
-                        header: 'Location',
-                        // subHeader: 'Subtitle',
-                        message: 'Location Saved successfully.',
-                        buttons: ['OK']
-                      });
-
-                    case 2:
-                      alert = _context3.sent;
-                      _context3.next = 5;
-                      return alert.present();
-
-                    case 5:
-                    case "end":
-                      return _context3.stop();
-                  }
-                }
-              }, _callee3, this);
-            }));
           }
         }, {
           key: "backToHome",
@@ -873,17 +570,13 @@
 
       LocationPage.ctorParameters = function () {
         return [{
-          type: _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormBuilder"]
+          type: _Service_shared_service__WEBPACK_IMPORTED_MODULE_6__["SharedService"]
         }, {
-          type: _Service_location_service__WEBPACK_IMPORTED_MODULE_6__["LocationService"]
+          type: _angular_router__WEBPACK_IMPORTED_MODULE_7__["Router"]
         }, {
-          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["AlertController"]
+          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["Platform"]
         }, {
-          type: _Service_shared_service__WEBPACK_IMPORTED_MODULE_8__["SharedService"]
-        }, {
-          type: _angular_router__WEBPACK_IMPORTED_MODULE_9__["Router"]
-        }, {
-          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["Platform"]
+          type: _Service_restaurant_service__WEBPACK_IMPORTED_MODULE_8__["RestaurantService"]
         }];
       };
 

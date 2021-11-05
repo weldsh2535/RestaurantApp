@@ -7,148 +7,6 @@
 
   (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["order-history-order-history-module"], {
     /***/
-    "+cje":
-    /*!***********************************************!*\
-      !*** ./src/app/Service/restaurant.service.ts ***!
-      \***********************************************/
-
-    /*! exports provided: RestaurantService */
-
-    /***/
-    function cje(module, __webpack_exports__, __webpack_require__) {
-      "use strict";
-
-      __webpack_require__.r(__webpack_exports__);
-      /* harmony export (binding) */
-
-
-      __webpack_require__.d(__webpack_exports__, "RestaurantService", function () {
-        return RestaurantService;
-      });
-      /* harmony import */
-
-
-      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-      /*! tslib */
-      "mrSG");
-      /* harmony import */
-
-
-      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-      /*! @angular/core */
-      "fXoL");
-      /* harmony import */
-
-
-      var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-      /*! rxjs */
-      "qCKp");
-      /* harmony import */
-
-
-      var rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
-      /*! rxjs/internal/operators/map */
-      "q3Kh");
-      /* harmony import */
-
-
-      var rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_3__);
-      /* harmony import */
-
-
-      var angularfire2_firestore__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
-      /*! angularfire2/firestore */
-      "CqG3");
-      /* harmony import */
-
-
-      var angularfire2_firestore__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(angularfire2_firestore__WEBPACK_IMPORTED_MODULE_4__);
-      /* harmony import */
-
-
-      var _common_bad_input__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
-      /*! ../common/bad-input */
-      "XEKg");
-      /* harmony import */
-
-
-      var _common_not_found_error__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
-      /*! ../common/not-found-error */
-      "5Jak");
-      /* harmony import */
-
-
-      var _common_app_error__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
-      /*! ../common/app-error */
-      "/GcI");
-
-      var RestaurantService = /*#__PURE__*/function () {
-        function RestaurantService(db) {
-          _classCallCheck(this, RestaurantService);
-
-          this.db = db;
-          this.restaurantCollectionList = db.collection('Restaurant');
-        }
-
-        _createClass(RestaurantService, [{
-          key: "create",
-          value: function create(restaurantObj) {
-            return this.restaurantCollectionList.add(restaurantObj);
-          }
-        }, {
-          key: "getAllRestaurant",
-          value: function getAllRestaurant() {
-            this.restaurantList = this.restaurantCollectionList.snapshotChanges().pipe(Object(rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_3__["map"])(function (actions) {
-              return actions.map(function (a) {
-                var data = a.payload.doc.data();
-                var id = a.payload.doc.id;
-                return Object.assign({
-                  id: id
-                }, data);
-              });
-            }));
-            return this.restaurantList;
-          }
-        }, {
-          key: "getRestaurant",
-          value: function getRestaurant(id) {
-            return this.restaurantCollectionList.doc(id).valueChanges();
-          }
-        }, {
-          key: "updateRestaurant",
-          value: function updateRestaurant(restaurantObj, id) {
-            return this.restaurantCollectionList.doc(id).update(restaurantObj)["catch"](this.handleError);
-          }
-        }, {
-          key: "removeRestaurant",
-          value: function removeRestaurant(id) {
-            return this.restaurantCollectionList.doc(id)["delete"]()["catch"](this.handleError);
-          }
-        }, {
-          key: "handleError",
-          value: function handleError(error) {
-            if (error.status === 400) return rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"]["throw"](new _common_bad_input__WEBPACK_IMPORTED_MODULE_5__["BadInput"](error.json()));
-            if (error.status === 404) return rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"]["throw"](new _common_not_found_error__WEBPACK_IMPORTED_MODULE_6__["NotFoundError"]());
-            return rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"]["throw"](new _common_app_error__WEBPACK_IMPORTED_MODULE_7__["AppError"](error));
-          }
-        }]);
-
-        return RestaurantService;
-      }();
-
-      RestaurantService.ctorParameters = function () {
-        return [{
-          type: angularfire2_firestore__WEBPACK_IMPORTED_MODULE_4__["AngularFirestore"]
-        }];
-      };
-
-      RestaurantService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
-        providedIn: 'root'
-      })], RestaurantService);
-      /***/
-    },
-
-    /***/
     "LuXT":
     /*!*****************************************************!*\
       !*** ./src/app/order-history/order-history.page.ts ***!
@@ -239,9 +97,15 @@
       var _Service_shared_service__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
       /*! ../Service/shared.service */
       "ldse");
+      /* harmony import */
+
+
+      var _angular_common__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
+      /*! @angular/common */
+      "ofXK");
 
       var OrderHistoryPage = /*#__PURE__*/function () {
-        function OrderHistoryPage(modalCtrl, alertCtrl, orderService, fb, router, restaurantService, orderDetailService, foodService, sharedService) {
+        function OrderHistoryPage(modalCtrl, alertCtrl, orderService, fb, router, restaurantService, orderDetailService, foodService, sharedService, datepipe) {
           _classCallCheck(this, OrderHistoryPage);
 
           this.modalCtrl = modalCtrl;
@@ -253,11 +117,18 @@
           this.orderDetailService = orderDetailService;
           this.foodService = foodService;
           this.sharedService = sharedService;
+          this.datepipe = datepipe;
           this.cart = [];
           this.regform = this.fb.group({});
           this.currentDate = new Date().toUTCString();
           this.minDate = new Date().toISOString();
           this.maxDate = new Date().toISOString();
+          this.model = {};
+          this.date = new Date(); //this.currentDate = new Date().toDateString();
+
+          this.currentMonth = new Date().getMonth() + 1;
+          this.currentYear = new Date().getFullYear();
+          this.currentDates = new Date().getDate();
         }
 
         _createClass(OrderHistoryPage, [{
@@ -369,7 +240,7 @@
               Customer: localStorage.getItem("userId"),
               Location: this.listOfRestaurant.find(function (c) {
                 return c.id == _this4.restaurantId;
-              }).Location,
+              }).location,
               OrderStatus: this.regform.get('transactionType').value,
               Total: this.Total,
               orderNo: this.orderNo,
@@ -460,6 +331,8 @@
           type: _Service_food_service__WEBPACK_IMPORTED_MODULE_7__["FoodService"]
         }, {
           type: _Service_shared_service__WEBPACK_IMPORTED_MODULE_11__["SharedService"]
+        }, {
+          type: _angular_common__WEBPACK_IMPORTED_MODULE_12__["DatePipe"]
         }];
       };
 
@@ -487,7 +360,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "ion-badge {\n  color: #fff;\n  position: absolute;\n  top: -9px;\n  right: 2px;\n  border-radius: 100%;\n}\n\n.cart-icon {\n  font-size: 50px;\n}\n\n.cart-length {\n  color: var(--ion-color-primary);\n  position: absolute;\n  top: 18px;\n  left: 25px;\n  font-weight: 600;\n  font-size: 1em;\n  min-width: 25px;\n  z-index: 10;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXG9yZGVyLWhpc3RvcnkucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksV0FBQTtFQUNBLGtCQUFBO0VBQ0EsU0FBQTtFQUNBLFVBQUE7RUFDQSxtQkFBQTtBQUNKOztBQUVBO0VBQ0UsZUFBQTtBQUNGOztBQUVBO0VBQ0UsK0JBQUE7RUFDQSxrQkFBQTtFQUNBLFNBQUE7RUFDQSxVQUFBO0VBQ0EsZ0JBQUE7RUFDQSxjQUFBO0VBQ0EsZUFBQTtFQUNBLFdBQUE7QUFDRiIsImZpbGUiOiJvcmRlci1oaXN0b3J5LnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbImlvbi1iYWRnZSB7XHJcbiAgICBjb2xvcjogI2ZmZjtcclxuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcclxuICAgIHRvcDogLTlweDtcclxuICAgIHJpZ2h0OiAycHg7XHJcbiAgICBib3JkZXItcmFkaXVzOiAxMDAlO1xyXG59XHJcbiBcclxuLmNhcnQtaWNvbiB7XHJcbiAgZm9udC1zaXplOiA1MHB4O1xyXG59XHJcbiBcclxuLmNhcnQtbGVuZ3RoIHtcclxuICBjb2xvcjogdmFyKC0taW9uLWNvbG9yLXByaW1hcnkpO1xyXG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcclxuICB0b3A6IDE4cHg7XHJcbiAgbGVmdDogMjVweDtcclxuICBmb250LXdlaWdodDogNjAwO1xyXG4gIGZvbnQtc2l6ZTogMWVtO1xyXG4gIG1pbi13aWR0aDogMjVweDtcclxuICB6LWluZGV4OiAxMDtcclxufVxyXG4iXX0= */";
+      __webpack_exports__["default"] = "ion-badge {\n  color: #fff;\n  position: absolute;\n  top: -9px;\n  right: 2px;\n  border-radius: 100%;\n}\n\n.cart-icon {\n  font-size: 50px;\n}\n\n.cart-length {\n  color: var(--ion-color-primary);\n  position: absolute;\n  top: 18px;\n  left: 25px;\n  font-weight: 600;\n  font-size: 1em;\n  min-width: 25px;\n  z-index: 10;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXG9yZGVyLWhpc3RvcnkucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksV0FBVztFQUNYLGtCQUFrQjtFQUNsQixTQUFTO0VBQ1QsVUFBVTtFQUNWLG1CQUFtQjtBQUN2Qjs7QUFFQTtFQUNFLGVBQWU7QUFDakI7O0FBRUE7RUFDRSwrQkFBK0I7RUFDL0Isa0JBQWtCO0VBQ2xCLFNBQVM7RUFDVCxVQUFVO0VBQ1YsZ0JBQWdCO0VBQ2hCLGNBQWM7RUFDZCxlQUFlO0VBQ2YsV0FBVztBQUNiIiwiZmlsZSI6Im9yZGVyLWhpc3RvcnkucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiaW9uLWJhZGdlIHtcclxuICAgIGNvbG9yOiAjZmZmO1xyXG4gICAgcG9zaXRpb246IGFic29sdXRlO1xyXG4gICAgdG9wOiAtOXB4O1xyXG4gICAgcmlnaHQ6IDJweDtcclxuICAgIGJvcmRlci1yYWRpdXM6IDEwMCU7XHJcbn1cclxuIFxyXG4uY2FydC1pY29uIHtcclxuICBmb250LXNpemU6IDUwcHg7XHJcbn1cclxuIFxyXG4uY2FydC1sZW5ndGgge1xyXG4gIGNvbG9yOiB2YXIoLS1pb24tY29sb3ItcHJpbWFyeSk7XHJcbiAgcG9zaXRpb246IGFic29sdXRlO1xyXG4gIHRvcDogMThweDtcclxuICBsZWZ0OiAyNXB4O1xyXG4gIGZvbnQtd2VpZ2h0OiA2MDA7XHJcbiAgZm9udC1zaXplOiAxZW07XHJcbiAgbWluLXdpZHRoOiAyNXB4O1xyXG4gIHotaW5kZXg6IDEwO1xyXG59XHJcbiJdfQ== */";
       /***/
     },
 

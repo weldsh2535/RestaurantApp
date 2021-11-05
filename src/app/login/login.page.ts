@@ -36,17 +36,7 @@ export class LoginPage implements OnInit {
 					localStorage.setItem("fullName", result[0].fullName);
 					localStorage.setItem("roleType", result[0].type);
 					localStorage.setItem('active', result[0].active);
-					if (result[0].type == "driver") {
-						if (result[0].active == "true") {
-							this.router.navigate(['/menu/driver-home']);
-							this.presentAlert("Login successfully.");
-							this.regform.reset();
-						}
-						else {
-							this.presentAlert("Please contact your system administrator")
-						}
-					}
-					else if (result[0].type == "restaurant") {
+				 if (result[0].type == "restaurant") {
 						if (result[0].active == "true") {
 							this.router.navigate(['/menu/restaurant-home']);
 							this.presentAlert("Login successfully.");
@@ -56,11 +46,7 @@ export class LoginPage implements OnInit {
 							this.presentAlert("Please contact your system administrator")
 						}
 					}
-					else {
-						this.router.navigate(['/menu']);
-						this.presentAlert("Login successfully.");
-						this.regform.reset();
-					}
+				
 				}
 				else {
 					this.presentAlert("Please enter correct username and password!!");

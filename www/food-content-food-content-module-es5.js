@@ -129,7 +129,7 @@
               if (!this.foodId) {
                 this.foodContentService.create(this.regform.value);
               } else {
-                this.foodContentService.updateFoodContent(this.regform.value, this.foodId);
+                this.foodContentService.updateFoodContent(this.regform.value);
               }
 
               this.regform.reset();
@@ -144,9 +144,9 @@
           value: function edit(food, slidingItem) {
             this.editMode = true;
             this.foodId = food.id;
-            this.regform.get('FoodId').setValue(food.FoodId);
-            this.regform.get('ContentName').setValue(food.ContentName);
-            this.regform.get('ContentDescription').setValue(food.ContentDescription);
+            this.regform.get('FoodId').setValue(food.foodId);
+            this.regform.get('ContentName').setValue(food.foodContentName);
+            this.regform.get('ContentDescription').setValue(food.foodContentDescription);
             this.regform.get('qty').setValue(food.qty);
             slidingItem.close();
           }
@@ -308,149 +308,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = ".label-class {\n  --inner-padding-start:12px;\n  --inner-padding-end:10px;\n  margin-left: 67px;\n}\n\n.label-class-al {\n  margin-left: 67px;\n}\n\n.ion-input {\n  margin-left: 67px;\n}\n\n.dx-lookup-field {\n  padding: 5px 23px 12px 54px;\n  font-size: 1em;\n}\n\nion-content ion-item {\n  padding: 0;\n  --border-radius: 14px;\n}\n\nion-content ion-searchbar {\n  --border-radius: 14px;\n  --background: rgb(243, 243, 243);\n  margin-top: -13px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXGZvb2QtY29udGVudC5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQ0E7RUFDSSwwQkFBQTtFQUNBLHdCQUFBO0VBQ0EsaUJBQUE7QUFBSjs7QUFFRTtFQUNFLGlCQUFBO0FBQ0o7O0FBQ0U7RUFDRSxpQkFBQTtBQUVKOztBQUFFO0VBQ0UsMkJBQUE7RUFDQSxjQUFBO0FBR0o7O0FBRU07RUFFRSxVQUFBO0VBRUEscUJBQUE7QUFEUjs7QUFLRztFQUNDLHFCQUFBO0VBQ0EsZ0NBQUE7RUFDQSxpQkFBQTtBQUhKIiwiZmlsZSI6ImZvb2QtY29udGVudC5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJcclxuLmxhYmVsLWNsYXNze1xyXG4gICAgLS1pbm5lci1wYWRkaW5nLXN0YXJ0OjEycHg7XHJcbiAgICAtLWlubmVyLXBhZGRpbmctZW5kOjEwcHg7XHJcbiAgICBtYXJnaW4tbGVmdDogNjdweDtcclxuICB9XHJcbiAgLmxhYmVsLWNsYXNzLWFse1xyXG4gICAgbWFyZ2luLWxlZnQ6IDY3cHg7XHJcbiAgfVxyXG4gIC5pb24taW5wdXR7XHJcbiAgICBtYXJnaW4tbGVmdDogNjdweDtcclxuICB9XHJcbiAgLmR4LWxvb2t1cC1maWVsZCB7XHJcbiAgICBwYWRkaW5nOiA1cHggMjNweCAxMnB4IDU0cHg7XHJcbiAgICBmb250LXNpemU6IDFlbTtcclxuICB9XHJcbiAgaW9uLWNvbnRlbnQge1xyXG4gICAgLy8tLWJhY2tncm91bmQ6IGxpbmVhci1ncmFkaWVudCg5MGRlZywgcmdiYSg0Myw5MCwxNDgsMSkgMCUsIHJnYmEoNDUsMTEyLDIyOSwxKSAzNSUsIHJnYmEoNDUsMTEyLDIyOSwxKSAxMDAlKTtcclxuICAgXHJcbiAgICAgIGlvbi1pdGVtIHtcclxuICAgICAgLy8gLS1iYWNrZ3JvdW5kOiByZ2IoMTIwLCAxMjYsIDEzNCk7XHJcbiAgICAgICAgcGFkZGluZzogMDtcclxuICAgICAgIC8vIG1hcmdpbjogMTRweCAwO1xyXG4gICAgICAgIC0tYm9yZGVyLXJhZGl1czogMTRweDtcclxuICAgICAgIC8vIGNvbG9yOiAjRkZGRkZGO1xyXG4gICAgICAgIC8vZm9udC13ZWlnaHQ6IDYwMDtcclxuICAgfVxyXG4gICBpb24tc2VhcmNoYmFye1xyXG4gICAgLS1ib3JkZXItcmFkaXVzOiAxNHB4O1xyXG4gICAgLS1iYWNrZ3JvdW5kOiByZ2IoMjQzLCAyNDMsIDI0Myk7XHJcbiAgICBtYXJnaW4tdG9wOiAtMTNweDtcclxuICAgfVxyXG4gIH0iXX0= */";
-      /***/
-    },
-
-    /***/
-    "Dkj+":
-    /*!*****************************************!*\
-      !*** ./src/app/Service/food.service.ts ***!
-      \*****************************************/
-
-    /*! exports provided: FoodService */
-
-    /***/
-    function Dkj(module, __webpack_exports__, __webpack_require__) {
-      "use strict";
-
-      __webpack_require__.r(__webpack_exports__);
-      /* harmony export (binding) */
-
-
-      __webpack_require__.d(__webpack_exports__, "FoodService", function () {
-        return FoodService;
-      });
-      /* harmony import */
-
-
-      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-      /*! tslib */
-      "mrSG");
-      /* harmony import */
-
-
-      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-      /*! @angular/core */
-      "fXoL");
-      /* harmony import */
-
-
-      var angularfire2_firestore__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-      /*! angularfire2/firestore */
-      "CqG3");
-      /* harmony import */
-
-
-      var angularfire2_firestore__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(angularfire2_firestore__WEBPACK_IMPORTED_MODULE_2__);
-      /* harmony import */
-
-
-      var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
-      /*! rxjs */
-      "qCKp");
-      /* harmony import */
-
-
-      var rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
-      /*! rxjs/internal/operators/map */
-      "q3Kh");
-      /* harmony import */
-
-
-      var rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_4__);
-      /* harmony import */
-
-
-      var _common_app_error__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
-      /*! ../common/app-error */
-      "/GcI");
-      /* harmony import */
-
-
-      var _common_bad_input__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
-      /*! ../common/bad-input */
-      "XEKg");
-      /* harmony import */
-
-
-      var _common_not_found_error__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
-      /*! ../common/not-found-error */
-      "5Jak");
-
-      var FoodService = /*#__PURE__*/function () {
-        function FoodService(db) {
-          _classCallCheck(this, FoodService);
-
-          this.db = db;
-          this.foodCollectionList = db.collection('Food');
-        }
-
-        _createClass(FoodService, [{
-          key: "create",
-          value: function create(foodObj) {
-            return this.foodCollectionList.add(foodObj);
-          }
-        }, {
-          key: "getAllFood",
-          value: function getAllFood() {
-            this.foodList = this.foodCollectionList.snapshotChanges().pipe(Object(rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_4__["map"])(function (actions) {
-              return actions.map(function (a) {
-                var data = a.payload.doc.data();
-                var id = a.payload.doc.id;
-                return Object.assign({
-                  id: id
-                }, data);
-              });
-            }));
-            return this.foodList;
-          }
-        }, {
-          key: "getFood",
-          value: function getFood(id) {
-            return this.foodCollectionList.doc(id).valueChanges();
-          }
-        }, {
-          key: "updateFood",
-          value: function updateFood(foodObj, id) {
-            return this.foodCollectionList.doc(id).update(foodObj)["catch"](this.handleError);
-          }
-        }, {
-          key: "removeFood",
-          value: function removeFood(id) {
-            return this.foodCollectionList.doc(id)["delete"]()["catch"](this.handleError);
-          }
-        }, {
-          key: "handleError",
-          value: function handleError(error) {
-            if (error.status === 400) return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"]["throw"](new _common_bad_input__WEBPACK_IMPORTED_MODULE_6__["BadInput"](error.json()));
-            if (error.status === 404) return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"]["throw"](new _common_not_found_error__WEBPACK_IMPORTED_MODULE_7__["NotFoundError"]());
-            return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"]["throw"](new _common_app_error__WEBPACK_IMPORTED_MODULE_5__["AppError"](error));
-          }
-        }]);
-
-        return FoodService;
-      }();
-
-      FoodService.ctorParameters = function () {
-        return [{
-          type: angularfire2_firestore__WEBPACK_IMPORTED_MODULE_2__["AngularFirestore"]
-        }];
-      };
-
-      FoodService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
-        providedIn: 'root'
-      })], FoodService);
+      __webpack_exports__["default"] = ".label-class {\n  --inner-padding-start:12px;\n  --inner-padding-end:10px;\n  margin-left: 67px;\n}\n\n.label-class-al {\n  margin-left: 67px;\n}\n\n.ion-input {\n  margin-left: 67px;\n}\n\n.dx-lookup-field {\n  padding: 5px 23px 12px 54px;\n  font-size: 1em;\n}\n\nion-content ion-item {\n  padding: 0;\n  --border-radius: 14px;\n}\n\nion-content ion-searchbar {\n  --border-radius: 14px;\n  --background: rgb(243, 243, 243);\n  margin-top: -13px;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXGZvb2QtY29udGVudC5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQ0E7RUFDSSwwQkFBc0I7RUFDdEIsd0JBQW9CO0VBQ3BCLGlCQUFpQjtBQUFyQjs7QUFFRTtFQUNFLGlCQUFpQjtBQUNyQjs7QUFDRTtFQUNFLGlCQUFpQjtBQUVyQjs7QUFBRTtFQUNFLDJCQUEyQjtFQUMzQixjQUFjO0FBR2xCOztBQURFO0VBS00sVUFBVTtFQUVWLHFCQUFnQjtBQUR4Qjs7QUFORTtFQVlFLHFCQUFnQjtFQUNoQixnQ0FBYTtFQUNiLGlCQUFpQjtBQUZyQiIsImZpbGUiOiJmb29kLWNvbnRlbnQucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiXHJcbi5sYWJlbC1jbGFzc3tcclxuICAgIC0taW5uZXItcGFkZGluZy1zdGFydDoxMnB4O1xyXG4gICAgLS1pbm5lci1wYWRkaW5nLWVuZDoxMHB4O1xyXG4gICAgbWFyZ2luLWxlZnQ6IDY3cHg7XHJcbiAgfVxyXG4gIC5sYWJlbC1jbGFzcy1hbHtcclxuICAgIG1hcmdpbi1sZWZ0OiA2N3B4O1xyXG4gIH1cclxuICAuaW9uLWlucHV0e1xyXG4gICAgbWFyZ2luLWxlZnQ6IDY3cHg7XHJcbiAgfVxyXG4gIC5keC1sb29rdXAtZmllbGQge1xyXG4gICAgcGFkZGluZzogNXB4IDIzcHggMTJweCA1NHB4O1xyXG4gICAgZm9udC1zaXplOiAxZW07XHJcbiAgfVxyXG4gIGlvbi1jb250ZW50IHtcclxuICAgIC8vLS1iYWNrZ3JvdW5kOiBsaW5lYXItZ3JhZGllbnQoOTBkZWcsIHJnYmEoNDMsOTAsMTQ4LDEpIDAlLCByZ2JhKDQ1LDExMiwyMjksMSkgMzUlLCByZ2JhKDQ1LDExMiwyMjksMSkgMTAwJSk7XHJcbiAgIFxyXG4gICAgICBpb24taXRlbSB7XHJcbiAgICAgIC8vIC0tYmFja2dyb3VuZDogcmdiKDEyMCwgMTI2LCAxMzQpO1xyXG4gICAgICAgIHBhZGRpbmc6IDA7XHJcbiAgICAgICAvLyBtYXJnaW46IDE0cHggMDtcclxuICAgICAgICAtLWJvcmRlci1yYWRpdXM6IDE0cHg7XHJcbiAgICAgICAvLyBjb2xvcjogI0ZGRkZGRjtcclxuICAgICAgICAvL2ZvbnQtd2VpZ2h0OiA2MDA7XHJcbiAgIH1cclxuICAgaW9uLXNlYXJjaGJhcntcclxuICAgIC0tYm9yZGVyLXJhZGl1czogMTRweDtcclxuICAgIC0tYmFja2dyb3VuZDogcmdiKDI0MywgMjQzLCAyNDMpO1xyXG4gICAgbWFyZ2luLXRvcDogLTEzcHg7XHJcbiAgIH1cclxuICB9Il19 */";
       /***/
     },
 
@@ -575,19 +433,15 @@
       /* harmony import */
 
 
-      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! @angular/common/http */
+      "tk/3");
+      /* harmony import */
+
+
+      var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/core */
       "fXoL");
-      /* harmony import */
-
-
-      var angularfire2_firestore__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-      /*! angularfire2/firestore */
-      "CqG3");
-      /* harmony import */
-
-
-      var angularfire2_firestore__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(angularfire2_firestore__WEBPACK_IMPORTED_MODULE_2__);
       /* harmony import */
 
 
@@ -597,80 +451,62 @@
       /* harmony import */
 
 
-      var rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
-      /*! rxjs/internal/operators/map */
-      "q3Kh");
-      /* harmony import */
-
-
-      var rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_4__);
-      /* harmony import */
-
-
-      var _common_app_error__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      var _common_app_error__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! ../common/app-error */
       "/GcI");
       /* harmony import */
 
 
-      var _common_bad_input__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      var _common_bad_input__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! ../common/bad-input */
       "XEKg");
       /* harmony import */
 
 
-      var _common_not_found_error__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+      var _common_not_found_error__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! ../common/not-found-error */
       "5Jak");
 
       var FoodContentService = /*#__PURE__*/function () {
-        function FoodContentService(db) {
+        function FoodContentService(http) {
           _classCallCheck(this, FoodContentService);
 
-          this.db = db;
-          this.foodContentCollectionList = db.collection('FoodContent');
+          this.http = http;
+          this.APIURL = 'http://localhost:49347/api';
         }
 
         _createClass(FoodContentService, [{
           key: "create",
-          value: function create(foodContentObj) {
-            return this.foodContentCollectionList.add(foodContentObj);
+          value: function create(val) {
+            return this.http.post(this.APIURL + '/FoodContent', val);
           }
         }, {
           key: "getAllFoodContent",
           value: function getAllFoodContent() {
-            this.foodContentList = this.foodContentCollectionList.snapshotChanges().pipe(Object(rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_4__["map"])(function (actions) {
-              return actions.map(function (a) {
-                var data = a.payload.doc.data();
-                var id = a.payload.doc.id;
-                return Object.assign({
-                  id: id
-                }, data);
-              });
-            }));
-            return this.foodContentList;
-          }
-        }, {
-          key: "getFoodContent",
-          value: function getFoodContent(id) {
-            return this.foodContentCollectionList.doc(id).valueChanges();
+            return this.http.get(this.APIURL + '/FoodContent');
           }
         }, {
           key: "updateFoodContent",
-          value: function updateFoodContent(foodContentObj, id) {
-            return this.foodContentCollectionList.doc(id).update(foodContentObj)["catch"](this.handleError);
+          value: function updateFoodContent(val) {
+            return this.http.put(this.APIURL + '/FoodContent/', val);
           }
         }, {
           key: "removeFoodContent",
           value: function removeFoodContent(id) {
-            return this.foodContentCollectionList.doc(id)["delete"]()["catch"](this.handleError);
+            return this.http["delete"](this.APIURL + '/FoodContent/' + id).toPromise();
           }
         }, {
           key: "handleError",
           value: function handleError(error) {
-            if (error.status === 400) return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"]["throw"](new _common_bad_input__WEBPACK_IMPORTED_MODULE_6__["BadInput"](error.json()));
-            if (error.status === 404) return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"]["throw"](new _common_not_found_error__WEBPACK_IMPORTED_MODULE_7__["NotFoundError"]());
-            return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"]["throw"](new _common_app_error__WEBPACK_IMPORTED_MODULE_5__["AppError"](error));
+            if (error.status === 400) {
+              return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"]["throw"](new _common_bad_input__WEBPACK_IMPORTED_MODULE_5__["BadInput"](error.json()));
+            }
+
+            if (error.status === 404) {
+              return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"]["throw"](new _common_not_found_error__WEBPACK_IMPORTED_MODULE_6__["NotFoundError"]());
+            }
+
+            return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"]["throw"](new _common_app_error__WEBPACK_IMPORTED_MODULE_4__["AppError"](error));
           }
         }]);
 
@@ -679,11 +515,11 @@
 
       FoodContentService.ctorParameters = function () {
         return [{
-          type: angularfire2_firestore__WEBPACK_IMPORTED_MODULE_2__["AngularFirestore"]
+          type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]
         }];
       };
 
-      FoodContentService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+      FoodContentService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"])({
         providedIn: 'root'
       })], FoodContentService);
       /***/

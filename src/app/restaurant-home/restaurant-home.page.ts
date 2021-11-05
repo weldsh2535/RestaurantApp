@@ -190,15 +190,14 @@ export class RestaurantHomePage implements OnInit {
   }
   viewOrder(id) {
     this.cart = [];
-    let orderNo = this.listOfOrder.find(c => c.id == id).orderNo;
-    let orderDetails = this.listOfOrderDetails.filter(c => c.orderId == orderNo);
+    let orderDetails = this.listOfOrderDetails.filter(c => c.orderId == id);
     orderDetails.forEach(el => {
       let data = {
-        CookingTime: this.listOfFood.find(c => c.id == el.foodId).CookingTime,
-        DeliveryTime: this.listOfFood.find(c => c.id == el.foodId).DeliveryTime,
-        Description: this.listOfFood.find(c => c.id == el.foodId).Description,
-        Name: this.listOfFood.find(c => c.id == el.foodId).Name,
-        Price: this.listOfFood.find(c => c.id == el.foodId).Price,
+        CookingTime: this.listOfFood.find(c => c.id == el.foodId).cookingTime,
+        DeliveryTime: this.listOfFood.find(c => c.id == el.foodId).deliveryTime,
+        Description: this.listOfFood.find(c => c.id == el.foodId).description,
+        Name: this.listOfFood.find(c => c.id == el.foodId).name,
+        Price: this.listOfFood.find(c => c.id == el.foodId).price,
         amount: el.qty,
         categoryId: this.listOfFood.find(c => c.id == el.foodId).categoryId,
         id: el.foodId,
