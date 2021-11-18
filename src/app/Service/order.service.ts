@@ -8,6 +8,7 @@ import { BadInput } from '../common/bad-input';
 import { NotFoundError } from '../common/not-found-error';
 import { SharedService } from './shared.service';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -22,41 +23,11 @@ export class OrderService {
   amount: number;
   private order=[];
   private orderItemCount  = new BehaviorSubject(0);
-  readonly APIURL = 'http://localhost:49347/api';
+  readonly APIURL = environment.apiURL;
   constructor( private http: HttpClient,
     private sharedService: SharedService) {
 }
 
-  // create(orderObj) {
-  //   let values = this.orderCollectionList.add(orderObj)
-  //     .then((docRef) => {
-  //       this.sharedService.orderId.next(docRef.id);
-  //     })
-  //   return values;
-  // }
-
-  // getOrderBy(id){
-  //   const orderObj = this.db.collection('Order', ref => ref.where('id', '==', id)).snapshotChanges();
-  //   this.orderList = orderObj.pipe(
-  //     map(changes => changes.map(a => {
-  //       const data = a.payload.doc.data() as Order;
-  //       const id = a.payload.doc.id;
-  //       return { id, ...data };
-  //     }))
-  //   );
-  //   return this.orderList;
-  // }
-  // getOrderByDriverId(driverId){
-  //   const orderObj = this.db.collection('Order', ref => ref.where('Driver', '==', driverId)).snapshotChanges();
-  //   this.orderList = orderObj.pipe(
-  //     map(changes => changes.map(a => {
-  //       const data = a.payload.doc.data() as Order;
-  //       const id = a.payload.doc.id;
-  //       return { id, ...data };
-  //     }))
-  //   );
-  //   return this.orderList;
-  // }
   create(val: any) {
     return this.http.post(this.APIURL + '/Order', val);
   }

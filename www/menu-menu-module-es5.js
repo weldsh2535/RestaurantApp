@@ -349,17 +349,6 @@
             });
           }
         }, {
-          path: 'rest-menu',
-          loadChildren: function loadChildren() {
-            return Promise.all(
-            /*! import() | rest-menu-rest-menu-module */
-            [__webpack_require__.e("common"), __webpack_require__.e("rest-menu-rest-menu-module")]).then(__webpack_require__.bind(null,
-            /*! ../rest-menu/rest-menu.module */
-            "PDtb")).then(function (m) {
-              return m.RestMenuPageModule;
-            });
-          }
-        }, {
           path: 'food',
           loadChildren: function loadChildren() {
             return Promise.all(

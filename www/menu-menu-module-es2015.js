@@ -193,10 +193,6 @@ const routes = [
                 loadChildren: () => Promise.all(/*! import() | restaurant-restaurant-module */[__webpack_require__.e("default~food-food-module~profile-profile-module~restaurant-restaurant-module"), __webpack_require__.e("common"), __webpack_require__.e("restaurant-restaurant-module")]).then(__webpack_require__.bind(null, /*! ../restaurant/restaurant.module */ "xt6y")).then(m => m.RestaurantPageModule)
             },
             {
-                path: 'rest-menu',
-                loadChildren: () => Promise.all(/*! import() | rest-menu-rest-menu-module */[__webpack_require__.e("common"), __webpack_require__.e("rest-menu-rest-menu-module")]).then(__webpack_require__.bind(null, /*! ../rest-menu/rest-menu.module */ "PDtb")).then(m => m.RestMenuPageModule)
-            },
-            {
                 path: 'food',
                 loadChildren: () => Promise.all(/*! import() | food-food-module */[__webpack_require__.e("default~food-food-module~profile-profile-module~restaurant-restaurant-module"), __webpack_require__.e("common"), __webpack_require__.e("food-food-module")]).then(__webpack_require__.bind(null, /*! ../food/food.module */ "d3P2")).then(m => m.FoodPageModule)
             },

@@ -4,11 +4,12 @@ import { BadInput } from '../common/bad-input';
 import { NotFoundError } from '../common/not-found-error';
 import { AppError } from '../common/app-error';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class RestaurantService {
-  readonly APIURL = 'http://localhost:49347/api';
+  readonly APIURL = environment.apiURL;
   constructor( private http: HttpClient) {
   }
   create(val: any) {

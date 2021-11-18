@@ -14,6 +14,7 @@ export class LoginPage implements OnInit {
 	regform = this.fb.group({});
 	fieldTextType: boolean;
 	public subscription: any;
+	loader: any;
 	constructor(private authServices: AuthService, private router: Router,
 		private alertCtrl: AlertController, private fb: FormBuilder,
 		private modalController: ModalController,
@@ -29,7 +30,7 @@ export class LoginPage implements OnInit {
 		let email = this.regform.get("email").value;
 		let password = this.regform.get("password").value;
 		if (this.regform.valid) {
-			this.authServices.getAllAccount().subscribe(res => {
+			this.authServices.getAllAccount().subscribe(async res => {
 				let result = res.filter(c=>c.email==email && c.password==password);
 				if (result.length > 0) {
 					localStorage.setItem("userId", result[0].id);
@@ -39,7 +40,7 @@ export class LoginPage implements OnInit {
 				 if (result[0].type == "restaurant") {
 						if (result[0].active == "true") {
 							this.router.navigate(['/menu/restaurant-home']);
-							this.presentAlert("Login successfully.");
+							//this.presentAlert("Login successfully.");
 							this.regform.reset();
 						}
 						else {
@@ -51,7 +52,10 @@ export class LoginPage implements OnInit {
 				else {
 					this.presentAlert("Please enter correct username and password!!");
 				}
-			})
+			},async(err)=>{
+				await this.loader.dismiss().then();
+				 console.log(err);
+				});
 		}
 	}
 	ionViewDidEnter() {

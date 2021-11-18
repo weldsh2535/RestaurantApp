@@ -101,7 +101,7 @@ export class Order {
     orderLocation: string; // or droupLocation
     restaurantStatuses: any; // order recived, start cooking, cooked, ready to service
     customerStatus: string; // order cancelled,
-    status: any;
+    statuses: any;
 }
 export class OrderDetail {
     id: number;

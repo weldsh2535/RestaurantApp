@@ -6,6 +6,7 @@ import { OrderDetailService } from '../Service/order-detail.service';
 import { OrderService } from '../Service/order.service';
 import { SharedService } from '../Service/shared.service';
 import { DatePipe } from '@angular/common';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-restaurant-history',
@@ -51,12 +52,14 @@ export class RestaurantHistoryPage implements OnInit {
   increament: number=0;
   massge: boolean;
   message: string;
+  loader: HTMLIonLoadingElement;
   constructor(  private orderService: OrderService,
     private accountService: AccountService,
     private orderDetailsService: OrderDetailService,
     private foodService:FoodService,
     private sharedService:SharedService,
     private router:Router,
+    private loadingController:LoadingController,
     public datepipe: DatePipe) { 
       //this.currentDate = new Date().toDateString();
  this.currentMonth = new Date().getMonth() + 1;
@@ -64,7 +67,13 @@ export class RestaurantHistoryPage implements OnInit {
  this.currentDate = new Date().getDate();
  }
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.loader = await this.loadingController.create({
+      message:'Getting Products ...',
+      spinner:"bubbles",
+      animated:true
+    });
+    await this.loader.present().then();
     this.model.startdate = new Date();
     this.searchdate();
     this.getOrder();
@@ -72,17 +81,26 @@ export class RestaurantHistoryPage implements OnInit {
     this.getOrderDetails();
   }
   getOrderDetails() {
-    this.orderDetailsService.getAllOrderDetail().subscribe(res => {
+    this.orderDetailsService.getAllOrderDetail().subscribe(async res => {
+      await this.loader.dismiss().then();
       this.listOfOrderDetails = res;
+    },async(err)=>{
+      await this.loader.dismiss().then();
+      console.log(err);
     })
   }
   getFood() {
-    this.foodService.getAllFood().subscribe(res => {
+    this.foodService.getAllFood().subscribe(async res => {
+      await this.loader.dismiss().then();
       this.listOfFood = res;
+    },async(err)=>{
+      await this.loader.dismiss().then();
+      console.log(err);
     })
   }
   getOrder() {
-    this.orderService.getAllOrder().subscribe(res => {
+    this.orderService.getAllOrder().subscribe(async res => {
+      await this.loader.dismiss().then();
       this.UserId = localStorage.getItem("userId");
      let result = res.filter(c => c.restaurantId == this.UserId && c.restaurantStatuses.find(c=>c.isChecked==true && c.val=="ready to service") );
       if (result.length > 0 ) {
@@ -107,6 +125,9 @@ export class RestaurantHistoryPage implements OnInit {
           })
         });
       }
+    },async(err)=>{
+      await this.loader.dismiss().then();
+      console.log(err);
     })
   }
   viewOrder(id) {
@@ -202,7 +223,8 @@ searchdate() {
     }
   }
   scheduleOrder(date, event) {
-    this.orderService.getAllOrder().subscribe(res => {
+    this.orderService.getAllOrder().subscribe(async res => {
+      await this.loader.dismiss().then();
       this.UserId = localStorage.getItem("userId");
      let result = res.filter(c => c.restaurantId == this.UserId && c.restaurantStatuses.find(c=>c.isChecked==true && c.val=="ready to service") );
       if (result.length > 0 ) {
@@ -295,6 +317,9 @@ searchdate() {
           })
         });
       }
+    },async(err)=>{
+      await this.loader.dismiss().then();
+      console.log(err);
     })
   }
 }

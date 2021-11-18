@@ -328,175 +328,129 @@
       /* harmony import */
 
 
-      var angularfire2_firestore__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-      /*! angularfire2/firestore */
-      "CqG3");
-      /* harmony import */
-
-
-      var angularfire2_firestore__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(angularfire2_firestore__WEBPACK_IMPORTED_MODULE_2__);
-      /* harmony import */
-
-
-      var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/common/http */
       "tk/3");
       /* harmony import */
 
 
-      var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/core */
       "fXoL");
       /* harmony import */
 
 
-      var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/platform-browser */
       "jhN1");
       /* harmony import */
 
 
-      var _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      var _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @ionic-native/splash-screen/ngx */
       "54vc");
       /* harmony import */
 
 
-      var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+      var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @ionic-native/status-bar/ngx */
       "VYYF");
       /* harmony import */
 
 
-      var _ionic_angular__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+      var _ionic_angular__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @ionic/angular */
       "TEn/");
       /* harmony import */
 
 
-      var _app_routing_module__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+      var _app_routing_module__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! ./app-routing.module */
       "vY5A");
       /* harmony import */
 
 
-      var _app_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
+      var _app_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! ./app.component */
       "Sy1n");
       /* harmony import */
 
 
-      var _angular_forms__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
+      var _angular_forms__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
       /*! @angular/forms */
       "3Pt+");
       /* harmony import */
 
 
-      var angularfire2__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
-      /*! angularfire2 */
-      "MMa0");
-      /* harmony import */
-
-
-      var angularfire2__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(angularfire2__WEBPACK_IMPORTED_MODULE_12__);
-      /* harmony import */
-
-
-      var angularfire2_database__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
-      /*! angularfire2/database */
-      "6233");
-      /* harmony import */
-
-
-      var angularfire2_database__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(angularfire2_database__WEBPACK_IMPORTED_MODULE_13__);
-      /* harmony import */
-
-
-      var _angular_fire_auth__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
-      /*! @angular/fire/auth */
-      "UbJi");
-      /* harmony import */
-
-
-      var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(
+      var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
       /*! @ng-bootstrap/ng-bootstrap */
       "1kSV");
       /* harmony import */
 
 
-      var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(
+      var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
       /*! @angular/platform-browser/animations */
       "R1ws");
       /* harmony import */
 
 
-      var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(
+      var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
       /*! @angular/material/dialog */
       "0IaG");
       /* harmony import */
 
 
-      var devextreme_angular__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(
+      var devextreme_angular__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
       /*! devextreme-angular */
       "384S");
       /* harmony import */
 
 
-      var _common_app_error_handler__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(
+      var _common_app_error_handler__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(
       /*! ./common/app-error-handler */
       "TMt5");
       /* harmony import */
 
 
-      var _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(
+      var _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(
       /*! @ionic-native/file/ngx */
       "FAH8");
       /* harmony import */
 
 
-      var _ionic_native_social_sharing_ngx__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(
+      var _ionic_native_social_sharing_ngx__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(
       /*! @ionic-native/social-sharing/ngx */
       "/XPu");
       /* harmony import */
 
 
-      var _ionic_native_file_opener_ngx__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(
+      var _ionic_native_file_opener_ngx__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(
       /*! @ionic-native/file-opener/ngx */
       "te5A");
       /* harmony import */
 
 
-      var _angular_common__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(
+      var _angular_common__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(
       /*! @angular/common */
       "ofXK"); // import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
 
-
-      var config = {
-        apiKey: "AIzaSyDJ0I6Nu7J3wlns9EWmKIEMNuR_pVKmwaY",
-        authDomain: "mtk-delivery.firebaseapp.com",
-        projectId: "mtk-delivery",
-        storageBucket: "mtk-delivery.appspot.com",
-        messagingSenderId: "683827920990",
-        appId: "1:683827920990:web:014c718f855977b94eb4cf",
-        measurementId: "G-H6XJDHS7VQ"
-      };
 
       var AppModule = function AppModule() {
         _classCallCheck(this, AppModule);
       };
 
-      AppModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_4__["NgModule"])({
-        declarations: [_app_component__WEBPACK_IMPORTED_MODULE_10__["AppComponent"]],
+      AppModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["NgModule"])({
+        declarations: [_app_component__WEBPACK_IMPORTED_MODULE_9__["AppComponent"]],
         entryComponents: [],
-        imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_5__["BrowserModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_8__["IonicModule"].forRoot(), _app_routing_module__WEBPACK_IMPORTED_MODULE_9__["AppRoutingModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["FormsModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["ReactiveFormsModule"], angularfire2_database__WEBPACK_IMPORTED_MODULE_13__["AngularFireDatabaseModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_8__["IonicModule"].forRoot(), angularfire2__WEBPACK_IMPORTED_MODULE_12__["AngularFireModule"].initializeApp(config), angularfire2_firestore__WEBPACK_IMPORTED_MODULE_2__["AngularFirestoreModule"], _angular_fire_auth__WEBPACK_IMPORTED_MODULE_14__["AngularFireAuthModule"], angularfire2_database__WEBPACK_IMPORTED_MODULE_13__["AngularFireDatabaseModule"], _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_15__["NgbModule"], _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_16__["BrowserAnimationsModule"], _angular_material_dialog__WEBPACK_IMPORTED_MODULE_17__["MatDialogModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClientModule"], devextreme_angular__WEBPACK_IMPORTED_MODULE_18__["DxLookupModule"]],
-        providers: [_ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_7__["StatusBar"], _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_6__["SplashScreen"], _angular_common__WEBPACK_IMPORTED_MODULE_23__["DatePipe"], {
+        imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_4__["BrowserModule"], _app_routing_module__WEBPACK_IMPORTED_MODULE_8__["AppRoutingModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_10__["FormsModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_10__["ReactiveFormsModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_7__["IonicModule"].forRoot(), _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_11__["NgbModule"], _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_12__["BrowserAnimationsModule"], _angular_material_dialog__WEBPACK_IMPORTED_MODULE_13__["MatDialogModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClientModule"], devextreme_angular__WEBPACK_IMPORTED_MODULE_14__["DxLookupModule"]],
+        providers: [_ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__["StatusBar"], _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_5__["SplashScreen"], _angular_common__WEBPACK_IMPORTED_MODULE_19__["DatePipe"], {
           provide: _angular_router__WEBPACK_IMPORTED_MODULE_1__["RouteReuseStrategy"],
-          useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__["IonicRouteStrategy"]
+          useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_7__["IonicRouteStrategy"]
         }, {
-          provide: _angular_core__WEBPACK_IMPORTED_MODULE_4__["ErrorHandler"],
-          useClass: _common_app_error_handler__WEBPACK_IMPORTED_MODULE_19__["AppErrorHandler"]
-        }, _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_20__["File"], _ionic_native_social_sharing_ngx__WEBPACK_IMPORTED_MODULE_21__["SocialSharing"], _ionic_native_file_opener_ngx__WEBPACK_IMPORTED_MODULE_22__["FileOpener"]],
-        bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_10__["AppComponent"]]
+          provide: _angular_core__WEBPACK_IMPORTED_MODULE_3__["ErrorHandler"],
+          useClass: _common_app_error_handler__WEBPACK_IMPORTED_MODULE_15__["AppErrorHandler"]
+        }, _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_16__["File"], _ionic_native_social_sharing_ngx__WEBPACK_IMPORTED_MODULE_17__["SocialSharing"], _ionic_native_file_opener_ngx__WEBPACK_IMPORTED_MODULE_18__["FileOpener"]],
+        bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_9__["AppComponent"]]
       })], AppModule);
       /***/
     },

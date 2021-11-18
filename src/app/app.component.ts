@@ -6,7 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AuthService } from './Service/auth.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-declare var telegramBot;
+
 @Component({
   selector: 'app-root',
   template: '<ion-nav [root]="rootPage"></ion-nav>',
