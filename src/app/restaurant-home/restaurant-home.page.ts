@@ -9,6 +9,7 @@ import { FoodService } from '../Service/food.service';
 import { OrderDetailService } from '../Service/order-detail.service';
 import { OrderService } from '../Service/order.service';
 import { SharedService } from '../Service/shared.service';
+import { RestaurantService } from '../Service/restaurant.service';
 
 @Component({
   selector: 'app-restaurant-home',
@@ -34,19 +35,20 @@ export class RestaurantHomePage implements OnInit {
   restaurantstatus: any[] = [];
   activeCategory = 0;
   shownGroup = null;
-  hideme: any={};
-  status: any[]=[];
+  hideme: any = {};
+  status: any[] = [];
   selectedIndex = -1;
-  indexes: any[]=[];
+  indexes: any[] = [];
   orderStatus: Order[];
   checkStatus: boolean;
   statusofValue: boolean;
   orderStatus1: Order[];
   currentDate: string;
-  increment: number=0;
+  increment: number = 0;
   massge: boolean;
   message: string;
   loader: HTMLIonLoadingElement;
+  listOfRestaurant: any[];
   constructor(private foodService: FoodService,
     private fb: FormBuilder,
     private orderService: OrderService,
@@ -54,50 +56,48 @@ export class RestaurantHomePage implements OnInit {
     private orderDetailsService: OrderDetailService,
     private router: Router,
     private sharedService: SharedService,
-    private alertController: AlertController,
-    private toastController:ToastController,
-    private loadingController:LoadingController
+    private toastController: ToastController,
+    private loadingController: LoadingController,
+    private restaurantService: RestaurantService
   ) {
     this.currentDate = new Date().toDateString();
     //console.log(this.currentDate);
     this.accountService.getAllAccount().subscribe(res => {
       this.listOfAccount = res;
-     // console.log(res)
+      // console.log(res)
     })
+    this.getRestaurant();
   }
-
   async ngOnInit() {
     this.loader = await this.loadingController.create({
-      message:'Getting Products ...',
-      spinner:"bubbles",
-      animated:true
+      message: 'Getting Products ...',
+      spinner: "bubbles",
+      animated: true
     });
     await this.loader.present().then();
     this.regform = this.fb.group({
       status: [""],
     })
+
     this.getAllOrder();
     this.getFood();
     this.getOrder();
- 
     this.getOrderDetails();
-    
-    //this.lp = new LocationPicker('map');
   }
   getFood() {
     this.foodService.getAllFood().subscribe(async res => {
       await this.loader.present().then();
       this.listOfFood = res;
-    }, async(err)=>{
+    }, async (err) => {
       await this.loader.dismiss().then();
-       console.log(err);
-      })
+      console.log(err);
+    })
   }
   getAccount() {
     this.accountService.getAllAccount().subscribe(async res => {
       await this.loader.present().then();
       this.listOfAccount = res;
-    },async(err)=>{
+    }, async (err) => {
       await this.loader.dismiss().then();
       console.log(err);
     })
@@ -115,103 +115,117 @@ export class RestaurantHomePage implements OnInit {
     this.orderService.getAllOrder().subscribe(async result => {
       await this.loader.dismiss().then();
       this.listOfAllOrder = result;
-    },async (err)=>{
+    }, async (err) => {
       await this.loader.dismiss().then();
       console.log(err);
     });
+  }
+  getRestaurant() {
+    this.restaurantService.getAllRestaurant().subscribe(async res => {
+      // await this.loader.present().then();
+      this.listOfRestaurant = res;
+    }, async (err) => {
+      await this.loader.dismiss().then();
+      console.log(err);
+    })
   }
   getOrder() {
     this.listOfOrder = [];
     this.orderService.getAllOrder().subscribe(async res => {
       await this.loader.dismiss().then();
       this.UserId = localStorage.getItem("userId");
-      let result = res.filter(c => c.restaurantId == this.UserId && c.restaurantStatuses.find(c => c.isChecked == false && c.val == "ready to service"));
-      this.orderStatus = result.filter(c=>c.restaurantStatuses.find(entry=>entry.isChecked == true && entry.val =="start cooking")
-                           || c.restaurantStatuses.find(entry=>entry.isChecked == true && entry.val =="cooked")
-                            || c.restaurantStatuses.find(entry=>entry.isChecked == true && entry.val =="ready to service")) 
-      this.orderStatus1 = result.filter(c=>c.statuses.find(entry=>entry.isChecked==true && entry.val =="Accept"))
-      if (result.length > 0 ) {
+      let resId = this.listOfRestaurant.find(c => c.accountId == this.UserId).id;
+      let result = res.filter(c => c.restaurantId == resId && c.restaurantStatuses.find(c => c.isChecked == false && c.val == "ready to service")
+        && c.statuses.find(c => c.isChecked == false && c.val == "Reject"));
+      this.orderStatus = result.filter(c => c.restaurantStatuses.find(entry => entry.isChecked == true && entry.val == "start cooking")
+        || c.restaurantStatuses.find(entry => entry.isChecked == true && entry.val == "cooked")
+        || c.restaurantStatuses.find(entry => entry.isChecked == true && entry.val == "ready to service"))
+      this.orderStatus1 = result.filter(c => c.statuses.find(entry => entry.isChecked == true && entry.val == "Accept"))
+      if (result.length > 0) {
         this.listOfOrder = [];
         result.forEach(element => {
-            let checkStatus = this.orderStatus.find(c=>c.id==element.id);
-            let checkStatus1 = this.orderStatus1.find(c=>c.id==element.id);
-             if(checkStatus){
-              this.checkStatus = true
-            }
-            else{
-              this.checkStatus = false
-            }
-            if(checkStatus1){
-              this.statusofValue = true;
-              this.checkStatus = false;
-            }
-            else{
-              this.statusofValue = false;
-              this.checkStatus = true;
-            }
-            let data = {
-              id: element.id,
-              DateTime: element.dateTime,
-              Customer: this.listOfAccount.find(c => c.id == element.customer).fullName,
-              PhoneNumber:this.listOfAccount.find(c => c.id == element.customer).phonenumber,
-              CLocation: this.listOfAccount.find(c => c.id == element.customer).locationId,
-              RLocation: element.location,
-              Location: element.location,
-              restaurantStatus: element.restaurantStatuses,
-              Total: element.total,
-              Driver: element.driver,
-              Vehicle: element.vehicle,
-              orderLocation: element.orderLocation,
-              status:element.statuses,
-              checkStatus:this.checkStatus,
-              checkStatusofValue:this.statusofValue
-            }
-            //this.listOfOrder.push(data);
-            const dateOfOrders = new Date(element.dateTime).toDateString();
-            // console.log(dateOfOrders);
-             if (this.currentDate == dateOfOrders) {
-               this.listOfOrder.push(data);
-               this.increment = this.increment+1;
-               console.log(this.statusofValue);
-             }
-             if(this.increment == 0){
-              this.massge = true
-              this.message = "no orders"
-            }
-            //console.log(this.listOfOrder)
-            let status = element.restaurantStatuses.find(c => c.isChecked == true);
-            let index = element.restaurantStatuses.findIndex(c => c.isChecked == true);
-            if (index == 0) {
-              if (status !== undefined) {
-                if (this.dayFinished.includes(status)) {
-                  this.dayFinished.splice(this.dayFinished.indexOf(status), 1);
-                }
-                else {
-                  this.dayFinished.push(status);
-                }
-                this.setDisabled(status);
+          let checkStatus = this.orderStatus.find(c => c.id == element.id);
+          let checkStatus1 = this.orderStatus1.find(c => c.id == element.id);
+          if (checkStatus) {
+            this.checkStatus = true
+          }
+          else {
+            this.checkStatus = false
+          }
+          if (checkStatus1) {
+            this.statusofValue = true;
+            this.checkStatus = false;
+          }
+          else {
+            this.statusofValue = false;
+            this.checkStatus = true;
+          }
+          let data = {
+            id: element.id,
+            DateTime: element.dateTime,
+            Customer: this.listOfAccount.find(c => c.id == element.customer).fullName,
+            PhoneNumber: this.listOfAccount.find(c => c.id == element.customer).phonenumber,
+            CLocation: this.listOfAccount.find(c => c.id == element.customer).locationId,
+            RLocation: element.location,
+            Location: element.location,
+            restaurantStatus: element.restaurantStatuses,
+            Total: element.total,
+            Driver: element.driver,
+            Vehicle: element.vehicle,
+            orderLocation: element.orderLocation,
+            status: element.statuses,
+            checkStatus: this.checkStatus,
+            checkStatusofValue: this.statusofValue
+          }
+          //this.listOfOrder.push(data);
+          const dateOfOrders = new Date(element.dateTime).toDateString();
+          // console.log(dateOfOrders);
+          if (this.currentDate == dateOfOrders) {
+            this.listOfOrder.push(data);
+            this.increment = this.increment + 1;
+            console.log(this.statusofValue);
+          }
+          if (this.increment == 0) {
+            this.massge = true
+            this.message = "no orders"
+          }
+          //console.log(this.listOfOrder)
+          let status = element.restaurantStatuses.find(c => c.isChecked == true);
+          let index = element.restaurantStatuses.findIndex(c => c.isChecked == true);
+          if (index == 0) {
+            if (status !== undefined) {
+              if (this.dayFinished.includes(status)) {
+                this.dayFinished.splice(this.dayFinished.indexOf(status), 1);
               }
+              else {
+                this.dayFinished.push(status);
+              }
+              this.setDisabled(status);
             }
-            else if (index) {
-              let statusArray = element.restaurantStatuses;
-              for (let i = 0; i <= statusArray.length; i++) {
-                if (i <= index) {
-                  let statusA = element.restaurantStatuses[i];
-                  if (statusA !== undefined) {
-                    if (this.dayFinished.includes(statusA)) {
-                      this.dayFinished.splice(this.dayFinished.indexOf(statusA), 1);
-                    }
-                    else {
-                      this.dayFinished.push(statusA);
-                    }
-                    this.setDisabled(statusA);
+          }
+          else if (index) {
+            let statusArray = element.restaurantStatuses;
+            for (let i = 0; i <= statusArray.length; i++) {
+              if (i <= index) {
+                let statusA = element.restaurantStatuses[i];
+                if (statusA !== undefined) {
+                  if (this.dayFinished.includes(statusA)) {
+                    this.dayFinished.splice(this.dayFinished.indexOf(statusA), 1);
                   }
+                  else {
+                    this.dayFinished.push(statusA);
+                  }
+                  this.setDisabled(statusA);
                 }
               }
             }
+          }
         });
       }
-    },async (err)=>{
+      else {
+        this.message = "no orders"
+      }
+    }, async (err) => {
       await this.loader.dismiss().then();
       console.log(err);
     })
@@ -269,8 +283,8 @@ export class RestaurantHomePage implements OnInit {
       this.restaurantstatus.push(driverS);
     });
     this.restaurantstatus.forEach(element => {
-      this.orderService.updateRestaurantStatus(element).subscribe(res=>{
-       // alert(res.toString());
+      this.orderService.updateRestaurantStatus(element).subscribe(res => {
+        // alert(res.toString());
       })
     });
   }
@@ -286,7 +300,7 @@ export class RestaurantHomePage implements OnInit {
       // this.listOfOrder[i].acceptReject = true;
       // this.listOfOrder[i].statusSelect = true;
       // }
-     }
+    }
   }
   // Dummy refresher function
   doRefresh(event) {
@@ -296,16 +310,16 @@ export class RestaurantHomePage implements OnInit {
     }, 2000);
   }
   showContent(evt, index) {
-    this.selectedIndex = index;   
+    this.selectedIndex = index;
   }
-  toggleGroup(meal,event,val,index) {
+  toggleGroup(meal, event, val, index) {
     this.selectedIndex = -1;
     this.status = [];
     let status = meal.status;
-    if(index==0){
-    var item =meal.status[0];
+    if (index == 0) {
+      var item = meal.status[0];
     }
-    else{
+    else {
       item = meal.status[1];
     }
     status.forEach(element => {
@@ -322,41 +336,31 @@ export class RestaurantHomePage implements OnInit {
       }
       this.status.push(status);
     });
-    let res = this.listOfAllOrder.find(c => c.id == meal.id);
-     res.restaurantStatuses.forEach(ele=>{
-      this.orderService.updateRestaurantStatus(ele).subscribe(async res=>{
-        await this.loader.dismiss().then();
-      // alert(res.toString());
-      },async (err)=>{
-        await this.loader.dismiss().then();
-        console.log(err);
-      })
-    })
-    this.status.forEach(ele=>{
-      this.orderService.updateStatus(ele).subscribe(async res=>{
+    this.status.forEach(ele => {
+      this.orderService.updateStatus(ele).subscribe(async res => {
         await this.loader.dismiss().then();
         // alert(res.toString());
-      },async (err)=>{
+      }, async (err) => {
         await this.loader.dismiss().then();
         console.log(err);
       })
     })
     this.getOrder();
-    if(val !=="Reject"){
-      let data1={
-        id:event
+    if (val !== "Reject") {
+      let data1 = {
+        id: event
       }
       this.indexes.push(data1);
-      if(this.indexes.length>0){
-       this.indexes.forEach(ele=>{
-        this.selectedIndex = ele.id;
-       })
+      if (this.indexes.length > 0) {
+        this.indexes.forEach(ele => {
+          this.selectedIndex = ele.id;
+        })
       }
-      else{
+      else {
         this.selectedIndex = event
       }
     }
-    else{
+    else {
       this.presentAlert("reject order");
     }
   }

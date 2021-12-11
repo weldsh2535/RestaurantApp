@@ -8,23 +8,22 @@ import { environment } from 'src/environments/environment';
 })
 export class UserRoleService {
   readonly APIURL = environment.apiURL;
-  constructor( private http: HttpClient) {
+  constructor(private http: HttpClient) {
   }
   create(val: any) {
-    return this.http.post(this.APIURL + '/UserRole', val);
+    return this.http.post(this.APIURL + '/userrole', val);
   }
   getAllUserRole(): Observable<any[]> {
-    return this.http.get<any>(this.APIURL + '/UserRole');
+    return this.http.get<any>(this.APIURL + '/userrole');
   }
   updateUserRole(val: any) {
-    return this.http.put(this.APIURL + '/UserRole/', val);
+    return this.http.put(this.APIURL + '/userrole/', val);
   }
   deleteUserRole(id) {
-    return this.http.delete(this.APIURL + '/UserRole/' + id).toPromise();
+    return this.http.delete(this.APIURL + '/userrole/' + id).toPromise();
   }
-
   getUerRoleId(userId: string) {
-    return this.http.get<any>(this.APIURL + '/UserRole/' + userId);
+    return this.http.get<any>(this.APIURL + '/userrole/' + userId);
   }
 
 }

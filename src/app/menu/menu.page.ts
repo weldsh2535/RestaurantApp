@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController, Platform } from '@ionic/angular';
+import { AlertController, LoadingController, Platform } from '@ionic/angular';
 import { Account, functionality } from 'src/Table/table';
 import { AccountService } from '../Service/account.service';
 import { AuthService } from '../Service/auth.service';
@@ -24,15 +24,18 @@ export class MenuPage implements OnInit {
   usePicker: boolean;
   listOfAccount: Account[];
   base64textString: string;
+  loader: any;
   constructor(private authServices: AuthService,
     private router: Router,
     private alertCtrl: AlertController,
     private functionalityService: FunctionalityService,
     private userRoleService: UserRoleService,
     private accountService: AccountService,
-    private platform: Platform) { }
+    private platform: Platform,
+    private loadingController: LoadingController) { }
 
   ngOnInit() {
+
     if ((this.platform.is('mobile') && !this.platform.is('hybrid')) ||
       this.platform.is('desktop')
     ) {
@@ -49,27 +52,30 @@ export class MenuPage implements OnInit {
       { title: 'food-content', url: '/food-content', icon: 'list' },
       { title: 'location', url: '/location', icon: 'locate' },
       { title: 'orders', url: '/restaurant-home', icon: 'cart' },
-      { title: 'My orders', url:'/restaurant-history',icon:'cart'},
-      { title: 'profile',url:'/profile',icon:'person'}
-    ]; 
+      { title: 'My orders', url: '/restaurant-history', icon: 'cart' },
+      { title: 'profile', url: '/profile', icon: 'person' }
+    ];
     this.getRoute();
     this.getAccount();
   }
   getAccount() {
-    this.accountService.getAllAccount().subscribe(res => {
+    this.accountService.getAllAccount().subscribe(async res => {
       this.listOfAccount = res;
       this.base64textString = res.find(c => c.id == localStorage.getItem("userId")).photo;
+    }, async (err) => {
+      await this.loader.dismiss().then();
+      console.log(err);
     })
   }
   getRoute() {
-    this.functionalityService.getAllFunctionality().subscribe(result => {
+    this.functionalityService.getAllFunctionality().subscribe(async result => {
       this.listOfFunctionality = result;
       //console.log(result)
       if (result.length > 0) {
         this.roleType = localStorage.getItem("roleType");
         this.userName = localStorage.getItem("fullName");
         this.userRoleService.getAllUserRole().subscribe(res => {
-         // console.log(res)
+          // console.log(res)
           let result = res.filter(c => c.userId == this.roleType);
           let active = localStorage.getItem("active");
           if (result.length > 0 && active == "true") {
@@ -92,6 +98,9 @@ export class MenuPage implements OnInit {
         })
 
       }
+    }, async (err) => {
+      await this.loader.dismiss().then();
+      console.log(err);
     })
   }
 

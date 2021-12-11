@@ -11,19 +11,19 @@ import { NotFoundError } from '../common/not-found-error';
 })
 export class CategoryService {
   readonly APIURL = environment.apiURL;
-  constructor( private http: HttpClient) {
+  constructor(private http: HttpClient) {
   }
   create(val: any) {
-    return this.http.post(this.APIURL + '/Categorie', val);
+    return this.http.post(this.APIURL + '/categorie', val);
   }
   getAllCategory(): Observable<any[]> {
-    return this.http.get<any>(this.APIURL + '/Categorie');
+    return this.http.get<any>(this.APIURL + '/categorie');
   }
   updateCategory(val: any) {
-    return this.http.put(this.APIURL + '/Categorie/', val);
+    return this.http.put(this.APIURL + '/categorie/', val);
   }
   removeCategory(id) {
-    return this.http.delete(this.APIURL + '/Categorie/' + id).toPromise();
+    return this.http.delete(this.APIURL + '/categorie/' + id).toPromise();
   }
 
   private handleError(error: Response) {

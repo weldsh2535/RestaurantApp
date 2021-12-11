@@ -15,19 +15,19 @@ import { NotFoundError } from '../common/not-found-error';
 export class OrderDetailService {
 
   readonly APIURL = environment.apiURL;
-  constructor( private http: HttpClient) {
+  constructor(private http: HttpClient) {
   }
   create(val: any) {
-    return this.http.post(this.APIURL + '/OrderDetail', val);
+    return this.http.post(this.APIURL + '/orderdetail', val);
   }
   getAllOrderDetail(): Observable<any[]> {
-    return this.http.get<any>(this.APIURL + '/OrderDetail');
+    return this.http.get<any>(this.APIURL + '/orderdetail');
   }
   updateOrderDetail(val: any) {
-    return this.http.put(this.APIURL + '/OrderDetail/', val);
+    return this.http.put(this.APIURL + '/orderdetail/', val);
   }
   removeOrderDetail(id) {
-    return this.http.delete(this.APIURL + '/OrderDetail/' + id).toPromise();
+    return this.http.delete(this.APIURL + '/orderdetail/' + id).toPromise();
   }
 
   private handleError(error: Response) {

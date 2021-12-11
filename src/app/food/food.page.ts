@@ -24,19 +24,21 @@ export class FoodPage implements OnInit {
   SelectedCategoryId: string;
   SelectedRestaurantId: number
   listOfRestaurant: Restaurant[];
-  listOfCategoryFilter: any[]=[];
+  listOfCategoryFilter: any[] = [];
   listOfFoodFilter: any[];
   foodOfRestaurantLength: number;
   id: any;
-  generatefoodId: string='0';
-  foodIdOfGenerate: string="";
+  generatefoodId: string = '0';
+  foodIdOfGenerate: string = "";
   constructor(private fb: FormBuilder,
     private foodService: FoodService,
     private alertController: AlertController,
     private platform: Platform,
     private modalController: ModalController,
     private categoryService: CategoryService,
-    private restaurantservice: RestaurantService) { }
+    private restaurantservice: RestaurantService) {
+    this.getCategory();
+  }
 
   ngOnInit() {
     this.regform = this.fb.group({
@@ -49,7 +51,7 @@ export class FoodPage implements OnInit {
       type: ["", Validators.required],//food or drink or other
       categoryId: ["", Validators.required],
       restaurantId: ["", Validators.required],
-      foodId:[""]
+      foodId: [""]
     })
     if ((this.platform.is('mobile') && !this.platform.is('hybrid')) ||
       this.platform.is('desktop')
@@ -57,37 +59,36 @@ export class FoodPage implements OnInit {
       this.usePicker = true;
     }
     this.getFood();
-    this.getCategory();
     this.getRestaurant();
     this.generateFoodId();
   }
-  generateFoodId(){
+  generateFoodId() {
     let No = 0;
-   this.foodService.getAllFood().subscribe(res=>{
-     if(this.listOfRestaurant != undefined){
-      let resObj = this.listOfRestaurant.find(c=>c.accountId == +localStorage.getItem("userId"));
-      let foodObj =  res.filter(c=>c.restaurantId == resObj.id);
-      if (foodObj.length == 0)
+    this.foodService.getAllFood().subscribe(res => {
+      if (this.listOfRestaurant != undefined) {
+        let resObj = this.listOfRestaurant.find(c => c.accountId == +localStorage.getItem("userId"));
+        let foodObj = res.filter(c => c.restaurantId == resObj.id);
+        if (foodObj.length == 0)
           No = 1;
         else
           No = foodObj.length + 1;
         this.generatefoodId = "VN-" + this.generatefoodId.padStart(4, '0') + No;
         console.log(this.generatefoodId);
-     }
-     else{
-       this.getRefresh();
-     }
-   })
+      }
+      else {
+        this.getRefresh();
+      }
+    })
   }
-  getRefresh(){
-    setTimeout(()=>{
+  getRefresh() {
+    setTimeout(() => {
       this.generateFoodId();
-    },200);
+    }, 200);
   }
   getFood() {
     this.foodService.getAllFood().subscribe(res => {
       this.listOfFood = res;
-      this.listOfFoodFilter = res.filter(c=>c.restaurantId == localStorage.getItem("userId"));
+      this.listOfFoodFilter = res.filter(c => c.restaurantId == localStorage.getItem("userId"));
       this.foodOfRestaurantLength = this.listOfFoodFilter.length;
     })
   }
@@ -101,40 +102,42 @@ export class FoodPage implements OnInit {
     this.listOfCategoryFilter = [];
     if ($event !== undefined && $event != null) {
       this.foodService.getAllFood().subscribe(res => {
-        this.listOfFoodFilter = res.filter(c=>c.restaurantId == $event);
-       this.foodOfRestaurantLength =this.listOfFoodFilter.length;
-       let categories = this.listOfRestaurant.find(c=>c.accountId==$event).categoryId;
-       let restaurantId = this.listOfRestaurant.find(c=>c.accountId ==$event).resId;
-      for(let i=0 ; i < categories.length ;i++){
-       let data ={
-         categoryName:this.listOfCategory.find(c => c.categoryName == categories[i]).categoryName
-       }
-        this.listOfCategoryFilter.push(data)
-      }
-      //to inital generate foodId
-      if(this.foodIdOfGenerate.length == 0){
-        this.generatefoodId="";
-        let No = 0;
-        if(this.listOfFood.filter(c=>c.restaurantId == $event).length == 0)
-          No = 1;
-        else       
-        No = (this.listOfFood.filter(c=>c.restaurantId == $event).length)+1;
-        this.generatefoodId = restaurantId+this.generatefoodId.padStart(0,'0')+No;
-       }
-    });
+        this.listOfFoodFilter = res.filter(c => c.restaurantId == $event);
+        this.foodOfRestaurantLength = this.listOfFoodFilter.length;
+        let categories = this.listOfRestaurant.find(c => c.accountId == $event).categoryId;
+        let restaurantId = this.listOfRestaurant.find(c => c.accountId == $event).resId;
+        for (let i = 0; i < categories.length; i++) {
+          let data = {
+            id: this.listOfCategory.find(c => c.categoryName == categories[i]).id,
+            categoryName: this.listOfCategory.find(c => c.categoryName == categories[i]).categoryName
+          }
+          this.listOfCategoryFilter.push(data)
+          console.log(this.listOfCategoryFilter)
+        }
+        //to inital generate foodId
+        if (this.foodIdOfGenerate.length == 0) {
+          this.generatefoodId = "";
+          let No = 0;
+          if (this.listOfFood.filter(c => c.restaurantId == $event).length == 0)
+            No = 1;
+          else
+            No = (this.listOfFood.filter(c => c.restaurantId == $event).length) + 1;
+          this.generatefoodId = restaurantId + this.generatefoodId.padStart(0, '0') + No;
+        }
+      });
     }
   }
   getRestaurant() {
     this.restaurantservice.getAllRestaurant().subscribe(res => {
-      this.listOfRestaurant = res.filter(c=>c.accountId == localStorage.getItem("userId"));
-      this.SelectedRestaurantId =this.listOfRestaurant.find(c=>c.accountId).accountId
+      this.listOfRestaurant = res.filter(c => c.accountId == localStorage.getItem("userId"));
+      this.SelectedRestaurantId = this.listOfRestaurant.find(c => c.accountId).accountId
     })
   }
-  filter(ev){
+  filter(ev) {
     this.foodService.getAllFood().subscribe(res => {
-     this.listOfFoodFilter = res.filter(c=>c.type==ev.target.value);
-    this.foodOfRestaurantLength = this.listOfFoodFilter.length;
-   })
+      this.listOfFoodFilter = res.filter(c => c.type == ev.target.value);
+      this.foodOfRestaurantLength = this.listOfFoodFilter.length;
+    })
   }
   saveFood() {
     if (this.base64textString !== undefined) {
@@ -161,7 +164,7 @@ export class FoodPage implements OnInit {
           restaurantId: this.regform.get('restaurantId').value,
           foodId: this.foodIdOfGenerate,
         };
-        this.foodService.updateFood(data).subscribe(res=>{
+        this.foodService.updateFood(data).subscribe(res => {
           alert(res.toString());
         })
       }

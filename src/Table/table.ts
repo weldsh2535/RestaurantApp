@@ -87,6 +87,7 @@ export class Account {
     locationId: number; // Restaurant
     active: string;
     type: string;
+    photo: string;
 }
 export class Order {
     id: number;

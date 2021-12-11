@@ -11,19 +11,19 @@ import { NotFoundError } from '../common/not-found-error';
 })
 export class FoodService {
   readonly APIURL = environment.apiURL;
-  constructor( private http: HttpClient) {
+  constructor(private http: HttpClient) {
   }
   create(val: any) {
-    return this.http.post(this.APIURL + '/Food', val);
+    return this.http.post(this.APIURL + '/food', val);
   }
   getAllFood(): Observable<any[]> {
-    return this.http.get<any>(this.APIURL + '/Food');
+    return this.http.get<any>(this.APIURL + '/food');
   }
   updateFood(val: any) {
-    return this.http.put(this.APIURL + '/Food/', val);
+    return this.http.put(this.APIURL + '/food/', val);
   }
   removeFood(id) {
-    return this.http.delete(this.APIURL + '/Food/' + id).toPromise();
+    return this.http.delete(this.APIURL + '/food/' + id).toPromise();
   }
   private handleError(error: Response) {
     if (error.status === 400) {

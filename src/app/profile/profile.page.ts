@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Plugins, CameraSource, CameraResultType } from '@capacitor/core';
 import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
 import { Account } from 'src/Table/table';
 import { AccountService } from '../Service/account.service';
 import { AuthService } from '../Service/auth.service';
@@ -19,19 +19,23 @@ export class ProfilePage implements OnInit {
   base64textString: string;
   photo: string;
   listOfAccount: Account[];
-  fullName:string
+  fullName: string
+  loader: any;
   constructor(private router: Router, private authServices: AuthService,
     private alertCtrl: AlertController, private accountService: AccountService,
-    private fb: FormBuilder) { }
+    private fb: FormBuilder, private loadingController: LoadingController) { }
 
   ngOnInit() {
     this.getAccount();
   }
   getAccount() {
-    this.accountService.getAllAccount().subscribe(res => {
+    this.accountService.getAllAccount().subscribe(async res => {
       this.listOfAccount = res;
       this.base64textString = res.find(c => c.id == localStorage.getItem("userId")).photo;
-      this.fullName = res.find(c=>c.id==localStorage.getItem("userId")).FullName
+      this.fullName = res.find(c => c.id == localStorage.getItem("userId")).FullName
+    }, async (err) => {
+      await this.loader.dismiss().then();
+      console.log(err);
     })
   }
   account() {
@@ -44,18 +48,18 @@ export class ProfilePage implements OnInit {
     this.router.navigate(["/contact"]);
   }
   async logout(): Promise<void> {
-      localStorage.setItem("userId", null);
-      localStorage.setItem("fullName", null);
-      localStorage.setItem("active", null);
-      localStorage.setItem("roleType", null);
-      this.router.navigateByUrl('login');
-      async error => {
-        const alert = await this.alertCtrl.create({
-          message: error.message,
-          buttons: [{ text: 'ok', role: 'cancel' }],
-        });
-        await alert.present();
-      }
+    localStorage.setItem("userId", null);
+    localStorage.setItem("fullName", null);
+    localStorage.setItem("active", null);
+    localStorage.setItem("roleType", null);
+    this.router.navigateByUrl('login');
+    async error => {
+      const alert = await this.alertCtrl.create({
+        message: error.message,
+        buttons: [{ text: 'ok', role: 'cancel' }],
+      });
+      await alert.present();
+    }
   }
   onPickImage() {
     if (this.usePicker == true) {
@@ -75,16 +79,22 @@ export class ProfilePage implements OnInit {
         this.base64textString = 'data:image/png;base64,' + image.base64String;
         let accounts = this.listOfAccount.find(c => c.id == +localStorage.getItem("userId"));
         let data = {
+          id: accounts.id,
           email: accounts.email,
           phonenumber: accounts.phonenumber,
           password: accounts.password,
-          FullName: accounts.fullName,
-          FirstTimeLocation: accounts.locationId,
+          fullName: accounts.fullName,
+          locationId: accounts.locationId,
           active: accounts.active,
           type: accounts.type,
           photo: this.base64textString
         }
-        this.accountService.updateAccount(data)
+        this.accountService.updateAccount(data).subscribe(async res => {
+          console.log(res);
+        }, async (err) => {
+          await this.loader.dismiss().then();
+          console.log(err);
+        })
       })
       .catch(error => {
         console.log(error);

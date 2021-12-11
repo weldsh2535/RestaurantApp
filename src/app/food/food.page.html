@@ -1,104 +1,119 @@
 <ion-header [translucent]="true">
-  <ion-toolbar color="primary" >
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-   <ion-title style="text-align: center;">Food</ion-title>
+    <ion-title style="text-align: center;">Food</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <form [formGroup]="regform">
     <ion-item>
-       <ion-label>Name </ion-label>
-       <ion-input formControlName="name" type="text"></ion-input>
-       <small class="form-text text-muted" *ngIf="!regform.get('name').valid && regform.get('name').touched" > This field is required! </small> 
-     </ion-item>
-     <ion-item>
-       <ion-label>Price</ion-label>
-       <ion-input formControlName="price" type="text"></ion-input>
-       <small class="form-text text-muted" *ngIf="!regform.get('price').valid && regform.get('price').touched" > This field is required! </small> 
-     </ion-item>
-      <ion-item>
-       <ion-label>Type</ion-label>
-       <ion-select interface="popover" formControlName="type" [(ngModel)]="itemType">
+      <ion-label>Name </ion-label>
+      <ion-input formControlName="name" type="text"></ion-input>
+      <small class="form-text text-muted" *ngIf="!regform.get('name').valid && regform.get('name').touched"> This field
+        is required! </small>
+    </ion-item>
+    <ion-item>
+      <ion-label>Price</ion-label>
+      <ion-input formControlName="price" type="text"></ion-input>
+      <small class="form-text text-muted" *ngIf="!regform.get('price').valid && regform.get('price').touched"> This
+        field is required! </small>
+    </ion-item>
+    <ion-item>
+      <ion-label>Type</ion-label>
+      <ion-select interface="popover" formControlName="type" [(ngModel)]="itemType">
         <ion-select-option value="Food">Food</ion-select-option>
         <ion-select-option value="Drink">Drink</ion-select-option>
         <ion-select-option value="other">other</ion-select-option>
       </ion-select>
-       <small class="form-text text-muted" *ngIf="!regform.get('type').valid && regform.get('type').touched" > This field is required! </small> 
-     </ion-item>
-     <ion-item>
+      <small class="form-text text-muted" *ngIf="!regform.get('type').valid && regform.get('type').touched"> This field
+        is required! </small>
+    </ion-item>
+    <ion-item>
       <ion-label>Restaurant Id</ion-label>
-      <ion-select interface="popover" formControlName="restaurantId" (ngModelChange)="selectRestaurant($event)" [(ngModel)]="SelectedRestaurantId">
-        <ion-select-option   *ngFor="let code of listOfRestaurant" value="{{code?.accountId}}">
+      <ion-select interface="popover" formControlName="restaurantId" (ngModelChange)="selectRestaurant($event)"
+        [(ngModel)]="SelectedRestaurantId">
+        <ion-select-option *ngFor="let code of listOfRestaurant" value="{{code?.accountId}}">
           {{code?.name}}
         </ion-select-option>
       </ion-select>
-      </ion-item>
-     <ion-item>
+    </ion-item>
+    <ion-item>
       <ion-label>Category Id</ion-label>
       <ion-select interface="popover" formControlName="categoryId" [(ngModel)]="SelectedCategoryId">
-        <ion-select-option   *ngFor="let code of this.listOfCategoryFilter" value="{{code?.id}}">
+        <ion-select-option *ngFor="let code of listOfCategoryFilter" value="{{code?.id}}">
           {{code?.categoryName}}
         </ion-select-option>
       </ion-select>
-      </ion-item>
-  
-     <ion-item>
-       <ion-label>Description</ion-label>
-       <ion-input formControlName="description" type="text"></ion-input>
-       <small class="form-text text-muted" *ngIf="!regform.get('description').valid && regform.get('description').touched" > This field is required! </small> 
-     </ion-item>
-     <ion-item>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Description</ion-label>
+      <ion-input formControlName="description" type="text"></ion-input>
+      <small class="form-text text-muted"
+        *ngIf="!regform.get('description').valid && regform.get('description').touched"> This field is required!
+      </small>
+    </ion-item>
+    <ion-item>
       <ion-label>Cooking Time</ion-label>
-      <ion-datetime formControlName="cookingTime" display-format="h:mm A" picker-format="h:mm A" value="1990-02-19T07:43Z"></ion-datetime>
-      <small class="form-text text-muted" *ngIf="!regform.get('cookingTime').valid && regform.get('cookingTime').touched" > This field is required! </small> 
+      <ion-datetime formControlName="cookingTime" display-format="h:mm A" picker-format="h:mm A"
+        value="1990-02-19T07:43Z"></ion-datetime>
+      <small class="form-text text-muted"
+        *ngIf="!regform.get('cookingTime').valid && regform.get('cookingTime').touched"> This field is required!
+      </small>
     </ion-item>
     <ion-item>
       <ion-label>DeliveryTime</ion-label>
-      <ion-datetime formControlName="deliveryTime" display-format="h:mm A" picker-format="h:mm A" value="1990-02-19T07:43Z"></ion-datetime>
-      <small class="form-text text-muted" *ngIf="!regform.get('deliveryTime').valid && regform.get('deliveryTime').touched" > This field is required! </small> 
+      <ion-datetime formControlName="deliveryTime" display-format="h:mm A" picker-format="h:mm A"
+        value="1990-02-19T07:43Z"></ion-datetime>
+      <small class="form-text text-muted"
+        *ngIf="!regform.get('deliveryTime').valid && regform.get('deliveryTime').touched"> This field is required!
+      </small>
     </ion-item>
-   
-   <div class="picker">
-    <ion-img role="button" class="image" (click)="onPickImage()" [src]="base64textString"
-      *ngIf="base64textString"></ion-img>
-    <ion-button color="primary" (click)="onPickImage()" *ngIf="!base64textString">
-      <ion-icon name="camera" slot="start"></ion-icon>
-      <ion-label>Take Picture</ion-label>
-    </ion-button>
-  </div>
-  <input hidden type="file" accept="image/jpeg" *ngIf="usePicker" #filePicker (change)="onFileChosen($event)" />
+
+    <div class="picker">
+      <ion-img role="button" class="image" (click)="onPickImage()" [src]="base64textString" *ngIf="base64textString">
+      </ion-img>
+      <ion-button color="primary" (click)="onPickImage()" *ngIf="!base64textString">
+        <ion-icon name="camera" slot="start"></ion-icon>
+        <ion-label>Take Picture</ion-label>
+      </ion-button>
+    </div>
+    <input hidden type="file" accept="image/jpeg" *ngIf="usePicker" #filePicker (change)="onFileChosen($event)" />
     <div style="text-align: center; margin: auto;">
-       <ion-button id="add items" (click)="saveFood()"> 
-         <ion-icon slot="start" name="add-circle-outline"></ion-icon>
-         {{editMode?'Update Food':'Add Food'}}</ion-button>
-     </div> 
- </form>
- <ion-item>
-  <ion-label style="margin-left: 12px;">list of food </ion-label>
-   <ion-select interface="popover" class="form-control" (ionChange)="filter($event)" placeholder="Food or Drink">
+      <ion-button id="add items" (click)="saveFood()">
+        <ion-icon slot="start" name="add-circle-outline"></ion-icon>
+        {{editMode?'Update Food':'Add Food'}}
+      </ion-button>
+    </div>
+  </form>
+  <ion-item>
+    <ion-label style="margin-left: 12px;">list of food </ion-label>
+    <ion-select interface="popover" class="form-control" (ionChange)="filter($event)" placeholder="Food or Drink">
       <ion-select-option value="Drink">Drink</ion-select-option>
       <ion-select-option value="Food">Food</ion-select-option>
     </ion-select>
-  <ion-badge slot="end">{{foodOfRestaurantLength}}</ion-badge>
-</ion-item>
- <ion-item-sliding  *ngFor="let item of listOfFoodFilter " #slidingItem >
- <ion-item detail>
-    <ion-thumbnail slot="start">
-      <img [src]="item.picture">
-    </ion-thumbnail>
-    <ion-label> {{item.name}}</ion-label>
-    <ion-label> {{item.price}}</ion-label>
-    <ion-label> {{item.description}}</ion-label>
-    <ion-label> {{item.type}} </ion-label>
+    <ion-badge slot="end">{{foodOfRestaurantLength}}</ion-badge>
   </ion-item>
-  <ion-item-options side="start">
-    <ion-item-option color="danger" (click)="edit(item,slidingItem)">
-   <ion-icon  name="create" slot="icon-only"></ion-icon></ion-item-option>
-   <ion-item-option color="danger" (click)="delete(item,slidingItem)">
-    <ion-icon  name="trash" slot="icon-only"></ion-icon></ion-item-option>
-  </ion-item-options>
-</ion-item-sliding>
+  <ion-item-sliding *ngFor="let item of listOfFoodFilter " #slidingItem>
+    <ion-item detail>
+      <ion-thumbnail slot="start">
+        <img [src]="item.picture">
+      </ion-thumbnail>
+      <ion-label> {{item.name}}</ion-label>
+      <ion-label> {{item.price}}</ion-label>
+      <ion-label> {{item.description}}</ion-label>
+      <ion-label> {{item.type}} </ion-label>
+    </ion-item>
+    <ion-item-options side="start">
+      <ion-item-option color="danger" (click)="edit(item,slidingItem)">
+        <ion-icon name="create" slot="icon-only"></ion-icon>
+      </ion-item-option>
+      <ion-item-option color="danger" (click)="delete(item,slidingItem)">
+        <ion-icon name="trash" slot="icon-only"></ion-icon>
+      </ion-item-option>
+    </ion-item-options>
+  </ion-item-sliding>
 </ion-content>

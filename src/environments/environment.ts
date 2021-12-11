@@ -1,6 +1,5 @@
-import * as firebase from "firebase";
 
 export const environment = {
   production: false,
-   apiURL:'http://localhost:49347/api',
+  apiURL: 'http://192.168.0.103:8009/api',
 };

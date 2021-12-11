@@ -8,9 +8,9 @@ import { environment } from 'src/environments/environment';
 })
 export class AuthService {
   readonly APIURL = environment.apiURL;
-  constructor( private http: HttpClient) {
+  constructor(private http: HttpClient) {
   }
   getAllAccount(): Observable<any[]> {
-    return this.http.get<any>(this.APIURL + '/Account');
+    return this.http.get<any>(this.APIURL + '/account');
   }
 }

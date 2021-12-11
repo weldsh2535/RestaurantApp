@@ -12,19 +12,19 @@ import { NotFoundError } from '../common/not-found-error';
 export class AccountService {
 
   readonly APIURL = environment.apiURL;
-  constructor( private http: HttpClient) {
+  constructor(private http: HttpClient) {
   }
   create(val: any) {
-    return this.http.post(this.APIURL + '/Account', val);
+    return this.http.post(this.APIURL + '/account', val);
   }
   getAllAccount(): Observable<any[]> {
-    return this.http.get<any>(this.APIURL + '/Account');
+    return this.http.get<any>(this.APIURL + '/account');
   }
   updateAccount(val: any) {
-    return this.http.put(this.APIURL + '/Account/', val);
+    return this.http.put(this.APIURL + '/account/', val);
   }
   removeAccount(id) {
-    return this.http.delete(this.APIURL + '/Account/' + id).toPromise();
+    return this.http.delete(this.APIURL + '/account/' + id).toPromise();
   }
 
   private handleError(error: Response) {

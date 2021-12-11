@@ -21,33 +21,33 @@ export class OrderService {
   private orderCollectionList: AngularFirestoreCollection<any>;
   private orderList: Observable<Order[]>;
   amount: number;
-  private order=[];
-  private orderItemCount  = new BehaviorSubject(0);
+  private order = [];
+  private orderItemCount = new BehaviorSubject(0);
   readonly APIURL = environment.apiURL;
-  constructor( private http: HttpClient,
+  constructor(private http: HttpClient,
     private sharedService: SharedService) {
-}
+  }
 
   create(val: any) {
-    return this.http.post(this.APIURL + '/Order', val);
+    return this.http.post(this.APIURL + '/order', val);
   }
   getAllOrder(): Observable<any[]> {
-    return this.http.get<any>(this.APIURL + '/Order');
+    return this.http.get<any>(this.APIURL + '/order');
   }
   updateOrder(val: any) {
-    return this.http.put(this.APIURL + '/Order/', val);
+    return this.http.put(this.APIURL + '/order/', val);
   }
-  updateOrderStatus(val:any){
-    return this.http.put(this.APIURL + '/OrderStatus/', val);
+  updateOrderStatus(val: any) {
+    return this.http.put(this.APIURL + '/orderstatus/', val);
   }
-  updateRestaurantStatus(val:any){
-    return this.http.put(this.APIURL + '/RestaurantStatus/', val);
+  updateRestaurantStatus(val: any) {
+    return this.http.put(this.APIURL + '/restaurantstatus/', val);
   }
-  updateStatus(val: any){
-    return this.http.put(this.APIURL + '/Status/', val)
+  updateStatus(val: any) {
+    return this.http.put(this.APIURL + '/status/', val)
   }
   removeOrder(id) {
-    return this.http.delete(this.APIURL + '/Order/' + id).toPromise();
+    return this.http.delete(this.APIURL + '/order/' + id).toPromise();
   }
   private handleError(error: Response) {
     if (error.status === 400)
@@ -59,13 +59,13 @@ export class OrderService {
   getCart() {
     return this.cart;
   }
-  getOrders(){
+  getOrders() {
     return this.order;
   }
   getCartItemCount() {
     return this.cartItemCount;
   }
-  getOrderItemCount(){
+  getOrderItemCount() {
     return this.orderItemCount;
   }
   getRestaurantId() {
@@ -75,15 +75,15 @@ export class OrderService {
     return this.orderStatus;
   }
   addOrder(items) {
-   this.order =[]
-   this.amount =0;
-    this.order.forEach(el=>{
-      let index = this.order.indexOf(c=>c.orderDetailsId===el.orderDetailsId)
-      this.order.splice(index,1)
+    this.order = []
+    this.amount = 0;
+    this.order.forEach(el => {
+      let index = this.order.indexOf(c => c.orderDetailsId === el.orderDetailsId)
+      this.order.splice(index, 1)
     });
     this.orderItemCount.next(0);
     items.forEach(element => {
-    this.amount = this.amount + element.amount
+      this.amount = this.amount + element.amount
       let data = {
         CookingTime: element.CookingTime,
         DeliveryTime: element.DeliveryTime,
@@ -95,11 +95,11 @@ export class OrderService {
         id: element.Food,
         picture: element.picture,
         restaurantId: element.restaurantId,
-        type:element.type,
-        orderDetailsId:element.orderDetailsId,
+        type: element.type,
+        orderDetailsId: element.orderDetailsId,
       }
       this.order.push(data);
-      });
+    });
     this.orderItemCount.next(this.orderItemCount.value + this.amount);
   }
   addProduct(product) {
