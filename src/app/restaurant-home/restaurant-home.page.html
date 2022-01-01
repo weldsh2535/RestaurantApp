@@ -6,24 +6,23 @@
     <ion-title style="text-align: center">Orders</ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" #pageTop scrollEvents="true" (ionScroll)="scroll($event)">
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <div class="message" *ngIf="massge" >
+  <div class="message" *ngIf="massge==true">
     <ion-grid class="message">
       <ion-row class="message">
-        <ion-label class="message">{{message}}</ion-label>
+        <ion-label style="margin-left: 86px;margin-top: 26px;font-size: 24px;text-align: center;">{{messageOrder}}
+        </ion-label>
       </ion-row>
     </ion-grid>
   </div>
   <div class="orders">
-    <ion-row *ngFor="let meal of listOfOrder ;let i = index; odd as o; even as e;"
-    [ngClass]="{
+    <ion-row *ngFor="let meal of listOfOrder ;let i = index; odd as o; even as e;" [ngClass]="{
       'odd-active': o,
       'even-active': e
-    }"
-     class="ion-padding meal-row">
+    }" class="ion-padding meal-row">
       <ion-col size="8" class="border-bottom">
         <ion-label>
           <p color="primary">Total : {{ meal.Total | currency:'ETB' }}</p>
@@ -32,10 +31,10 @@
         <ion-button fill="clear" (click)="viewOrder(meal.id)">
           view order
         </ion-button>
-       <ion-row *ngIf="meal.checkStatusofValue == false">
+        <ion-row *ngIf="meal.checkStatusofValue == false">
           <div *ngFor="let status of meal.status; let k = index" [hidden]="setDisabled(status)">
-            <ion-button  (click)="toggleGroup(meal,i,status.val,k)"> {{status.val}}</ion-button>
-           </div>
+            <ion-button (click)="toggleGroup(meal,i,status.val,k)"> {{status.val}}</ion-button>
+          </div>
         </ion-row>
         <!-- *ngIf="selectedIndex == i" -->
         <ion-row class="status" *ngIf="meal.checkStatus== false">
@@ -61,4 +60,11 @@
       </ion-col>
     </ion-row>
   </div>
+  
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed"
+    [ngClass]="{'location-visible':showScroll,'location-hidden':!showScroll}">
+    <ion-fab-button color="light" (click)="pageScroller()">
+      <ion-icon md="chevron-up-outline" ios="chevron-up-circle-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

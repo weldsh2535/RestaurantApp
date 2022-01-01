@@ -51,8 +51,8 @@ export class MenuPage implements OnInit {
       { title: 'Add food', url: '/food', icon: 'fast-food' },
       { title: 'food-content', url: '/food-content', icon: 'list' },
       { title: 'location', url: '/location', icon: 'locate' },
-      { title: 'orders', url: '/restaurant-home', icon: 'cart' },
-      { title: 'My orders', url: '/restaurant-history', icon: 'cart' },
+      { title: 'Restaurant Home', url: '/restaurant-home', icon: 'cart' },
+      { title: 'Restaurant Orders', url: '/restaurant-history', icon: 'cart' },
       { title: 'profile', url: '/profile', icon: 'person' }
     ];
     this.getRoute();
@@ -61,7 +61,10 @@ export class MenuPage implements OnInit {
   getAccount() {
     this.accountService.getAllAccount().subscribe(async res => {
       this.listOfAccount = res;
-      this.base64textString = res.find(c => c.id == localStorage.getItem("userId")).photo;
+      let userId = localStorage.getItem("userId");
+      if (userId != "null") {
+        this.base64textString = res.find(c => c.id == +userId).photo;
+      }
     }, async (err) => {
       await this.loader.dismiss().then();
       console.log(err);
@@ -86,7 +89,7 @@ export class MenuPage implements OnInit {
                 let rol = this.ListOfMenu1.filter(c => c.title == isFound[0].compName)[0];
                 if (rol) {
                   let y = {
-                    title: isFound[0].compName,
+                    title: isFound[0].description,
                     url: rol.url,
                     icon: rol.icon
                   }

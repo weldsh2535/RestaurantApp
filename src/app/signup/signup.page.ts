@@ -28,7 +28,7 @@ export class SignupPage implements OnInit {
       FirstTimeLocation: ["", Validators.required],
       password: ["", Validators.required],
       confirmPassword: ["", Validators.required],
-      type:[""],
+      type: ['restaurant'],
       active:[""],
     })
   }
@@ -41,10 +41,12 @@ export class SignupPage implements OnInit {
         }
         else{
           this.regform.get("active").setValue("false");
-          this.accountService.create(this.regform.value);
-           this.router.navigate(["/menu/login"]);
+          this.accountService.create(this.regform.value).subscribe(res => {
+            console.log(res);
+            this.router.navigate(["/menu/login"]);
+          });
         }
-        
+        this.regform.reset();
       }
       else {
         this.ErrorAlert("Please Enter All field.");
@@ -55,7 +57,7 @@ export class SignupPage implements OnInit {
     }
   }
   login() {
-    this.router.navigate(["/menu/login"]);
+    this.router.navigate(["/login"]);
   }
   async presentAlertConfirm(account: Account) {
     const alert = await this.alertController.create({

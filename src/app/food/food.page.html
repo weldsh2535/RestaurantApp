@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content #pageTop scrollEvents="true" (ionScroll)="scroll($event)">
   <form [formGroup]="regform">
     <ion-item>
       <ion-label>Name </ion-label>
@@ -116,4 +116,10 @@
       </ion-item-option>
     </ion-item-options>
   </ion-item-sliding>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed"
+    [ngClass]="{'location-visible':showScroll,'location-hidden':!showScroll}">
+    <ion-fab-button color="light" (click)="pageScroller()">
+      <ion-icon md="chevron-up-outline" ios="chevron-up-circle-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

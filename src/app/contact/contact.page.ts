@@ -8,7 +8,7 @@ import { AccountService } from '../Service/account.service';
 })
 export class ContactPage implements OnInit {
   listOfAccount:any;
-  address: string;
+  address: any;
   email: string;
 
   constructor(private accountService:AccountService) { }
@@ -16,8 +16,8 @@ export class ContactPage implements OnInit {
   ngOnInit() {
     this.accountService.getAllAccount().subscribe(res=>{
       let id = localStorage.getItem('userId');
-      this.address = res.find(c=>c.id==id).FirstTimeLocation;
-      this.email = res.find(c=>c.id==id).email;
+      this.address = res.find(c=>c.id==+id).locationId;
+      this.email = res.find(c=>c.id==+id).email;
     })
   }
   buttonClick(){

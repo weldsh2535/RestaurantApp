@@ -10,16 +10,8 @@ const routes: Routes = [
     component: MenuPage,
     children: [
       {
-        path: 'restaurant',
-        loadChildren: () => import('../restaurant/restaurant.module').then(m => m.RestaurantPageModule)
-      },
-      {
         path: 'food',
         loadChildren: () => import('../food/food.module').then(m => m.FoodPageModule)
-      },
-      {
-        path: 'account',
-        loadChildren: () => import('../account/account.module').then(m => m.AccountPageModule)
       },
       {
         path: 'food-content',
@@ -29,11 +21,7 @@ const routes: Routes = [
         path: 'location',
         loadChildren: () => import('../location/location.module').then(m => m.LocationPageModule)
       },
-      {
-        path: 'cart-modal',
-        loadChildren: () => import('../cart-modal/cart-modal.module').then(m => m.CartModalPageModule)
-      },
-      {
+     {
         path: 'login',
         loadChildren: () => import('../login/login.module').then(m => m.LoginPageModule)
       },

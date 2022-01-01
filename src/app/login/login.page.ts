@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController, ModalController, Platform } from '@ionic/angular';
 import { AuthService } from '../Service/auth.service';
@@ -22,8 +22,8 @@ export class LoginPage implements OnInit {
 
 	ngOnInit() {
 		this.regform = this.fb.group({
-			email: [""],
-			password: [""]
+			email: ["",Validators.compose([Validators.required,Validators.email])],
+			password: ["",Validators.required]
 		})
 	}
 	signIn() {
@@ -57,6 +57,9 @@ export class LoginPage implements OnInit {
 				 console.log(err);
 				});
 		}
+		else {
+			this.errorAlert();
+		}
 	}
 	ionViewDidEnter() {
 		this.subscription = this.platform.backButton.subscribe(() => {
@@ -73,6 +76,15 @@ export class LoginPage implements OnInit {
 			header: 'Login',
 			// subHeader: 'Subtitle',
 			message: message,
+			buttons: ['OK']
+		});
+		await alert.present();
+	}
+	async errorAlert() {
+		const alert = await this.alertCtrl.create({
+			cssClass: 'my-custom-class',
+			header: 'Error',
+			message: 'Please Enter All field.',
 			buttons: ['OK']
 		});
 		await alert.present();

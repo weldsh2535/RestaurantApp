@@ -1,29 +1,32 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title style="text-align: center">signup</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="detail"></ion-back-button>
+    </ion-buttons>
+    <ion-title style="text-align: center">Sign Up</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <form [formGroup]="regform">
     <ion-item>
-      <ion-label>Full Name</ion-label>
+      <ion-label position="floating">Full Name</ion-label>
       <ion-input formControlName="FullName" type="text"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>Email </ion-label>
+      <ion-label position="floating">Email </ion-label>
       <ion-input formControlName="email" type="text"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>Phone number</ion-label>
+      <ion-label position="floating">Phone number</ion-label>
       <ion-input formControlName="phonenumber" type="text"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>Location</ion-label>
+      <ion-label position="floating">Location</ion-label>
       <ion-input formControlName="FirstTimeLocation" type="text"></ion-input>
     </ion-item>
-    <ion-item>
-      <ion-label>Type</ion-label>
+    <ion-item hidden>
+      <ion-label >Type</ion-label>
       <ion-select interface="popover" formControlName="type">
         <ion-select-option value="driver">Driver</ion-select-option>
         <ion-select-option value="restaurant">Restaurant</ion-select-option>
@@ -32,20 +35,21 @@
       </ion-select>
     </ion-item>
     <ion-item>
-      <ion-label>Password</ion-label>
+      <ion-label position="floating">Password</ion-label>
       <ion-input [type]="fieldTextType ? 'text' : 'password'" formControlName="password" [required]></ion-input>
       <i class="fa" [ngClass]="{'fa-eye-slash': !fieldTextType,'fa-eye': fieldTextType }"
         (click)="toggleFieldTextType()"></i>
     </ion-item>
     <ion-item>
-      <ion-label>Confirm Password</ion-label>
+      <ion-label position="floating">Confirm Password</ion-label>
       <ion-input [type]="conformPassword ? 'text' : 'password'" formControlName="confirmPassword" [required]>
       </ion-input>
       <i class="fa" [ngClass]="{'fa-eye-slash': !conformPassword,'fa-eye': conformPassword }" 
         (click)="conPassword()"></i>
     </ion-item>
     <div style="text-align: center; margin: auto">
-      <ion-button expand="full" (click)="registerAccount()">
+      <ion-button style="border-top-left-radius: 20px;
+    border-top-right-radius: 20px;" expand="full" (click)="registerAccount()">
         <ion-icon slot="start" name="add-circle-outline"></ion-icon>
         Sign Up
       </ion-button>

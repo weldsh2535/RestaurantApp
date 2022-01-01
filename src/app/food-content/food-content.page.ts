@@ -44,7 +44,7 @@ export class FoodContentPage implements OnInit {
   getFood(){
     this.foodService.getAllFood().subscribe(res=>{
       this.listOfFood = res;
-      this.defualtFoodContent = res[0].Name
+      this.defualtFoodContent = res[0].name
     })
   }
   getFoodContent() {

@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Plugins, CameraSource, CameraResultType } from '@capacitor/core';
-import { AlertController, IonItemSliding, ModalController, Platform } from '@ionic/angular';
+import { AlertController, IonContent, IonItemSliding, LoadingController, ModalController, Platform } from '@ionic/angular';
 import { Category, Food, Restaurant } from 'src/Table/table';
 import { CategoryService } from '../Service/category.service';
 import { FoodService } from '../Service/food.service';
@@ -13,6 +13,7 @@ import { RestaurantService } from '../Service/restaurant.service';
 })
 export class FoodPage implements OnInit {
   @ViewChild('filePicker', { static: false }) filePickerRef: ElementRef<HTMLInputElement>;
+  @ViewChild('pageTop') pageTop: IonContent
   usePicker = false;
   regform = this.fb.group({});
   foodId: number;
@@ -30,17 +31,22 @@ export class FoodPage implements OnInit {
   id: any;
   generatefoodId: string = '0';
   foodIdOfGenerate: string = "";
+  showScroll: boolean = false
+  public pageScroller() {
+    this.pageTop.scrollToTop();
+  }
   constructor(private fb: FormBuilder,
     private foodService: FoodService,
     private alertController: AlertController,
     private platform: Platform,
     private modalController: ModalController,
     private categoryService: CategoryService,
-    private restaurantservice: RestaurantService) {
+    private restaurantservice: RestaurantService,
+    private loadingController:LoadingController) {
     this.getCategory();
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.regform = this.fb.group({
       name: ["", Validators.required],
       price: ["", Validators.required],
@@ -64,10 +70,10 @@ export class FoodPage implements OnInit {
   }
   generateFoodId() {
     let No = 0;
-    this.foodService.getAllFood().subscribe(res => {
+    this.foodService.getAllFood().subscribe(async res => {
       if (this.listOfRestaurant != undefined) {
         let resObj = this.listOfRestaurant.find(c => c.accountId == +localStorage.getItem("userId"));
-        let foodObj = res.filter(c => c.restaurantId == resObj.id);
+        let foodObj = await res.filter(c => c.restaurantId == (resObj.id).toString());
         if (foodObj.length == 0)
           No = 1;
         else
@@ -86,23 +92,23 @@ export class FoodPage implements OnInit {
     }, 200);
   }
   getFood() {
-    this.foodService.getAllFood().subscribe(res => {
-      this.listOfFood = res;
-      this.listOfFoodFilter = res.filter(c => c.restaurantId == localStorage.getItem("userId"));
+    this.foodService.getAllFood().subscribe(async res => {
+      this.listOfFood = await res;
+      this.listOfFoodFilter = await res.filter(c => c.restaurantId == localStorage.getItem("userId"));
       this.foodOfRestaurantLength = this.listOfFoodFilter.length;
     })
   }
   getCategory() {
-    this.categoryService.getAllCategory().subscribe(res => {
-      this.listOfCategory = res;
+    this.categoryService.getAllCategory().subscribe(async res => {
+      this.listOfCategory = await res;
     })
   }
   selectRestaurant($event) {
     this.id = $event;
     this.listOfCategoryFilter = [];
     if ($event !== undefined && $event != null) {
-      this.foodService.getAllFood().subscribe(res => {
-        this.listOfFoodFilter = res.filter(c => c.restaurantId == $event);
+      this.foodService.getAllFood().subscribe(async res => {
+        this.listOfFoodFilter = await res.filter(c => c.restaurantId == $event);
         this.foodOfRestaurantLength = this.listOfFoodFilter.length;
         let categories = this.listOfRestaurant.find(c => c.accountId == $event).categoryId;
         let restaurantId = this.listOfRestaurant.find(c => c.accountId == $event).resId;
@@ -128,14 +134,14 @@ export class FoodPage implements OnInit {
     }
   }
   getRestaurant() {
-    this.restaurantservice.getAllRestaurant().subscribe(res => {
-      this.listOfRestaurant = res.filter(c => c.accountId == localStorage.getItem("userId"));
+    this.restaurantservice.getAllRestaurant().subscribe(async res => {
+      this.listOfRestaurant = await res.filter(c => c.accountId == +localStorage.getItem("userId"));
       this.SelectedRestaurantId = this.listOfRestaurant.find(c => c.accountId).accountId
     })
   }
   filter(ev) {
-    this.foodService.getAllFood().subscribe(res => {
-      this.listOfFoodFilter = res.filter(c => c.type == ev.target.value);
+    this.foodService.getAllFood().subscribe(async res => {
+      this.listOfFoodFilter = await res.filter(c => c.type == ev.target.value && c.restaurantId == (this.SelectedRestaurantId).toString());
       this.foodOfRestaurantLength = this.listOfFoodFilter.length;
     })
   }
@@ -148,7 +154,10 @@ export class FoodPage implements OnInit {
     this.regform.get('foodId').setValue(this.generatefoodId)
     if (this.regform.valid) {
       if (!this.foodId) {
-        this.foodService.create(this.regform.value);
+        this.foodService.create(this.regform.value).subscribe(res => {
+          console.log(res.toString());
+          this.getFood();
+        });
       }
       else {
         const data = {
@@ -165,7 +174,8 @@ export class FoodPage implements OnInit {
           foodId: this.foodIdOfGenerate,
         };
         this.foodService.updateFood(data).subscribe(res => {
-          alert(res.toString());
+          console.log(res.toString());
+          this.getFood();
         })
       }
       this.base64textString = '';
@@ -181,11 +191,11 @@ export class FoodPage implements OnInit {
     this.editMode = true;
     this.foodId = food.id;
     this.foodIdOfGenerate = food.foodId;
-    this.regform.get('Name').setValue(food.name);
-    this.regform.get('CookingTime').setValue(food.cookingTime);
-    this.regform.get('DeliveryTime').setValue(food.deliveryTime);
-    this.regform.get('Description').setValue(food.description);
-    this.regform.get('Price').setValue(food.price);
+    this.regform.get('name').setValue(food.name);
+    this.regform.get('cookingTime').setValue(food.cookingTime);
+    this.regform.get('deliveryTime').setValue(food.deliveryTime);
+    this.regform.get('description').setValue(food.description);
+    this.regform.get('price').setValue(food.price);
     this.regform.get('type').setValue(food.type);
     this.regform.get('categoryId').setValue(food.categoryId);
     this.regform.get('restaurantId').setValue(food.restaurantId);
@@ -211,7 +221,10 @@ export class FoodPage implements OnInit {
         }, {
           text: 'OK',
           handler: () => {
-            this.foodService.removeFood(food.id);
+            this.foodService.removeFood(food.id).then(res => {
+              console.log(res.toString());
+              this.getFood();
+            });
             this.regform.reset();
             this.foodId = null;
           }
@@ -282,5 +295,8 @@ export class FoodPage implements OnInit {
   closeModal() {
     this.modalController.dismiss();
   }
-
+  scroll(ev) {
+    const offset = ev.detail.scrollTop;
+    this.showScroll = offset > 300;
+  }
 }

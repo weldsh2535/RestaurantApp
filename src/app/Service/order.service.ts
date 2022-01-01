@@ -31,8 +31,8 @@ export class OrderService {
   create(val: any) {
     return this.http.post(this.APIURL + '/order', val);
   }
-  getAllOrder(): Observable<any[]> {
-    return this.http.get<any>(this.APIURL + '/order');
+  getAllOrder(): Observable<Order[]> {
+    return this.http.get<Order[]>(this.APIURL + '/order');
   }
   updateOrder(val: any) {
     return this.http.put(this.APIURL + '/order/', val);

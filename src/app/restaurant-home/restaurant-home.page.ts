@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AlertController, LoadingController, ToastController } from '@ionic/angular';
+import { IonContent, LoadingController, ToastController } from '@ionic/angular';
 import LocationPicker from 'location-picker';
 import { Account, Order, OrderDetail } from 'src/Table/table';
 import { AccountService } from '../Service/account.service';
@@ -46,9 +46,14 @@ export class RestaurantHomePage implements OnInit {
   currentDate: string;
   increment: number = 0;
   massge: boolean;
-  message: string;
+  messageOrder: string;
   loader: HTMLIonLoadingElement;
   listOfRestaurant: any[];
+  @ViewChild('pageTop') pageTop: IonContent
+  showScroll: boolean = false;
+  public pageScroller() {
+    this.pageTop.scrollToTop();
+  }
   constructor(private foodService: FoodService,
     private fb: FormBuilder,
     private orderService: OrderService,
@@ -70,7 +75,7 @@ export class RestaurantHomePage implements OnInit {
   }
   async ngOnInit() {
     this.loader = await this.loadingController.create({
-      message: 'Getting Products ...',
+      message: 'Getting Orders ...',
       spinner: "bubbles",
       animated: true
     });
@@ -78,64 +83,65 @@ export class RestaurantHomePage implements OnInit {
     this.regform = this.fb.group({
       status: [""],
     })
-
     this.getAllOrder();
     this.getFood();
     this.getOrder();
     this.getOrderDetails();
   }
-  getFood() {
+  async getFood() {
     this.foodService.getAllFood().subscribe(async res => {
-      await this.loader.present().then();
-      this.listOfFood = res;
+      // await this.loader.dismiss().then();
+      this.listOfFood = await res;
     }, async (err) => {
       await this.loader.dismiss().then();
       console.log(err);
     })
   }
-  getAccount() {
+  async getAccount() {
     this.accountService.getAllAccount().subscribe(async res => {
-      await this.loader.present().then();
-      this.listOfAccount = res;
+      // await this.loader.dismiss().then();
+      this.listOfAccount = await res;
     }, async (err) => {
       await this.loader.dismiss().then();
       console.log(err);
     })
   }
-  getOrderDetails() {
+  async getOrderDetails() {
     this.orderDetailsService.getAllOrderDetail().subscribe(async res => {
-      await this.loader.dismiss().then();
-      this.listOfOrderDetails = res;
+      // await this.loader.dismiss().then();
+      this.listOfOrderDetails = await res;
     }, async (err) => {
       await this.loader.dismiss().then();
       console.log(err);
     })
   }
-  getAllOrder() {
+  async getAllOrder() {
     this.orderService.getAllOrder().subscribe(async result => {
-      await this.loader.dismiss().then();
-      this.listOfAllOrder = result;
+      // await this.loader.dismiss().then();
+      this.listOfAllOrder = await result;
     }, async (err) => {
       await this.loader.dismiss().then();
       console.log(err);
     });
   }
-  getRestaurant() {
+  async getRestaurant() {
     this.restaurantService.getAllRestaurant().subscribe(async res => {
-      // await this.loader.present().then();
-      this.listOfRestaurant = res;
+      //  await this.loader.dismiss().then();
+      this.listOfRestaurant = await res;
     }, async (err) => {
       await this.loader.dismiss().then();
       console.log(err);
     })
   }
-  getOrder() {
+
+  async getOrder() {
     this.listOfOrder = [];
     this.orderService.getAllOrder().subscribe(async res => {
       await this.loader.dismiss().then();
       this.UserId = localStorage.getItem("userId");
+      console.log(this.UserId)
       let resId = this.listOfRestaurant.find(c => c.accountId == this.UserId).id;
-      let result = res.filter(c => c.restaurantId == resId && c.restaurantStatuses.find(c => c.isChecked == false && c.val == "ready to service")
+      let result = await res.filter(c => c.restaurantId == this.UserId && c.restaurantStatuses.find(c => c.isChecked == false && c.val == "ready to service")
         && c.statuses.find(c => c.isChecked == false && c.val == "Reject"));
       this.orderStatus = result.filter(c => c.restaurantStatuses.find(entry => entry.isChecked == true && entry.val == "start cooking")
         || c.restaurantStatuses.find(entry => entry.isChecked == true && entry.val == "cooked")
@@ -163,9 +169,9 @@ export class RestaurantHomePage implements OnInit {
           let data = {
             id: element.id,
             DateTime: element.dateTime,
-            Customer: this.listOfAccount.find(c => c.id == element.customer).fullName,
-            PhoneNumber: this.listOfAccount.find(c => c.id == element.customer).phonenumber,
-            CLocation: this.listOfAccount.find(c => c.id == element.customer).locationId,
+            Customer: this.listOfAccount.find(c => c.id == +element.customer).fullName,
+            PhoneNumber: this.listOfAccount.find(c => c.id == +element.customer).phonenumber,
+            CLocation: this.listOfAccount.find(c => c.id == +element.customer).locationId,
             RLocation: element.location,
             Location: element.location,
             restaurantStatus: element.restaurantStatuses,
@@ -177,19 +183,20 @@ export class RestaurantHomePage implements OnInit {
             checkStatus: this.checkStatus,
             checkStatusofValue: this.statusofValue
           }
-          //this.listOfOrder.push(data);
           const dateOfOrders = new Date(element.dateTime).toDateString();
-          // console.log(dateOfOrders);
+          // console.log(dateOfOrders + "" + element.id);
           if (this.currentDate == dateOfOrders) {
             this.listOfOrder.push(data);
             this.increment = this.increment + 1;
-            console.log(this.statusofValue);
           }
           if (this.increment == 0) {
             this.massge = true
-            this.message = "no orders"
+            this.messageOrder = "no orders"
+            console.log(this.messageOrder)
           }
-          //console.log(this.listOfOrder)
+          else {
+            this.massge = false
+          }
           let status = element.restaurantStatuses.find(c => c.isChecked == true);
           let index = element.restaurantStatuses.findIndex(c => c.isChecked == true);
           if (index == 0) {
@@ -223,7 +230,8 @@ export class RestaurantHomePage implements OnInit {
         });
       }
       else {
-        this.message = "no orders"
+        this.massge = true
+        this.messageOrder = "no orders"
       }
     }, async (err) => {
       await this.loader.dismiss().then();
@@ -284,7 +292,8 @@ export class RestaurantHomePage implements OnInit {
     });
     this.restaurantstatus.forEach(element => {
       this.orderService.updateRestaurantStatus(element).subscribe(res => {
-        // alert(res.toString());
+        console.log(res.toString());
+        this.getOrder()
       })
     });
   }
@@ -332,20 +341,21 @@ export class RestaurantHomePage implements OnInit {
       let status = {
         id: element.id,
         val: element.val,
-        isChecked: this.checked
+        isChecked: this.checked,
+        Orderid: meal.id
       }
       this.status.push(status);
     });
     this.status.forEach(ele => {
       this.orderService.updateStatus(ele).subscribe(async res => {
         await this.loader.dismiss().then();
-        // alert(res.toString());
+        console.log(res.toString());
+        this.getOrder()
       }, async (err) => {
         await this.loader.dismiss().then();
         console.log(err);
       })
     })
-    this.getOrder();
     if (val !== "Reject") {
       let data1 = {
         id: event
@@ -378,5 +388,9 @@ export class RestaurantHomePage implements OnInit {
       message: message,
     });
     await toast.present();
+  }
+  scroll(ev) {
+    const offset = ev.detail.scrollTop;
+    this.showScroll = offset > 300;
   }
 }

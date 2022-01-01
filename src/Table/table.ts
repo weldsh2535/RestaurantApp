@@ -93,6 +93,7 @@ export class Order {
     id: number;
     restaurantId: string; // Restaurant
     dateTime: string;
+    deliveryTime: string;
     customer: string; //
     location: any; // Restaurant
     orderStatuses: any; // picked,start moving, delivered(finished)

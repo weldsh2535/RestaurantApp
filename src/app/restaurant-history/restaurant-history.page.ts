@@ -84,64 +84,69 @@ export class RestaurantHistoryPage implements OnInit {
     this.getOrderDetails();
     this.getRestaurant();
   }
-  getRestaurant() {
+  async getRestaurant() {
     this.restaurantService.getAllRestaurant().subscribe(async res => {
       await this.loader.present().then();
-      this.listOfRestaurant = res;
+      this.listOfRestaurant = await res;
     }, async (err) => {
       await this.loader.dismiss().then();
       console.log(err);
     })
   }
-  getOrderDetails() {
+  async getOrderDetails() {
     this.orderDetailsService.getAllOrderDetail().subscribe(async res => {
       await this.loader.dismiss().then();
-      this.listOfOrderDetails = res;
+      this.listOfOrderDetails = await res;
     }, async (err) => {
       await this.loader.dismiss().then();
       console.log(err);
     })
   }
-  getFood() {
+  async getFood() {
     this.foodService.getAllFood().subscribe(async res => {
       await this.loader.dismiss().then();
-      this.listOfFood = res;
+      this.listOfFood = await res;
     }, async (err) => {
       await this.loader.dismiss().then();
       console.log(err);
     })
   }
-  getOrder() {
+  async getOrder() {
     this.orderService.getAllOrder().subscribe(async res => {
       await this.loader.dismiss().then();
       this.UserId = localStorage.getItem("userId");
-      let resId = this.listOfRestaurant.find(c => c.accountId == this.UserId).id;
-      let result = res.filter(c => c.restaurantId == resId && c.restaurantStatuses.find(c => c.isChecked == true && c.val == "ready to service"));
-      if (result.length > 0) {
-        this.listOfOrder = [];
-        result.forEach(element => {
-          this.accountService.getAllAccount().subscribe(result => {
-            let data = {
-              id: element.id,
-              DateTime: element.dateTime,
-              Customer: result.find(c => c.id == element.customer).fullName,
-              PhoneNumber: result.find(c => c.id == element.customer).phonenumber,
-              CLocation: result.find(c => c.id == element.customer).locationId,
-              RLocation: element.location,
-              Location: element.location,
-              restaurantStatus: element.restaurantStatuses,
-              Total: element.total,
-              Driver: element.driver,
-              Vehicle: element.vehicle,
-              orderLocation: element.orderLocation
-            }
-            this.listOfOrder.push(data);
-          })
-        });
+      if (this.listOfRestaurant != undefined) {
+        let resId = this.listOfRestaurant.find(c => c.accountId == this.UserId).id;
+        let result = await res.filter(c => c.restaurantId == resId && c.restaurantStatuses.find(c => c.isChecked == true && c.val == "ready to service"));
+        if (result.length > 0) {
+          this.listOfOrder = [];
+          result.forEach(element => {
+            this.accountService.getAllAccount().subscribe(async result => {
+              let data = {
+                id: element.id,
+                DateTime: element.dateTime,
+                Customer: await result.find(c => c.id == +element.customer).fullName,
+                PhoneNumber: await result.find(c => c.id == +element.customer).phonenumber,
+                CLocation: await result.find(c => c.id == +element.customer).locationId,
+                RLocation: element.location,
+                Location: element.location,
+                restaurantStatus: element.restaurantStatuses,
+                Total: element.total,
+                Driver: element.driver,
+                Vehicle: element.vehicle,
+                orderLocation: element.orderLocation
+              }
+              this.listOfOrder.push(data);
+            })
+          });
+        }
+        else {
+          this.massge = true
+          this.message = "no orders"
+        }
       }
       else {
-        this.massge = true
-        this.message = "no orders"
+        this.getOrder();
       }
     }, async (err) => {
       await this.loader.dismiss().then();
@@ -253,9 +258,9 @@ export class RestaurantHistoryPage implements OnInit {
             let data = {
               id: element.id,
               DateTime: element.dateTime,
-              Customer: result.find(c => c.id == element.customer).fullName,
-              PhoneNumber: result.find(c => c.id == element.customer).phonenumber,
-              CLocation: result.find(c => c.id == element.customer).locationId,
+              Customer: result.find(c => c.id == +element.customer).fullName,
+              PhoneNumber: result.find(c => c.id == +element.customer).phonenumber,
+              CLocation: result.find(c => c.id == +element.customer).locationId,
               RLocation: element.location,
               Location: element.location,
               restaurantStatus: element.restaurantStatuses,
