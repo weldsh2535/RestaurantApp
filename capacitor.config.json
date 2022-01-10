@@ -1,6 +1,6 @@
 {
   "appId": "io.ionic.starter",
-  "appName": "MTK-Inv",
+  "appName": "MTK-RestuarantApp",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",

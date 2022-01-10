@@ -4,7 +4,7 @@ import { BadInput } from '../common/bad-input';
 import { NotFoundError } from '../common/not-found-error';
 import { AppError } from '../common/app-error';
 import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
+import { environment } from 'src/environments/environment.prod';
 import { Restaurant } from 'src/Table/table';
 @Injectable({
   providedIn: 'root'
